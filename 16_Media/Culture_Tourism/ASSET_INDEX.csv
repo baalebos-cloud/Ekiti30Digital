@@ -1,0 +1,30 @@
+Asset ID,Slug (folder name),Media title,Category,Location,Verification status
+CT-001,ikogosi-warm-springs,Ikogosi Warm Springs,Tourism,"Ikogosi-Ekiti, Ekiti West LGA",Verified
+CT-002,arinta-waterfall,Arinta Waterfall,Tourism,"Ipole-Iloro, Ekiti West LGA",Verified
+CT-003,fajuyi-memorial-park,Fajuyi Memorial Park,Tourism,"Ado-Ekiti, Ado-Ekiti LGA",Verified
+CT-004,motif-funland,Motif Funland,Tourism,Iworoko-Ekiti (LGA needs confirming),Needs verification
+CT-005,ewi-of-ado-ekiti-palace,Ewi of Ado-Ekiti Palace,Tourism,"Ado-Ekiti, Ado-Ekiti LGA",Needs verification
+CT-006,olowe-of-ise-ancestral-compound-workshop,Olowe of Ise Ancestral Compound & Workshop,Tourism,"Ise-Ekiti, Ise/Orun LGA",Verified
+CT-007,abanijorin-rocks-cave,Abanijorin Rocks & Cave,Tourism,"Iyin-Ekiti, Irepodun/Ifelodun LGA",Verified
+CT-008,esa-cave,Esa Cave,Tourism,"Iyin-Ekiti, Irepodun/Ifelodun LGA",Needs verification
+CT-009,ero-dam-lake,Ero Dam & Lake,Tourism,"Ikun-Ekiti, Moba LGA",Verified
+CT-010,egbe-dam,Egbe Dam,Tourism,"Egbe-Ekiti, Gbonyin (Aiyekire) LGA",Verified
+CT-011,olosunta-orole-hills,Olosunta & Orole Hills,Tourism,"Ikere-Ekiti, Ikere LGA",Needs verification
+CT-012,erin-ayonigba-sacred-fish-river,Erin Ayonigba Sacred Fish River,Tourism,Location/LGA unconfirmed — possibly Ekiti West LGA,Needs verification
+CT-013,olowe-of-ise-museum-under-construction,Olowe of Ise Museum (under construction),Tourism,"Ise-Ekiti, Ise/Orun LGA",Verified
+CT-014,ado-ni-ile-ifa-ado-ekiti-s-ifa-heritage,Ado ni Ile Ifa (Ado-Ekiti's Ifa heritage),Culture,"Ado-Ekiti, Ado-Ekiti LGA",Community claim
+CT-015,olosunta-and-orole-hill-deity-veneration,Olosunta and Orole Hill Deity Veneration,Culture,"Ikere-Ekiti, Ikere LGA",Community claim
+CT-016,udiroko-festival,Udiroko Festival,Culture,"Ado-Ekiti, Ado-Ekiti LGA",Verified
+CT-017,olosunta-orun-ikere-festival,Olosunta Orun Ikere Festival,Culture,"Ikere-Ekiti, Ikere LGA",Verified
+CT-018,ogun-onire-festival,Ogun Onire Festival,Culture,"Ire-Ekiti, Oye LGA",Mixed
+CT-019,ijesu-new-yam-festival,Ijesu (New Yam Festival),Culture,Statewide (all LGAs),Verified
+CT-020,epa-masquerade-festival-isan-ekiti,Epa Masquerade Festival (Isan-Ekiti),Culture,"Isan-Ekiti, Oye LGA",Verified
+CT-021,aeregbe-festival,Aeregbe Festival,Culture,"Afao-Ekiti (Irepodun/Ifelodun LGA), Igbara-Odo-Ekiti (Ekiti South-West LGA), Emure-Ekiti (Emure LGA)",Mixed
+CT-022,efon-alaaye-woodcarving-tradition-adeshina-workshop,Efon-Alaaye Woodcarving Tradition (Adeshina Workshop),Culture,"Efon-Alaaye, Efon LGA",Verified
+CT-023,olowe-of-ise-sculpture-legacy,Olowe of Ise Sculpture Legacy,Culture,"Ise-Ekiti, Ise/Orun LGA",Verified
+CT-024,ado-ekiti-cotton-weaving-tradition,Ado-Ekiti Cotton Weaving Tradition,Culture,"Ado-Ekiti, Ado-Ekiti LGA",Verified
+CT-025,ekiti-state-bureau-of-tourism-development-ekifest,Ekiti State Bureau of Tourism Development / EKIFEST,Culture,"Ado-Ekiti, Ado-Ekiti LGA",Verified
+CT-026,founding-of-ado-ekiti-by-ewi-awamaro,Founding of Ado-Ekiti by Ewi Awamaro,History,"Ado-Ekiti, Ado-Ekiti LGA",Community claim
+CT-027,ikere-ekiti-s-unconquered-status-in-inter-tribal-wars,Ikere-Ekiti's Unconquered Status in Inter-tribal Wars,History,"Ikere-Ekiti, Ikere LGA",Community claim
+CT-PENDING-01,itapaji-water-dam,Itapaji Water Dam,Pending addition,"Itapaji-Ekiti, Ikole LGA",Needs verification
+CT-PENDING-02,oore-monumental-palace,Oore Monumental Palace,Pending addition,"Otun-Ekiti, Moba LGA",Needs verification

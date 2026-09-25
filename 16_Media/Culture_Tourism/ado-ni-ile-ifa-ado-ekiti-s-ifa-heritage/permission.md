@@ -1,0 +1,9 @@
+# Permission Log — Ado ni Ile Ifa (Ado-Ekiti's Ifa heritage)
+Asset ID: CT-014
+
+- Image filename:
+- Rights holder / photographer:
+- Permission requested: Y/N — date
+- Permission granted: Y/N — date
+- Permission type (CC license / written consent / public domain / needs further verification):
+- If NEEDS VERIFICATION — action plan:
