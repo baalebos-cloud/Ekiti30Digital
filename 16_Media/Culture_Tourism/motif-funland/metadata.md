@@ -1,4 +1,3 @@
-Asset ID: CT-004
 Media title: Motif Funland
 Category: Tourism
 Related section/ID: motif-funland

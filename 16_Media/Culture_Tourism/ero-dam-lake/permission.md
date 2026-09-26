@@ -1,5 +1,4 @@
 # Permission Log — Ero Dam & Lake
-Asset ID: CT-009
 
 - Image filename:
 - Rights holder / photographer:

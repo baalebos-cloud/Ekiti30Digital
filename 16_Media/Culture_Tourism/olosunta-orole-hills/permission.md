@@ -1,5 +1,4 @@
 # Permission Log — Olosunta & Orole Hills
-Asset ID: CT-011
 
 - Image filename:
 - Rights holder / photographer:

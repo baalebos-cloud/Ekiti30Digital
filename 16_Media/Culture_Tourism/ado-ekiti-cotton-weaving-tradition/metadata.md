@@ -1,4 +1,3 @@
-Asset ID: CT-024
 Media title: Ado-Ekiti Cotton Weaving Tradition
 Category: Culture
 Related section/ID: ado-ekiti-cotton-weaving-tradition

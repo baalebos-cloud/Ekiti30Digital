@@ -1,5 +1,4 @@
 # Sources — Esa Cave
-Asset ID: CT-008
 
 - Primary source: Wikipedia ("Iyin Ekiti")
 - Primary source URL: https://en.wikipedia.org/wiki/Iyin_Ekiti

@@ -1,5 +1,4 @@
 # Permission Log — Olowe of Ise Sculpture Legacy
-Asset ID: CT-023
 
 - Image filename:
 - Rights holder / photographer:

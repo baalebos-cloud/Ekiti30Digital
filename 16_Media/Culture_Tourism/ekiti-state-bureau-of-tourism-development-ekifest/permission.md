@@ -1,5 +1,4 @@
 # Permission Log — Ekiti State Bureau of Tourism Development / EKIFEST
-Asset ID: CT-025
 
 - Image filename:
 - Rights holder / photographer:

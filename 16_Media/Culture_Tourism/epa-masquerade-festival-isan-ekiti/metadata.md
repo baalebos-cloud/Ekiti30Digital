@@ -1,4 +1,3 @@
-Asset ID: CT-020
 Media title: Epa Masquerade Festival (Isan-Ekiti)
 Category: Culture
 Related section/ID: epa-masquerade-festival-isan-ekiti

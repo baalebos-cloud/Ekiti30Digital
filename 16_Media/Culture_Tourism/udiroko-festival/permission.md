@@ -1,5 +1,4 @@
 # Permission Log — Udiroko Festival
-Asset ID: CT-016
 
 - Image filename:
 - Rights holder / photographer:

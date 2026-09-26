@@ -1,5 +1,4 @@
 # Sources — Fajuyi Memorial Park
-Asset ID: CT-003
 
 - Primary source: Ekiti State Government (Tourism page)
 - Primary source URL: https://ekitistate.gov.ng/newsite/about-us/tourism/

@@ -1,4 +1,3 @@
-Asset ID: CT-026
 Media title: Founding of Ado-Ekiti by Ewi Awamaro
 Category: History
 Related section/ID: founding-of-ado-ekiti-by-ewi-awamaro

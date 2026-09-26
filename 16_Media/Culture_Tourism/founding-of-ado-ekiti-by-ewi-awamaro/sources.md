@@ -1,5 +1,4 @@
 # Sources — Founding of Ado-Ekiti by Ewi Awamaro
-Asset ID: CT-026
 
 - Primary source: Wikipedia ("Ado Ekiti")
 - Primary source URL: https://en.wikipedia.org/wiki/Ado_Ekiti

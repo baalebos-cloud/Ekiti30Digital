@@ -1,4 +1,3 @@
-Asset ID: CT-005
 Media title: Ewi of Ado-Ekiti Palace
 Category: Tourism
 Related section/ID: ewi-of-ado-ekiti-palace

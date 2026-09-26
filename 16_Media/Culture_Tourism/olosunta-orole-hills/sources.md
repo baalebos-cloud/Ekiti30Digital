@@ -1,5 +1,4 @@
 # Sources — Olosunta & Orole Hills
-Asset ID: CT-011
 
 - Primary source: Ekiti State Government (Tourism page); Wikipedia
 - Primary source URL: https://en.wikipedia.org/wiki/Ikere-Ekiti

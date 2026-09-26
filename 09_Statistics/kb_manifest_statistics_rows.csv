@@ -1,0 +1,21 @@
+# NOTE: NON-AUTHORITATIVE WORKING/SOURCE REGISTRY. Authoritative ingestion status governed by 13_Knowledge_Base/kb_manifest.csv
+doc_id,source_title,source_url,class,tier,last_verified,ingestible
+EK-STAT-001,Ekiti State Govt website - About Ekiti,https://www.ekitistate.gov.ng/about-ekiti,primary,1,2026-09-25,yes
+EK-STAT-002,Ekiti State Govt website - About Ekiti,https://www.ekitistate.gov.ng/about-ekiti,primary,1,2026-09-25,yes
+EK-STAT-003,citypopulation.de - Ekiti State Nigeria,https://www.citypopulation.de/en/nigeria/admin/NGA013__ekiti/,secondary,2,2026-09-25,yes
+EK-STAT-004,Ekiti State Official Records - Demographics,https://www.ekitistate.gov.ng,primary,1,2026-09-25,no
+EK-STAT-005,Scope Journal - Measurement of Poverty in Ekiti State,https://scope-journal.com/assets/uploads/doc/d61d4-502-510.202317180.pdf,academic,1,2026-09-25,yes
+EK-STAT-006,Ekiti State Govt website - SBS StatCloud,https://www.ekitistate.gov.ng/ekiti-state-bureau-of-statistics-statcloud,primary,1,2026-09-25,yes
+EK-STAT-007,academia.edu - Spatial Distribution of Poverty Indicators in Ekiti State,https://www.academia.edu/88150950/Spatial_Distribution_of_Poverty_indicators_in_Ekiti_State,academic,1,2026-09-25,yes
+EK-STAT-008,National Bureau of Statistics - 2022 MPI launch,https://nigerianstat.gov.ng/news/78,primary,1,2026-09-25,yes
+EK-STAT-009,NBS Nigeria Labour Force Survey Annual Report 2023,https://www.nigerianstat.gov.ng/pdfuploads/Annual_Nigerian_Labour_Force_Survey_Report.pdf,primary,1,2026-09-25,yes
+EK-STAT-010,Ekiti State Govt website - IGR Growth Ranking,https://www.ekitistate.gov.ng/archives/28885,primary,1,2026-09-25,yes
+EK-STAT-011,Ekiti State Govt website - SBS StatCloud,https://www.ekitistate.gov.ng/ekiti-state-bureau-of-statistics-statcloud,primary,1,2026-09-25,yes
+EK-STAT-012,Guardian Nigeria - Literacy Rate in Nigeria,https://guardian.ng/nigerian/what-is-the-literacy-rate-in-nigeria/,news,2,2026-09-25,yes
+EK-STAT-INST-001,Ekiti State Govt website - SBS StatCloud,https://www.ekitistate.gov.ng/ekiti-state-bureau-of-statistics-statcloud,primary,1,2026-09-25,yes
+EK-STAT-INST-002,citypopulation.de - Ekiti State Nigeria,https://www.citypopulation.de/en/nigeria/admin/NGA013__ekiti/,secondary,2,2026-09-25,yes
+EK-STAT-DATA-001,Multiple - see timeline EK-STAT-001 to 004,n/a,compiled,2,2026-09-25,yes
+EK-STAT-DATA-002,Multiple - see timeline EK-STAT-005 007 008,n/a,compiled,2,2026-09-25,yes
+EK-STAT-DATA-003,NBS Nigeria Labour Force Survey Annual Report 2023,https://www.nigerianstat.gov.ng/pdfuploads/Annual_Nigerian_Labour_Force_Survey_Report.pdf,primary,1,2026-09-25,yes
+EK-STAT-DATA-004,Ekiti State Govt website - IGR Growth Ranking,https://www.ekitistate.gov.ng/archives/28885,primary,1,2026-09-25,yes
+EK-STAT-DATA-005,Multiple - see timeline EK-STAT-011 012,n/a,compiled,2,2026-09-25,yes

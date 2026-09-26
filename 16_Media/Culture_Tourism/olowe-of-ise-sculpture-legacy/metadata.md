@@ -1,4 +1,3 @@
-Asset ID: CT-023
 Media title: Olowe of Ise Sculpture Legacy
 Category: Culture
 Related section/ID: olowe-of-ise-sculpture-legacy

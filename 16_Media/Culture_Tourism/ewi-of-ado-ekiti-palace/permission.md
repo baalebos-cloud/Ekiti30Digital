@@ -1,5 +1,4 @@
 # Permission Log — Ewi of Ado-Ekiti Palace
-Asset ID: CT-005
 
 - Image filename:
 - Rights holder / photographer:

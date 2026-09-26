@@ -1,5 +1,4 @@
 # Permission Log — Esa Cave
-Asset ID: CT-008
 
 - Image filename:
 - Rights holder / photographer:

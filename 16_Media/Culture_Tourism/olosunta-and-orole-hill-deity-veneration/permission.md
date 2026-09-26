@@ -1,5 +1,4 @@
 # Permission Log — Olosunta and Orole Hill Deity Veneration
-Asset ID: CT-015
 
 - Image filename:
 - Rights holder / photographer:

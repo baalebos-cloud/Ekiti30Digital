@@ -1,4 +1,3 @@
-Asset ID: CT-001
 Media title: Ikogosi Warm Springs
 Category: Tourism
 Related section/ID: ikogosi-warm-springs

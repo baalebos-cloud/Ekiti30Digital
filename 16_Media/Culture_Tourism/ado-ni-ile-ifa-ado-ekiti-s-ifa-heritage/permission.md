@@ -1,5 +1,4 @@
 # Permission Log — Ado ni Ile Ifa (Ado-Ekiti's Ifa heritage)
-Asset ID: CT-014
 
 - Image filename:
 - Rights holder / photographer:

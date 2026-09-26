@@ -1,4 +1,3 @@
-Asset ID: CT-006
 Media title: Olowe of Ise Ancestral Compound & Workshop
 Category: Tourism
 Related section/ID: olowe-of-ise-ancestral-compound-workshop

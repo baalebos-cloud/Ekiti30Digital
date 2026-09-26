@@ -1,5 +1,4 @@
 # Permission Log — Arinta Waterfall
-Asset ID: CT-002
 
 - Image filename:
 - Rights holder / photographer:

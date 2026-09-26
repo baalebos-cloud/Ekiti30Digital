@@ -1,5 +1,4 @@
 # Permission Log — Ado-Ekiti Cotton Weaving Tradition
-Asset ID: CT-024
 
 - Image filename:
 - Rights holder / photographer:

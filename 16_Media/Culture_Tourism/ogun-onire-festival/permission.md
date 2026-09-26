@@ -1,5 +1,4 @@
 # Permission Log — Ogun Onire Festival
-Asset ID: CT-018
 
 - Image filename:
 - Rights holder / photographer:

@@ -1,4 +1,3 @@
-Asset ID: CT-011
 Media title: Olosunta & Orole Hills
 Category: Tourism
 Related section/ID: olosunta-orole-hills

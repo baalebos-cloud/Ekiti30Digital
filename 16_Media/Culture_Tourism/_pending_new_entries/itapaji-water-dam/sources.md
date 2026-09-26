@@ -1,5 +1,4 @@
 # Sources — Itapaji Water Dam
-Asset ID: CT-PENDING-01
 
 - Primary source: Ekiti State Government (Ikole LGA page); The ICIR (investigative report)
 - Primary source URL: https://www.ekitistate.gov.ng/?p=5292

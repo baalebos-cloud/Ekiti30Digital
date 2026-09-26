@@ -1,5 +1,4 @@
 # Sources — Ekiti State Bureau of Tourism Development / EKIFEST
-Asset ID: CT-025
 
 - Primary source: Ekiti State Government (EKIFEST and Bureau press releases)
 - Primary source URL: https://www.ekitistate.gov.ng/?p=4505

@@ -1,5 +1,4 @@
 # Permission Log — Fajuyi Memorial Park
-Asset ID: CT-003
 
 - Image filename:
 - Rights holder / photographer:

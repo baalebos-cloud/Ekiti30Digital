@@ -1,5 +1,4 @@
 # Permission Log — Epa Masquerade Festival (Isan-Ekiti)
-Asset ID: CT-020
 
 - Image filename:
 - Rights holder / photographer:

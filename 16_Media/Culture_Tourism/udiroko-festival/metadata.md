@@ -1,4 +1,3 @@
-Asset ID: CT-016
 Media title: Udiroko Festival
 Category: Culture
 Related section/ID: udiroko-festival

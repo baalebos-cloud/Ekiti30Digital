@@ -1,5 +1,4 @@
 # Permission Log — Ikogosi Warm Springs
-Asset ID: CT-001
 
 - Image filename:
 - Rights holder / photographer:

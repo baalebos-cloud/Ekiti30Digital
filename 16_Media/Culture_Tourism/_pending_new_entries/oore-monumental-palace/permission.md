@@ -1,5 +1,4 @@
 # Permission Log — Oore Monumental Palace
-Asset ID: CT-PENDING-02
 
 - Image filename:
 - Rights holder / photographer:

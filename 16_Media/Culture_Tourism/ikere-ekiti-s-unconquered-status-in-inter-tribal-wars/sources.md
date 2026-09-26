@@ -1,5 +1,4 @@
 # Sources — Ikere-Ekiti's Unconquered Status in Inter-tribal Wars
-Asset ID: CT-027
 
 - Primary source: Ekiti State Government (Tourism page)
 - Primary source URL: https://ekitistate.gov.ng/newsite/about-us/tourism/

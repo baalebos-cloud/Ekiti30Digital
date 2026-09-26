@@ -1,5 +1,4 @@
 # Sources — Ogun Onire Festival
-Asset ID: CT-018
 
 - Primary source: Wikipedia (mythology); ThisDay/Channels TV/Guardian Nigeria (2020 event)
 - Primary source URL: https://en.wikipedia.org/wiki/Ogun

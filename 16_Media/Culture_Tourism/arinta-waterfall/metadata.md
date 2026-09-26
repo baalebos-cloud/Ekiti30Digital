@@ -1,4 +1,3 @@
-Asset ID: CT-002
 Media title: Arinta Waterfall
 Category: Tourism
 Related section/ID: arinta-waterfall

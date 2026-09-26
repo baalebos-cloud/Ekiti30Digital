@@ -1,4 +1,3 @@
-Asset ID: CT-009
 Media title: Ero Dam & Lake
 Category: Tourism
 Related section/ID: ero-dam-lake
@@ -13,3 +12,5 @@ Copyright/permission status: Needs verification — no image sourced yet
 Submitted by: Member 7
 Verification status: Verified
 File name: TBD
+
+Note: a candidate link from images.openai.com was reviewed and rejected -- it is an AI-generated image, not a real photograph. Do not use it.

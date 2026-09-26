@@ -1,4 +1,3 @@
-Asset ID: CT-019
 Media title: Ijesu (New Yam Festival)
 Category: Culture
 Related section/ID: ijesu-new-yam-festival

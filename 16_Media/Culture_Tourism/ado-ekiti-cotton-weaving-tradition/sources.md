@@ -1,5 +1,4 @@
 # Sources — Ado-Ekiti Cotton Weaving Tradition
-Asset ID: CT-024
 
 - Primary source: Encyclopaedia Britannica
 - Primary source URL: https://www.britannica.com/place/Ado-Ekiti

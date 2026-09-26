@@ -1,5 +1,4 @@
 # Permission Log — Olowe of Ise Ancestral Compound & Workshop
-Asset ID: CT-006
 
 - Image filename:
 - Rights holder / photographer:

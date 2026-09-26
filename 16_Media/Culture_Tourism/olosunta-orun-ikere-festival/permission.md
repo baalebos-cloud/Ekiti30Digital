@@ -1,5 +1,4 @@
 # Permission Log — Olosunta Orun Ikere Festival
-Asset ID: CT-017
 
 - Image filename:
 - Rights holder / photographer:

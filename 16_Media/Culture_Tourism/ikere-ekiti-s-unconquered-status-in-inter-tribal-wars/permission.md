@@ -1,5 +1,4 @@
 # Permission Log — Ikere-Ekiti's Unconquered Status in Inter-tribal Wars
-Asset ID: CT-027
 
 - Image filename:
 - Rights holder / photographer:

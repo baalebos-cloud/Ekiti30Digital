@@ -1,5 +1,4 @@
 # Sources — Olosunta Orun Ikere Festival
-Asset ID: CT-017
 
 - Primary source: The Arthub NG (named byline, on-record quotes)
 - Primary source URL: https://thearthubng.com/?p=10340

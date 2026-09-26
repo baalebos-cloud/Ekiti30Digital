@@ -1,5 +1,4 @@
 # Sources — Efon-Alaaye Woodcarving Tradition (Adeshina Workshop)
-Asset ID: CT-022
 
 - Primary source: Smithsonian National Museum of African Art (Eliot Elisofon Archives)
 - Primary source URL: https://si.edu/object/archives/components/sova-eepa-1973-001-ref33050

@@ -1,5 +1,4 @@
 # Permission Log — Efon-Alaaye Woodcarving Tradition (Adeshina Workshop)
-Asset ID: CT-022
 
 - Image filename:
 - Rights holder / photographer:

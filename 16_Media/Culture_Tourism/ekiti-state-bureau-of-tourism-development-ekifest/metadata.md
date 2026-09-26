@@ -1,4 +1,3 @@
-Asset ID: CT-025
 Media title: Ekiti State Bureau of Tourism Development / EKIFEST
 Category: Culture
 Related section/ID: ekiti-state-bureau-of-tourism-development-ekifest

@@ -1,5 +1,4 @@
 # Permission Log — Founding of Ado-Ekiti by Ewi Awamaro
-Asset ID: CT-026
 
 - Image filename:
 - Rights holder / photographer:

@@ -1,4 +1,3 @@
-Asset ID: CT-003
 Media title: Fajuyi Memorial Park
 Category: Tourism
 Related section/ID: fajuyi-memorial-park

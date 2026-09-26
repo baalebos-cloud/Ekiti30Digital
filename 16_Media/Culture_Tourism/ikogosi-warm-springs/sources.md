@@ -1,5 +1,4 @@
 # Sources — Ikogosi Warm Springs
-Asset ID: CT-001
 
 - Primary source: Ekiti State Government (Tourism page)
 - Primary source URL: https://ekitistate.gov.ng/newsite/about-us/tourism/

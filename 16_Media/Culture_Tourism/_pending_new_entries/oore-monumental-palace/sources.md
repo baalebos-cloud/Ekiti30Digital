@@ -1,5 +1,4 @@
 # Sources — Oore Monumental Palace
-Asset ID: CT-PENDING-02
 
 - Primary source: Wikipedia ("Moba, Nigeria"); Ekiti State Government (Oore installation coverage)
 - Primary source URL: https://en.wikipedia.org/wiki/Moba,_Nigeria

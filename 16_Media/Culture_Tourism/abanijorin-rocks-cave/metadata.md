@@ -1,4 +1,3 @@
-Asset ID: CT-007
 Media title: Abanijorin Rocks & Cave
 Category: Tourism
 Related section/ID: abanijorin-rocks-cave

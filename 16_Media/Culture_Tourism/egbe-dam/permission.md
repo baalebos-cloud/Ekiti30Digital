@@ -1,5 +1,4 @@
 # Permission Log — Egbe Dam
-Asset ID: CT-010
 
 - Image filename:
 - Rights holder / photographer:

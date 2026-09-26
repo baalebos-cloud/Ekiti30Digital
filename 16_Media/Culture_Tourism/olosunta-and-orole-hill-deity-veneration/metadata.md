@@ -1,4 +1,3 @@
-Asset ID: CT-015
 Media title: Olosunta and Orole Hill Deity Veneration
 Category: Culture
 Related section/ID: olosunta-and-orole-hill-deity-veneration

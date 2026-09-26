@@ -1,5 +1,4 @@
 # Sources — Epa Masquerade Festival (Isan-Ekiti)
-Asset ID: CT-020
 
 - Primary source: Ekiti State Government (Tourism page)
 - Primary source URL: https://ekitistate.gov.ng/newsite/about-us/tourism/

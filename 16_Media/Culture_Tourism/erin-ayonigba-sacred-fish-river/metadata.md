@@ -1,4 +1,3 @@
-Asset ID: CT-012
 Media title: Erin Ayonigba Sacred Fish River
 Category: Tourism
 Related section/ID: erin-ayonigba-sacred-fish-river

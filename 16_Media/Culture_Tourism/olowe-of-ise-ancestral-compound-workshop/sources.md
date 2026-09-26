@@ -1,5 +1,4 @@
 # Sources — Olowe of Ise Ancestral Compound & Workshop
-Asset ID: CT-006
 
 - Primary source: Ekiti State Government (news release)
 - Primary source URL: https://www.ekitistate.gov.ng/?p=27348

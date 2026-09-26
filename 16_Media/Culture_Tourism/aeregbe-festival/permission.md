@@ -1,5 +1,4 @@
 # Permission Log — Aeregbe Festival
-Asset ID: CT-021
 
 - Image filename:
 - Rights holder / photographer:

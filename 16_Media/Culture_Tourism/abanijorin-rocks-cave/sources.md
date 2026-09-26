@@ -1,5 +1,4 @@
 # Sources — Abanijorin Rocks & Cave
-Asset ID: CT-007
 
 - Primary source: GazetteNGR (independent news report)
 - Primary source URL: https://gazettengr.com/oyebanji-seeks-fgs-support-for-ekiti-tourism-initiative/

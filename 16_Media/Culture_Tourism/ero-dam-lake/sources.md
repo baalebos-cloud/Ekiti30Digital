@@ -1,5 +1,4 @@
 # Sources — Ero Dam & Lake
-Asset ID: CT-009
 
 - Primary source: Ekiti State Government (Tourism page)
 - Primary source URL: https://ekitistate.gov.ng/newsite/about-us/tourism/

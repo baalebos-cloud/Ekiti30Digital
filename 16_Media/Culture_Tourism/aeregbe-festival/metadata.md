@@ -1,4 +1,3 @@
-Asset ID: CT-021
 Media title: Aeregbe Festival
 Category: Culture
 Related section/ID: aeregbe-festival

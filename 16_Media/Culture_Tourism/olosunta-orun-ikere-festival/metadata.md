@@ -1,4 +1,3 @@
-Asset ID: CT-017
 Media title: Olosunta Orun Ikere Festival
 Category: Culture
 Related section/ID: olosunta-orun-ikere-festival

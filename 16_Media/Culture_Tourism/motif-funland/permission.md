@@ -1,5 +1,4 @@
 # Permission Log — Motif Funland
-Asset ID: CT-004
 
 - Image filename:
 - Rights holder / photographer:

@@ -1,5 +1,4 @@
 # Sources — Udiroko Festival
-Asset ID: CT-016
 
 - Primary source: Ekiti State Government (Udiroko festival articles)
 - Primary source URL: https://www.ekitistate.gov.ng/?p=4314

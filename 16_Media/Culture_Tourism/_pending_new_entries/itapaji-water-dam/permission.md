@@ -1,5 +1,4 @@
 # Permission Log — Itapaji Water Dam
-Asset ID: CT-PENDING-01
 
 - Image filename:
 - Rights holder / photographer:

@@ -1,4 +1,3 @@
-Asset ID: CT-008
 Media title: Esa Cave
 Category: Tourism
 Related section/ID: esa-cave

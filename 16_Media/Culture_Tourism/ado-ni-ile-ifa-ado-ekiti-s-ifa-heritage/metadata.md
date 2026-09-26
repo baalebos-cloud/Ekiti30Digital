@@ -1,4 +1,3 @@
-Asset ID: CT-014
 Media title: Ado ni Ile Ifa (Ado-Ekiti's Ifa heritage)
 Category: Culture
 Related section/ID: ado-ni-ile-ifa-ado-ekiti-s-ifa-heritage

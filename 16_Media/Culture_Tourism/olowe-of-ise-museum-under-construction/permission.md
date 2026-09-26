@@ -1,5 +1,4 @@
 # Permission Log — Olowe of Ise Museum (under construction)
-Asset ID: CT-013
 
 - Image filename:
 - Rights holder / photographer:

@@ -1,5 +1,4 @@
 # Sources — Ewi of Ado-Ekiti Palace
-Asset ID: CT-005
 
 - Primary source: Ekiti State Government (Udiroko festival coverage)
 - Primary source URL: https://www.ekitistate.gov.ng/?p=4314

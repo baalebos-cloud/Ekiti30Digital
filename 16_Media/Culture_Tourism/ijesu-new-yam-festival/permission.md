@@ -1,5 +1,4 @@
 # Permission Log — Ijesu (New Yam Festival)
-Asset ID: CT-019
 
 - Image filename:
 - Rights holder / photographer:

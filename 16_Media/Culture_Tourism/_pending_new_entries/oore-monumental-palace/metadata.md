@@ -1,4 +1,3 @@
-Asset ID: CT-PENDING-02
 Media title: Oore Monumental Palace
 Category: Tourism/Culture (pending addition)
 Related section/ID: oore-monumental-palace

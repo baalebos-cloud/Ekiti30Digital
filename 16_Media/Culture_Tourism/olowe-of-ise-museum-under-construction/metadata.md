@@ -1,4 +1,3 @@
-Asset ID: CT-013
 Media title: Olowe of Ise Museum (under construction)
 Category: Tourism
 Related section/ID: olowe-of-ise-museum-under-construction

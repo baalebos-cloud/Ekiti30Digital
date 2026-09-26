@@ -1,4 +1,3 @@
-Asset ID: CT-027
 Media title: Ikere-Ekiti's Unconquered Status in Inter-tribal Wars
 Category: History
 Related section/ID: ikere-ekiti-s-unconquered-status-in-inter-tribal-wars

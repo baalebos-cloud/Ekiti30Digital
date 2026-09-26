@@ -4,6 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.routes import (
     admin,
     ask_ekiti,
+    contributor_admin,
+    contributor_auth,
     health,
     lgas,
     stories,
@@ -31,3 +33,5 @@ app.include_router(vision2056.router)
 app.include_router(ask_ekiti.router)
 app.include_router(uploads.router)
 app.include_router(admin.router)
+app.include_router(contributor_auth.router)
+app.include_router(contributor_admin.router)

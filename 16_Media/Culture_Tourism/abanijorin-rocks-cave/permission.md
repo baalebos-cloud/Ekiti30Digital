@@ -1,5 +1,4 @@
 # Permission Log — Abanijorin Rocks & Cave
-Asset ID: CT-007
 
 - Image filename:
 - Rights holder / photographer:

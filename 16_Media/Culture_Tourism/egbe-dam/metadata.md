@@ -1,4 +1,3 @@
-Asset ID: CT-010
 Media title: Egbe Dam
 Category: Tourism
 Related section/ID: egbe-dam

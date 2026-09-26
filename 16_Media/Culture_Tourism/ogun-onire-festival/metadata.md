@@ -1,4 +1,3 @@
-Asset ID: CT-018
 Media title: Ogun Onire Festival
 Category: Culture
 Related section/ID: ogun-onire-festival

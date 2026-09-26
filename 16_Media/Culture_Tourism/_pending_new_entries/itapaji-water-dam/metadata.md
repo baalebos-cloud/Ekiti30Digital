@@ -1,4 +1,3 @@
-Asset ID: CT-PENDING-01
 Media title: Itapaji Water Dam
 Category: Tourism/Culture (pending addition)
 Related section/ID: itapaji-water-dam

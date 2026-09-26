@@ -1,5 +1,4 @@
 # Permission Log — Erin Ayonigba Sacred Fish River
-Asset ID: CT-012
 
 - Image filename:
 - Rights holder / photographer:

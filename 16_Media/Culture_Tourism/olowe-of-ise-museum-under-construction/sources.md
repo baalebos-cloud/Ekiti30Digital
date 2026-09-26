@@ -1,5 +1,4 @@
 # Sources — Olowe of Ise Museum (under construction)
-Asset ID: CT-013
 
 - Primary source: Ekiti State Government; TheWill News
 - Primary source URL: https://thewillnews.com/ekiti-to-host-fundraiser-for-olowe-of-ise-museum

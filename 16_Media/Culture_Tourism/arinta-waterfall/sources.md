@@ -1,5 +1,4 @@
 # Sources — Arinta Waterfall
-Asset ID: CT-002
 
 - Primary source: Ramsar Sites Information Service
 - Primary source URL: https://rsistest.ramsar.org/RISapp/files/RISrep/NG2565RIS_2503_en.pdf

@@ -1,4 +1,3 @@
-Asset ID: CT-022
 Media title: Efon-Alaaye Woodcarving Tradition (Adeshina Workshop)
 Category: Culture
 Related section/ID: efon-alaaye-woodcarving-tradition-adeshina-workshop
