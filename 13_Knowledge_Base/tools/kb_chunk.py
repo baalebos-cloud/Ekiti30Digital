@@ -138,6 +138,16 @@ def build_chunks(manifest_rows, root):
         if row.get("ingestible") != "yes":
             skipped.append((row.get("path", ""), row.get("reason", "not ingestible")))
             continue
+        # Defensive check, independent of kb_validate.py: never chunk a
+        # document whose status isn't literally "verified", even if
+        # ingestible was somehow set to "yes" by a manifest bug or a hand
+        # edit. This is the last line of defense before unverified content
+        # could reach retrieval (spec A9.1).
+        if row.get("status") != "verified":
+            errors.append(f"{row['path']}: marked ingestible=yes but status is "
+                           f"'{row.get('status')}', not 'verified' -- refusing to chunk "
+                           f"(check kb_manifest.csv for a bug)")
+            continue
         full = os.path.join(root, row["path"])
         if not os.path.exists(full):
             errors.append(f"{row['path']}: file listed in manifest but not found on disk")
@@ -256,6 +266,9 @@ id: history-empty
                     "SRC-001", "2021-10-01", "2026-09-21", "Victor", "en", "", "1996", "x", "yes", ""])
         w.writerow(["history-missing", "01_History/missing.md", "history", "event", "verified", "A",
                     "SRC-001", "2021-10-01", "2026-09-21", "Victor", "en", "", "1996", "x", "yes", ""])
+        w.writerow(["history-forged", "01_History/example.md", "history", "event", "needs_review", "A",
+                    "SRC-001", "2021-10-01", "", "", "en", "", "1996", "x", "yes",
+                    "manifest bug: ingestible=yes but status is not verified"])
     chunks, skipped, errors, warnings = run(tmp, manifest, os.path.join(tmp, "c.jsonl"),
                                              os.path.join(tmp, "c.csv"), quiet=True)
     failures = []
@@ -284,6 +297,10 @@ id: history-empty
         failures.append("empty document should raise a 'no Facts' error")
     if not any("not found on disk" in e for e in errors):
         failures.append("missing file should raise a 'not found' error")
+    if not any("refusing to chunk" in e for e in errors):
+        failures.append("a row marked ingestible=yes with a non-verified status must be refused")
+    if any(c["doc_id"] == "history-forged" for c in chunks):
+        failures.append("the forged (non-verified) row must never produce chunks")
     ids = [c["chunk_id"] for c in ex]
     if len(set(ids)) != len(ids):
         failures.append("chunk_ids should be unique")

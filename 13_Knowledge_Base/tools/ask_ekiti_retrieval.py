@@ -24,6 +24,14 @@ step with a call to an LLM that is instructed to answer only from the
 supplied chunks (spec A9.1-A9.2), while keeping this function's retrieval,
 threshold, conflict-detection and citation-formatting logic unchanged.
 
+Provenance rule (v2 addition, review feedback): only chunk_type == "fact"
+chunks may support an answer. A document's "## Summary" chunk is still
+produced by kb_chunk.py (useful for a future document-level overview
+feature) but is excluded from scoring and citation here, because a summary
+sentence is free prose without the per-fact [S#] resolution a Facts-section
+chunk carries -- citing it risks attributing a whole sentence to sources
+that only actually support part of it.
+
 Conflict detection (v2, fixes a v1 bug flagged in review): v1 grouped
 chunks by (category, chunk_type) and flagged a conflict whenever two chunks
 in the same group contained different numbers -- so two unrelated facts in
@@ -56,6 +64,22 @@ RELEVANCE_THRESHOLD = 0.15   # A9.4: below this, answer "insufficient" rather th
 SAME_CLAIM_THRESHOLD = 0.5   # word-overlap (numbers removed) above which two chunks are
                               # treated as competing versions of the same claim (A6)
 TOP_K = 6                    # max chunks considered as context for one answer
+
+# Single source of truth for the embedding vector size, once an
+# EmbeddingRetriever is added. pgvector's column dimension is fixed at
+# table-creation time and cannot be changed without a migration, so the
+# backend's schema and this module must agree on one number rather than
+# each hard-coding its own. Set this from an environment variable so it
+# only has to be entered once the provider is confirmed; do not duplicate
+# a literal dimension elsewhere in Python or SQL.
+EMBEDDING_DIM = int(os.environ.get("ASK_EKITI_EMBEDDING_DIM", "0"))  # 0 = not yet configured
+
+# The Yoruba insufficient-knowledge string below is machine-drafted and has
+# not been reviewed by the Yoruba reviewer (spec A8/A9.9, Faith Ogunlade).
+# Flip this only after that review, so a route can gate on it rather than
+# on a comment a future edit might miss.
+YORUBA_REVIEWED = False
+
 STOPWORDS = set("""
 a an the of in on at to for and or is was were are be been being with as by from
 this that these those it its it's what when who how many much does do did state
@@ -104,6 +128,13 @@ class KeywordRetriever(Retriever):
             # not outscore a short, tightly on-topic chunk.
             out.append((c, overlap / union if union else 0.0))
         return out
+
+
+def is_language_production_ready(language):
+    """A route should call this before serving a real answer to a user and
+    fall back to a safe response (or refuse) if it returns False. English
+    is always ready; Yoruba is gated on YORUBA_REVIEWED (spec A8/A9.9)."""
+    return True if language != "yo" else YORUBA_REVIEWED
 
 
 # ---------------------------------------------------------------- data loading
@@ -181,7 +212,15 @@ def answer_question(question, chunks, retriever=None, language="en",
     generation without the LLM step described above.
     """
     retriever = retriever or KeywordRetriever()
-    scored = retriever.score(question, chunks)
+    # Summary chunks are excluded from answering (not just from scoring):
+    # a document's Summary is free prose written by the author, without the
+    # per-fact [S#] provenance a Facts-section chunk carries. Citing a
+    # summary sentence as "supported" could attribute claims to sources
+    # that only support part of that sentence. Only chunk_type == "fact"
+    # chunks -- which kb_chunk.py resolves to specific source_ids -- may
+    # back an answer (spec A9.1, A9.3).
+    citable = [c for c in chunks if c.get("chunk_type") == "fact"]
+    scored = retriever.score(question, citable)
     scored.sort(key=lambda x: x[1], reverse=True)
     top = [c for c, s in scored if s >= threshold][:top_k]
 
@@ -275,12 +314,26 @@ def selftest():
     if find_conflicts(same_doc):
         failures.append("chunks from the same document must never be flagged as conflicting")
 
+    summary_only = [{"chunk_id": "d#001", "doc_id": "d", "chunk_type": "summary",
+                      "text": "Ekiti State was created on 1 October 1996, according to this document.",
+                      "source_ids": "SRC-001;SRC-002", "source_titles": "", "category": "history",
+                      "tier": "A", "last_verified": "2026-09-21", "path": "01_History/d.md"}]
+    r6 = answer_question("When was Ekiti State created?", summary_only)
+    if r6["answer_status"] != "insufficient":
+        failures.append("a summary chunk alone must not be used to answer a factual "
+                         f"question (it lacks per-fact provenance); got {r6['answer_status']}")
+
+    if is_language_production_ready("yo") is not False:
+        failures.append("Yoruba must not read as production-ready before YORUBA_REVIEWED is set")
+    if not is_language_production_ready("en"):
+        failures.append("English should always read as production-ready")
+
     if failures:
         print("SELFTEST FAILED")
         for f in failures:
             print("  -", f)
         return 1
-    print("SELFTEST PASSED (7 answer-assembly/conflict cases + keyword scoring check)")
+    print("SELFTEST PASSED (9 answer-assembly/conflict/language cases + keyword scoring check)")
     return 0
 
 
