@@ -12,4 +12,4 @@ Photographer: TBD
 Copyright/permission status: Needs verification — no image sourced yet
 Submitted by: Member 7
 Verification status: Needs verification
-File name: TBD
+File name: CANDIDATE_erin-ayonigba-sacred-fish-river.jpg

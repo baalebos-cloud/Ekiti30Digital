@@ -12,4 +12,4 @@ Photographer: TBD
 Copyright/permission status: Needs verification — no image sourced yet
 Submitted by: Member 7
 Verification status: Community claim
-File name: TBD
+File name: CANDIDATE_ado-ni-ile-ifa-ado-ekiti-s-ifa-heritage.jpg
