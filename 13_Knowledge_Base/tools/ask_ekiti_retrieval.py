@@ -65,14 +65,13 @@ SAME_CLAIM_THRESHOLD = 0.5   # word-overlap (numbers removed) above which two ch
                               # treated as competing versions of the same claim (A6)
 TOP_K = 6                    # max chunks considered as context for one answer
 
-# Single source of truth for the embedding vector size, once an
-# EmbeddingRetriever is added. pgvector's column dimension is fixed at
-# table-creation time and cannot be changed without a migration, so the
-# backend's schema and this module must agree on one number rather than
-# each hard-coding its own. Set this from an environment variable so it
-# only has to be entered once the provider is confirmed; do not duplicate
-# a literal dimension elsewhere in Python or SQL.
-EMBEDDING_DIM = int(os.environ.get("ASK_EKITI_EMBEDDING_DIM", "0"))  # 0 = not yet configured
+# Single source of truth for the embedding vector size. The backend
+# already defines EMBEDDING_DIMENSIONS (currently 384) for this purpose;
+# read the same variable here rather than introducing a second config
+# concept, so the retrieval layer and the pgvector migration can never
+# drift out of sync. pgvector's column dimension is fixed at
+# table-creation time, so both sides must agree on one number, not two.
+EMBEDDING_DIM = int(os.environ.get("EMBEDDING_DIMENSIONS", "384"))
 
 # The Yoruba insufficient-knowledge string below is machine-drafted and has
 # not been reviewed by the Yoruba reviewer (spec A8/A9.9, Faith Ogunlade).

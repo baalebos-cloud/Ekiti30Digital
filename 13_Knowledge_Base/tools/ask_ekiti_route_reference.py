@@ -84,8 +84,9 @@
 #     backend re-reads it on a schedule/webhook after re-ingestion, or reads
 #     from Postgres directly once chunks are stored there instead of a
 #     JSONL file.
-#   - Confirm ASK_EKITI_EMBEDDING_DIM (see ask_ekiti_retrieval.py) matches
-#     whatever column dimension the pgvector migration uses, before either
-#     side hard-codes a number.
+#   - Retrieval reads EMBEDDING_DIMENSIONS (see ask_ekiti_retrieval.py) --
+#     the same variable the backend already defines (currently 384) --
+#     so confirm the pgvector column's dimension matches it, rather than
+#     the two sides tracking separate numbers.
 #   - Add the citation-object mapping to whatever shape the frontend's
 #     /ask-ekiti page currently expects, if it differs from Citation above.
