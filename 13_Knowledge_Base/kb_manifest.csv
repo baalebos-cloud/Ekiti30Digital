@@ -1,21 +1,67 @@
 id,path,category,doc_type,status,source_tier,source_ids,publication_date,last_verified,verified_by,language,translation_of,period_covered,file_sha256,ingestible,reason
+,01_History/founding-of-ado-ekiti-by-ewi-awamaro.md,history,,,,,null,2026-09-23,,,,,38eccd5db7c99441ca43c55be7ce80f6cd0c6bfd3a471b62c338f15fc422080b,no,has errors
+,01_History/ikere-ekiti-s-unconquered-status-in-inter-tribal-wars.md,history,,,,,null,2026-09-23,,,,,732a65f2433494fa7f2aa888645f9a3ab47e129e99acc926d7fdfb2ee1f8b914,no,has errors
 history-state-creation-1996,01_History/state-creation-1996.md,history,event,draft,A,SRC-001,2021-10-01,,,en,,1996,8e1d708622839d6ccdcb759c7af90c3238d229ec676a259c6b36f7fc822f9a1c,no,status is draft
-EK-STAT-001,09_Statistics/timeline/EK-STAT-001.md,statistics,timeline,draft,A,SRC-EK-STAT-001,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
-EK-STAT-002,09_Statistics/timeline/EK-STAT-002.md,statistics,timeline,draft,A,SRC-EK-STAT-002,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
-EK-STAT-003,09_Statistics/timeline/EK-STAT-003.md,statistics,timeline,draft,B,SRC-EK-STAT-003,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
-EK-STAT-004,09_Statistics/timeline/EK-STAT-004.md,statistics,timeline,draft,B,SRC-EK-STAT-004,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
-EK-STAT-005,09_Statistics/timeline/EK-STAT-005.md,statistics,timeline,draft,A,SRC-EK-STAT-005,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
-EK-STAT-006,09_Statistics/timeline/EK-STAT-006.md,statistics,timeline,draft,A,SRC-EK-STAT-006,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
-EK-STAT-007,09_Statistics/timeline/EK-STAT-007.md,statistics,timeline,draft,A,SRC-EK-STAT-007,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
-EK-STAT-008,09_Statistics/timeline/EK-STAT-008.md,statistics,timeline,draft,A,SRC-EK-STAT-008,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
-EK-STAT-009,09_Statistics/timeline/EK-STAT-009.md,statistics,timeline,draft,A,SRC-EK-STAT-009,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
-EK-STAT-010,09_Statistics/timeline/EK-STAT-010.md,statistics,timeline,draft,A,SRC-EK-STAT-010,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
-EK-STAT-011,09_Statistics/timeline/EK-STAT-011.md,statistics,timeline,draft,A,SRC-EK-STAT-011,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
-EK-STAT-012,09_Statistics/timeline/EK-STAT-012.md,statistics,timeline,draft,B,SRC-EK-STAT-012,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
-EK-STAT-INST-001,09_Statistics/institutions/sbs_statcloud/index.md,statistics,institutional_profile,draft,A,SRC-EK-STAT-INST-001,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
-EK-STAT-INST-002,09_Statistics/institutions/npc_state_office/index.md,statistics,institutional_profile,draft,B,SRC-EK-STAT-INST-002,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
-EK-STAT-DATA-001,09_Statistics/datasets/population-census-series.md,statistics,timeline,draft,B,SRC-EK-STAT-DATA-001,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
-EK-STAT-DATA-002,09_Statistics/datasets/poverty-mpi-series.md,statistics,timeline,draft,B,SRC-EK-STAT-DATA-002,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
-EK-STAT-DATA-003,09_Statistics/datasets/labour-force-series.md,statistics,timeline,draft,A,SRC-EK-STAT-DATA-003,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
-EK-STAT-DATA-004,09_Statistics/datasets/fiscal-igr-series.md,statistics,timeline,draft,A,SRC-EK-STAT-DATA-004,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
-EK-STAT-DATA-005,09_Statistics/datasets/literacy-education-stats.md,statistics,timeline,draft,B,SRC-EK-STAT-DATA-005,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
+,04_Tourism/abanijorin-rocks-cave.md,tourism,,,,,null,2026-09-23,,,,,cb686e5883222779f643da3976fb433d523a638c9fbb667886ee81f4952c991c,no,has errors
+,04_Tourism/arinta-waterfall.md,tourism,,,,,null,2026-09-23,,,,,1d5bf1734dc8f7224679f14fd8b74e82b29eb4f08ebe79ba07c9a7edc5707a61,no,has errors
+,04_Tourism/egbe-dam.md,tourism,,,,,null,2026-09-23,,,,,00a429714fd1712e4da76ab7124e70aeb91f257d7cd99989d4c027c48332e6a2,no,has errors
+,04_Tourism/erin-ayonigba-sacred-fish-river.md,tourism,,,,,null,2026-09-23,,,,,dda5ef87a37081c8090e8892a5cb1015d2987942b99eb1ed246d8ce15c8e715c,no,has errors
+,04_Tourism/ero-dam-lake.md,tourism,,,,,null,2026-09-23,,,,,a4764c7eb50f44efbc50994d5687c7a7584a3aeaeb8157486c35f2560ffcc353,no,has errors
+,04_Tourism/esa-cave.md,tourism,,,,,null,2026-09-23,,,,,140fff3e07052dc6dc07e65d6406ab20b6269bbdad87af1907388031004e9253,no,has errors
+,04_Tourism/ewi-of-ado-ekiti-palace.md,tourism,,,,,null,2026-09-23,,,,,965156d1ab6c7c552caeaf22a6068f1e7400ee52700fb522e752cf19a0a67609,no,has errors
+,04_Tourism/fajuyi-memorial-park.md,tourism,,,,,null,2026-09-23,,,,,1a930181529a636210a00adbba7b3c5932edcf3da01c34b188cc084fd6598687,no,has errors
+,04_Tourism/ikogosi-warm-springs.md,tourism,,,,,null,2026-09-23,,,,,fd0b0dfa407e54853774d7b0c8e5314e0b1fc23102822c4cd4257830c230c021,no,has errors
+,04_Tourism/motif-funland.md,tourism,,,,,null,2026-09-23,,,,,1a01477e0db735d3f7b49f0d055d2ff20583ac4283bc700ba1f08e5cfbeb3d92,no,has errors
+,04_Tourism/olosunta-orole-hills.md,tourism,,,,,null,2026-09-23,,,,,ecf7501a0df49db82a88b8a847c894e39d7f346d834241ebeadc0ed9b59e0e85,no,has errors
+,04_Tourism/olowe-of-ise-ancestral-compound-workshop.md,tourism,,,,,null,2026-09-23,,,,,b5df4655ed2013ab04e4dc926f60378d8e9b98d5bcd93bd66d0fbc4312312aed,no,has errors
+,04_Tourism/olowe-of-ise-museum-under-construction.md,tourism,,,,,null,2026-09-23,,,,,8975a7006bbedbb6ba1449f8e9a26b0566542b4c714c129bb5555d0103e50310,no,has errors
+,05_Culture/ado-ekiti-cotton-weaving-tradition.md,culture,,,,,null,2026-09-23,,,,,ffcee3c81ba91f04966d08078c03a9d016657dd840fbcbf7e9e5091f1ccedc8e,no,has errors
+,05_Culture/ado-ni-ile-ifa-ado-ekiti-s-ifa-heritage.md,culture,,,,,null,2026-09-23,,,,,b2e06b6378394c2a8a5794941e5935a35f9a645057c853bae0925148183f3f54,no,has errors
+,05_Culture/aeregbe-festival.md,culture,,,,,null,2026-09-23,,,,,f21ec2be2cede3a9b746a54f926e50b874c68e6a39d48610ef8b0e17eb3fa804,no,has errors
+,05_Culture/efon-alaaye-woodcarving-tradition-adeshina-workshop.md,culture,,,,,null,2026-09-23,,,,,d2bb9b2dd96e6a2368cce2f52d3e422de128c93a9d8603495dff989929fc55da,no,has errors
+,05_Culture/ekiti-state-bureau-of-tourism-development-ekifest.md,culture,,,,,null,2026-09-23,,,,,8115dbfc332da0135de344509290a094eacf7a43774ad0cfb483bad29e154556,no,has errors
+,05_Culture/epa-masquerade-festival-isan-ekiti.md,culture,,,,,null,2026-09-23,,,,,c11f2d0e7ce89adc2c742eca38ffce1efbeb0278b53639cb1d1a7a4f3511f29b,no,has errors
+,05_Culture/ijesu-new-yam-festival.md,culture,,,,,null,2026-09-23,,,,,7e2ff4a05c2df24a2be11cf3cfb42598fc05cd0845b1446920b0f05eed0018cd,no,has errors
+,05_Culture/olosunta-and-orole-hill-deity-veneration.md,culture,,,,,null,2026-09-23,,,,,6cbfa9a94c1c45693128e3c9b20afab4e2f2c80ae06e2716698f54e8920495bc,no,has errors
+,05_Culture/olosunta-orun-ikere-festival.md,culture,,,,,null,2026-09-23,,,,,4efe32e269b46e32913bbcc38b4f1600e976620b0b72dbd2aac1f2ccbbb25c89,no,has errors
+,05_Culture/olowe-of-ise-sculpture-legacy.md,culture,,,,,null,2026-09-23,,,,,cfff0d0e9e9c65baa0c9ba01534118264782d0e87f8bcfdefb26d001588b0c86,no,has errors
+,05_Culture/udiroko-festival.md,culture,,,,,null,2026-09-23,,,,,9e4b7acd3c291565151eaeea8b699ee70fd9ad68ad791f4c392edc3f5d380209,no,has errors
+,06_Education/Education_Gaps_and_Follow-ups.md,,,,,,,2026-09-25,,,,,427da0fe445c7c337ea91d1e84323196b17df349058d4a876ee8a380b2b805cb,no,has errors
+,06_Education/institutions/abuad/metadata.md,,,,,,,2026-09-25,,,,,ebd743d36e4fa5c5144ba228b7092be7d6877fd4e8346ac23fbe16d194d6843b,no,has errors
+,06_Education/institutions/cohesti-ijero-ekiti/metadata.md,,,,,,,2026-09-25,,,,,df625a45bc9c573488fd958ee0646ec995749fce9530a009e424c40f82ff5dbf,no,has errors
+,06_Education/institutions/ekspoly-isan-ekiti/metadata.md,,,,,,,2026-09-25,,,,,229fe453211573ca813d2165cbe0cbd4501cb8d6fee43947c80036d8d4b3605f,no,has errors
+,06_Education/institutions/eksu/metadata.md,,,,,,,2026-09-25,,,,,d6cdcc3228e69b915015929cee60569695b97f47f0d489e35f14c43b79f817c4,no,has errors
+,06_Education/institutions/fedpoly-ado-ekiti/metadata.md,,,,,,,2026-09-25,,,,,243cc96afcf69622fd3e72371fe82ed5fedbc035693c3314d61c5eaabceac273,no,has errors
+,06_Education/institutions/futes-iyin-ekiti/metadata.md,,,,,,,2026-09-25,,,,,6d68e8575690ad6905d80643da2146e7dfa4dfe4268ef0cdae342b0ad2b4feee,no,has errors
+,08_Agriculture/Agriculture_Gaps_and_Follow-ups.md,,,,,,,2026-09-25,,,,,5c65f07dc3086998480bec191f1c64256530ab9c5588369be667b4545381d471,no,has errors
+,08_Agriculture/data/agriculture_sector_snapshot.md,,,,,,,2026-09-25,,,,,8f71575286c83ea3c87c5570c7e34673428c357d42b4a0a383f4a52eb178c7a5,no,has errors
+,08_Agriculture/institutions/agro-allied-cargo-airport/metadata.md,,,,,,,2026-09-25,,,,,85d6d11b55e1a510673c9b91fe26bad952e46c5f52d0f27d4113475fac748942,no,has errors
+,08_Agriculture/institutions/ekiti-adp/metadata.md,,,,,,,2026-09-25,,,,,decd21eeb950c3c23078091f3700fd4bea0225ae00ea649598784b206609cfd6,no,has errors
+,08_Agriculture/institutions/ikun-dairy-farm/metadata.md,,,,,,,2026-09-25,,,,,b0387140a2c22e1e3c8d11f2f303c1308eb4243c6cd778228e598976e87e3c55,no,has errors
+,08_Agriculture/programmes/cbn_anchor_borrowers_rice.md,,,,,,,2026-09-25,,,,,19388987bdd934558159bf367aaba2382a3711d19537ee9eb9ba50142eb334f6,no,has errors
+,08_Agriculture/programmes/cocoa_revival_1970s_to_2026.md,,,,,,,2026-09-25,,,,,32b66cd2b5e13e28b949cf738ec3855955cf058f9feef6b749ac9ba3e07da622,no,has errors
+,08_Agriculture/programmes/l_pres_livestock_programme.md,,,,,,,2026-09-25,,,,,d9a2cc3938a5e2dee0e0c596cb120fab0dcbcd25125fbda5bcde973c4f031286,no,has errors
+,08_Agriculture/programmes/poultry_broiler_scheme.md,,,,,,,2026-09-25,,,,,b8aa6456a7c9cbfed78539912ce01a6098f68551481c3672127e2fb3c1c6a68d,no,has errors
+,08_Agriculture/programmes/tractorisation_subsidy_scheme.md,,,,,,,2026-09-25,,,,,951cba26670e859933cb9c979b13550cb696a5ea4f82c35187bcda1eb800977d,no,has errors
+,08_Agriculture/programmes/ycad_youth_commercial_agric.md,,,,,,,2026-09-25,,,,,d27fe5de067b479eacbada0800dc054a3f88b7d598ed4568cf7d34d7084a3e91,no,has errors
+,08_Agriculture/timeline/agriculture_timeline_1996-2026.md,,,,,,,2026-09-25,,,,,3ddba8c4f44241dfe0b3abb695a9de7ea4968efbc233791cb612577ba1e91896,no,has errors
+,09_Statistics/datasets/fiscal-igr-series.md,,,,,,,,,,,,2de85ba5375bf02964f842fac2fdccd6b8d26ed30e376fe91f4eb62f7106b301,no,has errors
+,09_Statistics/datasets/labour-force-series.md,,,,,,,,,,,,b6ede310288660044d8f3766e9aaebcc60f6dcad240f005f230cf0c9b0b8eaa4,no,has errors
+,09_Statistics/datasets/literacy-education-stats.md,,,,,,,,,,,,7ddfb1cfb2d05ad47770e3ce23f958b5bf8833348d9b6846709a38a7963aea7a,no,has errors
+,09_Statistics/datasets/population-census-series.md,,,,,,,,,,,,9621fa11da945e6c98cfb7abae27dccbef9158701756f60593284a47ba1e808a,no,has errors
+,09_Statistics/datasets/poverty-mpi-series.md,,,,,,,,,,,,5203358c6118e700ee136fe5ef94e2eea9967bc8ff5cfdc89069ee9ae6342ae7,no,has errors
+,09_Statistics/institutions/npc_state_office/metadata.md,,,,,,,,,,,,0694b48ed81a79803bc4a23228097b6d9c6a9f8b43bee470b2f68d8cd46b6698,no,has errors
+,09_Statistics/institutions/sbs_statcloud/metadata.md,,,,,,,,,,,,3970176f3fbeb3ad308f728a78265ce4a6e17425e35162071205c574040476d5,no,has errors
+,09_Statistics/sector_snapshot.md,,,,,,,,,,,,82009d41f994b544e7859fb122673b7a0fa4266045a1c07e8df227f94d36ca86,no,has errors
+,09_Statistics/timeline/EK-STAT-001.md,Population / Census,,,,,,,,,,,e6569ba760f2ca26b56098aeb44bdfac7f8f3e4f757ec1b2668e40c3acf865ba,no,has errors
+,09_Statistics/timeline/EK-STAT-002.md,Population / Governance,,,,,,,,,,,6648b9b2025cf5c4abe9badfd69af593092b00860198feb8c076344aa747eec8,no,has errors
+,09_Statistics/timeline/EK-STAT-003.md,Population / Census,,,,,,,,,,,f249a623b9ca64bf9165fbbc875e248e3eb8b47dd1e6f02c2ca05beafc32ce8b,no,has errors
+,09_Statistics/timeline/EK-STAT-004.md,Population / Projection,,,,,,,,,,,9901d3d4eb1e7e51abb3861b351d1d5e1fc616f8f5a1c212c810f8ca2da6b01e,no,has errors
+,09_Statistics/timeline/EK-STAT-005.md,Poverty / Economy,,,,,,,,,,,cfddd5e34a20009cf1e482a4d32c26c19f097692eebcab19ca626ca0fba0d160,no,has errors
+,09_Statistics/timeline/EK-STAT-006.md,Institutions,,,,,,,,,,,699a412768a0420d35519e51282325d05ee728b930db62472815396dc0088f0b,no,has errors
+,09_Statistics/timeline/EK-STAT-007.md,Poverty / Economy,,,,,,,,,,,a5f7bc98bcc52b300411458fede99d7a81165ff218143220caa1a263dc153014,no,has errors
+,09_Statistics/timeline/EK-STAT-008.md,Poverty / Economy,,,,,,,,,,,cec2ba719a3229efd19263e00900d9670db7b64ea512fa65f3b2c3c3ce36914f,no,has errors
+,09_Statistics/timeline/EK-STAT-009.md,Labour / Employment,,,,,,,,,,,dfbc057cd12ee3191ea0afc75c80853a824bc9abe1be42074fbc95d4b322c33e,no,has errors
+,09_Statistics/timeline/EK-STAT-010.md,Fiscal / Economy,,,,,,,,,,,9dcb719144a3a237e742d818863cdc98e0e67a7cf1017fe2a0be7a2ea190b25a,no,has errors
+,09_Statistics/timeline/EK-STAT-011.md,Institutions / Population / Literacy,,,,,,,,,,,8f2d551c754867aaaf30a637ece5b5721d17b73faa3d2a4c51a44ad44d461e3c,no,has errors
+,09_Statistics/timeline/EK-STAT-012.md,Literacy / Education,,,,,,,,,,,566d1c0b7cdae2c464ff09628f6351ccb456e52cda466bd9acba4de908fc8897,no,has errors
