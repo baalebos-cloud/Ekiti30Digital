@@ -77,9 +77,9 @@ function trimmedOrNull(value: string): string | null {
   return trimmed ? trimmed : null;
 }
 
-export function UploadForm() {
+export function UploadForm({ initialFolder }: { initialFolder?: string }) {
   const card = useAnimationControls();
-  const [fields, setFields] = useState<Fields>(EMPTY);
+  const [fields, setFields] = useState<Fields>({ ...EMPTY, folder: initialFolder ?? "" });
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [errors, setErrors] = useState<Partial<Record<FieldName, string>>>({});

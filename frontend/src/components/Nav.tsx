@@ -1,29 +1,22 @@
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 
-const sections = [
-  { href: "/timeline", label: "Timeline" },
-  { href: "/explore", label: "Explore" },
-  { href: "/my-story", label: "My Story" },
-  { href: "/ask-ekiti", label: "Ask Ekiti" },
-  { href: "/ekiti-2056", label: "Ekiti 2056" },
-];
+import { NavLinks, type Viewer } from "@/components/NavLinks";
+import { authOptions } from "@/lib/auth";
 
-export function Nav() {
+export async function Nav() {
+  // Read on the server so the right account links are there on first paint.
+  const session = await getServerSession(authOptions);
+  const role = session?.user?.role;
+  const viewer: Viewer = session ? { role: role === "admin" ? "admin" : "contributor" } : null;
+
   return (
-    <header className="border-b border-line">
-      <nav className="mx-auto flex max-w-3xl flex-wrap items-center gap-x-6 gap-y-2 px-6 py-4">
-        <Link href="/" className="font-display font-semibold">
-          EKITI@30 DIGITAL
+    <header className="site-header">
+      <nav className="wrap site-nav">
+        <Link href="/" className="site-brand">
+          EKITI<span className="num">@30</span> DIGITAL
         </Link>
-        <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
-          {sections.map((section) => (
-            <li key={section.href}>
-              <Link href={section.href} className="hover:underline">
-                {section.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <NavLinks viewer={viewer} />
       </nav>
     </header>
   );

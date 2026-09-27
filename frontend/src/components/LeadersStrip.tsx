@@ -1,3 +1,5 @@
+import { AutoScrollRow } from "@/components/ui/AutoScrollRow";
+
 type Leader = {
   name: string;
   term: string;
@@ -33,7 +35,7 @@ export default function LeadersStrip() {
             October 1996. Real, verified photos to follow once sourced.
           </p>
         </div>
-        <div className="leader-row">
+        <AutoScrollRow className="leader-row">
           {leaders.map((leader) => (
             <div className="leader-card" key={leader.name}>
               <div className="leader-photo">
@@ -43,7 +45,7 @@ export default function LeadersStrip() {
               <p className="leader-term">{leader.term}</p>
             </div>
           ))}
-        </div>
+        </AutoScrollRow>
       </div>
     </section>
   );

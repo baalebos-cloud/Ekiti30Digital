@@ -6,7 +6,8 @@ import { useState } from "react";
 
 import { Spinner } from "@/components/ui/Spinner";
 
-export function SignOutButton() {
+/** `variant="nav"` renders it as a nav link instead of a bordered button. */
+export function SignOutButton({ variant = "button" }: { variant?: "button" | "nav" }) {
   const [pending, setPending] = useState(false);
 
   return (
@@ -18,7 +19,7 @@ export function SignOutButton() {
         setPending(true);
         signOut({ callbackUrl: "/login" });
       }}
-      className="btn-secondary flex items-center gap-2"
+      className={variant === "nav" ? "nav-link nav-link-button nav-signout" : "btn-secondary btn-flex"}
     >
       {pending && <Spinner size={14} />}
       {pending ? "Signing out…" : "Sign out"}

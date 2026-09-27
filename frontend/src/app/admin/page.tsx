@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
-import { SignOutButton } from "@/components/SignOutButton";
+import { ReviewDesk } from "@/components/review/ReviewDesk";
 import { authOptions } from "@/lib/auth";
 
 export const metadata: Metadata = {
@@ -17,7 +17,7 @@ export default async function AdminPage() {
   if (session.user?.role !== "admin") redirect("/upload");
 
   return (
-    <main className="wrap flex-1 py-12">
+    <main className="wrap w-full flex-1 py-12">
       <div className="flex flex-wrap items-end justify-between gap-4 border-b border-line pb-6">
         <div>
           <div className="eyebrow-row">
@@ -26,10 +26,13 @@ export default async function AdminPage() {
           <h1 className="hero-title" style={{ fontSize: "clamp(28px, 3.6vw, 40px)" }}>
             Review <em>desk</em>
           </h1>
+          <p className="max-w-[56ch] text-sm text-ink-soft">
+            Nothing reaches the public site or signs in until it&apos;s approved here. Take a look,
+            then approve — or reject with a short reason.
+          </p>
         </div>
-        <SignOutButton />
       </div>
-      <p className="mt-8 text-ink-soft">The pending-uploads queue will appear here.</p>
+      <ReviewDesk />
     </main>
   );
 }

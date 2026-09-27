@@ -9,6 +9,7 @@ import { useState } from "react";
 import { Spinner } from "@/components/ui/Spinner";
 import { SuccessCheck } from "@/components/ui/SuccessCheck";
 import { AUTH_ERRORS } from "@/lib/authErrors";
+import { postLoginPath } from "@/lib/postLogin";
 
 type Status = "idle" | "submitting" | "success";
 
@@ -65,10 +66,7 @@ export function LoginForm({ callbackUrl }: { callbackUrl: string }) {
         redirect: false,
       });
       if (result?.ok && !result.error) {
-        // The default destination is the admin-only review desk; send
-        // contributors to the upload form instead.
-        const role = (await getSession())?.user?.role;
-        const destination = role !== "admin" && callbackUrl === "/admin" ? "/upload" : callbackUrl;
+        const destination = postLoginPath((await getSession())?.user?.role, callbackUrl);
         setArrival(destination === "/admin" ? "Taking you to the review desk…" : "Taking you in…");
         setStatus("success");
         // Let the checkmark play before leaving the page.

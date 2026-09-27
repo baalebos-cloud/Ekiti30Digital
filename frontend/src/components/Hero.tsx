@@ -21,10 +21,29 @@ export default function Hero() {
             <a className="btn-primary" href="#moments">
               Walk Through Our Journey
             </a>
-            <a className="btn-secondary" href="#">
+            <a className="btn-secondary" href="/my-ekiti-story">
               Share Your Ekiti Story
             </a>
           </div>
+          {/* Facts from the sourced timeline (03_Timeline, EK-001). */}
+          <dl className="hero-facts">
+            <div>
+              <dt>Created</dt>
+              <dd>1 Oct 1996</dd>
+            </div>
+            <div>
+              <dt>Local governments</dt>
+              <dd>16</dd>
+            </div>
+            <div>
+              <dt>Capital</dt>
+              <dd>Ado-Ekiti</dd>
+            </div>
+            <div>
+              <dt>Leaders since</dt>
+              <dd>7</dd>
+            </div>
+          </dl>
         </div>
 
         <div className="board">

@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 
 import { LoginForm } from "@/components/LoginForm";
 import { authOptions } from "@/lib/auth";
+import { postLoginPath } from "@/lib/postLogin";
 
 export const metadata: Metadata = {
   title: "Sign in — EKITI@30 DIGITAL",
@@ -23,7 +24,8 @@ function safeCallback(value: string | string[] | undefined): string {
 export default async function LoginPage({ searchParams }: PageProps<"/login">) {
   const callbackUrl = safeCallback((await searchParams).callbackUrl);
 
-  if (await getServerSession(authOptions)) redirect(callbackUrl);
+  const session = await getServerSession(authOptions);
+  if (session) redirect(postLoginPath(session.user?.role, callbackUrl));
 
   return (
     <main className="adire-bg flex flex-1 items-center justify-center px-5 py-16">
