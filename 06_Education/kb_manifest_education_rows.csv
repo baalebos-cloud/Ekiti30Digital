@@ -1,0 +1,32 @@
+doc_id,source_title,source_url,class,tier,last_verified,ingestible
+EK-EDU-000,EKITI@30 Education Sector Section Overview,,education,A,2026-09-25,no
+EK-EDU-TIMELINE,Ekiti State Education Timeline 1996-2026,,education,mixed,2026-09-25,no
+EK-EDU-001,Ministry of Education Science and Technology established Oct 1996,https://www.ekitistate.gov.ng/executive-council/mdas/ministry-of-education-science-and-technology,education,A,2026-09-25,no
+EK-EDU-002,Christ's School Ado-Ekiti founded 1933,"https://en.wikipedia.org/wiki/Christ's_School,_Ado_Ekiti",education,B,2026-09-25,no
+EK-EDU-003,Ekiti State University founded 1982,https://eksu.edu.ng/about-eksu/,education,A,2026-09-25,no
+EK-EDU-004,Federal University Oye-Ekiti founded 2011,https://en.wikipedia.org/wiki/Federal_University_Oye_Ekiti,education,B,2026-09-25,no
+EK-EDU-005,Afe Babalola University founded 2009,https://academicimpact.un.org/content/afe-babalola-university-ado-ekiti-nigeria,education,A,2026-09-25,no
+EK-EDU-006,BOUESTI upgraded from College of Education 2020,"https://en.wikipedia.org/wiki/College_of_Education,_Ikere_Ekiti",education,B,2026-09-25,no
+EK-EDU-007,Federal Polytechnic Ado-Ekiti relocation history,https://fedpolyado.edu.ng/about-fpa,education,A,2026-09-25,no
+EK-EDU-008,Education Development Levy introduced 2015,https://www.vanguardngr.com/2018/10/breaking-fayemi-declares-free-education-in-ekiti/,education,B,2026-09-25,no
+EK-EDU-009,Levy abolished free education declared 2018,https://guardian.ng/news/fayemi-signs-executive-order-for-free-education-in-ekiti/,education,B,2026-09-25,no
+EK-EDU-010,Ekiti Kete Meals school feeding launched 2019,https://www.thexpressng.com/ekiti-begins-free-school-feeding-programme/,education,C,2026-09-25,no
+EK-EDU-011,Africa Check fact-check of enrolment claims 2020,https://africacheck.org/fact-checks/reports/fact-check-nigeria-state-governors-claims-about-stellar-education-record-not,education,B,2026-09-25,no
+EK-EDU-012,2023-2024 Annual School Census summary,https://ekitistate.gov.ng/wp-content/uploads/2025/Edu/2023-2024%20Ekiti%20ASCE.pdf,education,A,2026-09-25,no
+EK-EDU-013,Oyebanji administration education spending figures 2022-2024,https://www.premiumtimesng.com/news/top-news/745916-ekiti-spends-n14-billion-on-renovation-construction-in-203-schools-oyebanji.html,education,C,2026-09-25,no
+EK-EDU-014,Smart School KOICA programme,https://www.eksginfo.ng/2025/04/17/ekiti-reiterates-commitment-to-smart-education/,education,B,2026-09-25,no
+EK-EDU-GAPS,Education section gaps and follow-ups,,education,n/a,2026-09-25,no
+EK-EDU-INST-EKSU,EKSU institutional record,https://eksu.edu.ng/about-eksu/,education,A,2026-09-25,no
+EK-EDU-INST-FUOYE,FUOYE institutional record,https://en.wikipedia.org/wiki/Federal_University_Oye_Ekiti,education,B,2026-09-25,no
+EK-EDU-INST-ABUAD,ABUAD institutional record,https://academicimpact.un.org/content/afe-babalola-university-ado-ekiti-nigeria,education,A,2026-09-25,no
+EK-EDU-INST-BOUESTI,BOUESTI institutional record,"https://en.wikipedia.org/wiki/College_of_Education,_Ikere_Ekiti",education,B,2026-09-25,no
+EK-EDU-INST-FEDPOLY,Federal Polytechnic Ado-Ekiti institutional record,https://fedpolyado.edu.ng/about-fpa,education,A,2026-09-25,no
+EK-EDU-INST-CHRISTS-SCHOOL,Christ's School Ado-Ekiti institutional record,"https://en.wikipedia.org/wiki/Christ's_School,_Ado_Ekiti",education,B,2026-09-25,no
+EK-EDU-POLICY-FREE-ED,Free education and levy policy history,,education,mixed,2026-09-25,no
+EK-EDU-DATA-ASCE-2023-24,2023-2024 Annual School Census summary,https://ekitistate.gov.ng/wp-content/uploads/2025/Edu/2023-2024%20Ekiti%20ASCE.pdf,education,A,2026-09-25,no
+EK-EDU-015,FUTES Iyin-Ekiti established 20 Feb 2025,https://futes.edu.ng/history,education,A,2026-09-25,no
+EK-EDU-016,COHESTI Ijero-Ekiti monotechnic-to-polytechnic conversion,https://en.wikipedia.org/wiki/Ekiti_State_College_of_Health_Science_and_Technology,education,B,2026-09-25,no
+EK-EDU-017,EKSPOLY Isan-Ekiti re-established 2 Sept 2019,https://www.ekspoly.edu.ng/,education,C,2026-09-25,no
+EK-EDU-INST-FUTES,FUTES Iyin-Ekiti institutional record,https://futes.edu.ng/history,education,A,2026-09-25,no
+EK-EDU-INST-COHESTI,COHESTI Ijero-Ekiti institutional record,https://en.wikipedia.org/wiki/Ekiti_State_College_of_Health_Science_and_Technology,education,B,2026-09-25,no
+EK-EDU-INST-EKSPOLY,EKSPOLY Isan-Ekiti institutional record,https://www.ekspoly.edu.ng/,education,B,2026-09-25,no

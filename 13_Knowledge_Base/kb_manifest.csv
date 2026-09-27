@@ -1,2 +1,21 @@
 id,path,category,doc_type,status,source_tier,source_ids,publication_date,last_verified,verified_by,language,translation_of,period_covered,file_sha256,ingestible,reason
 history-state-creation-1996,01_History/state-creation-1996.md,history,event,draft,A,SRC-001,2021-10-01,,,en,,1996,8e1d708622839d6ccdcb759c7af90c3238d229ec676a259c6b36f7fc822f9a1c,no,status is draft
+EK-STAT-001,09_Statistics/timeline/EK-STAT-001.md,statistics,timeline,draft,A,SRC-EK-STAT-001,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
+EK-STAT-002,09_Statistics/timeline/EK-STAT-002.md,statistics,timeline,draft,A,SRC-EK-STAT-002,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
+EK-STAT-003,09_Statistics/timeline/EK-STAT-003.md,statistics,timeline,draft,B,SRC-EK-STAT-003,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
+EK-STAT-004,09_Statistics/timeline/EK-STAT-004.md,statistics,timeline,draft,B,SRC-EK-STAT-004,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
+EK-STAT-005,09_Statistics/timeline/EK-STAT-005.md,statistics,timeline,draft,A,SRC-EK-STAT-005,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
+EK-STAT-006,09_Statistics/timeline/EK-STAT-006.md,statistics,timeline,draft,A,SRC-EK-STAT-006,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
+EK-STAT-007,09_Statistics/timeline/EK-STAT-007.md,statistics,timeline,draft,A,SRC-EK-STAT-007,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
+EK-STAT-008,09_Statistics/timeline/EK-STAT-008.md,statistics,timeline,draft,A,SRC-EK-STAT-008,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
+EK-STAT-009,09_Statistics/timeline/EK-STAT-009.md,statistics,timeline,draft,A,SRC-EK-STAT-009,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
+EK-STAT-010,09_Statistics/timeline/EK-STAT-010.md,statistics,timeline,draft,A,SRC-EK-STAT-010,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
+EK-STAT-011,09_Statistics/timeline/EK-STAT-011.md,statistics,timeline,draft,A,SRC-EK-STAT-011,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
+EK-STAT-012,09_Statistics/timeline/EK-STAT-012.md,statistics,timeline,draft,B,SRC-EK-STAT-012,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
+EK-STAT-INST-001,09_Statistics/institutions/sbs_statcloud/index.md,statistics,institutional_profile,draft,A,SRC-EK-STAT-INST-001,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
+EK-STAT-INST-002,09_Statistics/institutions/npc_state_office/index.md,statistics,institutional_profile,draft,B,SRC-EK-STAT-INST-002,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
+EK-STAT-DATA-001,09_Statistics/datasets/population-census-series.md,statistics,timeline,draft,B,SRC-EK-STAT-DATA-001,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
+EK-STAT-DATA-002,09_Statistics/datasets/poverty-mpi-series.md,statistics,timeline,draft,B,SRC-EK-STAT-DATA-002,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
+EK-STAT-DATA-003,09_Statistics/datasets/labour-force-series.md,statistics,timeline,draft,A,SRC-EK-STAT-DATA-003,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
+EK-STAT-DATA-004,09_Statistics/datasets/fiscal-igr-series.md,statistics,timeline,draft,A,SRC-EK-STAT-DATA-004,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off
+EK-STAT-DATA-005,09_Statistics/datasets/literacy-education-stats.md,statistics,timeline,draft,B,SRC-EK-STAT-DATA-005,2026-09-25,2026-09-25,,en,,2026,,no,Pending independent verification and review sign-off

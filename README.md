@@ -122,6 +122,40 @@ More detailed contribution guidelines will be provided in `CONTRIBUTING.md`.
 
 This repository is the technical home of EKITI@30 DIGITAL.
 
+## Getting Started (Development)
+
+The application has two parts: a FastAPI **backend** (`backend/`) and a Next.js **frontend** (`frontend/`). See `ARCHITECTURE.md` for the full stack rationale and repository layout.
+
+### Backend setup
+
+```bash
+cd backend
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+# macOS/Linux: source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
+uvicorn app.main:app --reload
+```
+
+The API defaults to a local SQLite database (`sqlite:///./dev.db`), so no database setup is required to get started. To use Postgres instead, set `DATABASE_URL` in `.env` (or run `docker compose up` from the repo root, which starts a Postgres service alongside the backend).
+
+**Note:** the Ask Ekiti knowledge base uses a `pgvector` column for embeddings, which requires Postgres with the pgvector extension (the `docker-compose.yml` Postgres image already has it). If you're running locally against the SQLite default, vector search won't be available — that's expected; switch to the Dockerized Postgres for that.
+
+### Frontend setup
+
+```bash
+cd frontend
+cp .env.example .env.local
+npm install
+npm run dev
+```
+
+### Verify it's working
+
+* Backend: visit [http://localhost:8000/api/health](http://localhost:8000/api/health) — should return `{"status": "ok"}`
+* Frontend: visit [http://localhost:3000](http://localhost:3000)
+
 ---
 
 **EKITI@30 DIGITAL**

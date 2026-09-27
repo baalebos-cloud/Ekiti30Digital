@@ -1,0 +1,18 @@
+{
+  "record_id": "STORY-001",
+  "record_type": "TEST_FIXTURE",
+  "title": "Memories of Ikogosi Springs",
+  "internal_contributor_identity": "TEST-CONTRIBUTOR-001",
+  "public_credit_preference": "Anonymous",
+  "attribution_text": "Anonymous Contributor",
+  "media_rights": {
+    "ownership": "Synthetic Test Asset",
+    "permission_scope": "Local Integration Testing Only",
+    "attribution_required": false
+  },
+  "consent": {
+    "status": "Granted",
+    "scope": "Synthetic test data for pipeline ingestion testing",
+    "is_synthetic": true
+  }
+}

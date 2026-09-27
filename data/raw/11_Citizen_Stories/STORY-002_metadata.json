@@ -1,0 +1,18 @@
+{
+  "record_id": "STORY-002",
+  "record_type": "TEST_FIXTURE",
+  "title": "Ado-Ekiti Trade Memories",
+  "internal_contributor_identity": "TEST-CONTRIBUTOR-002",
+  "public_credit_preference": "Pseudonym",
+  "attribution_text": "Photo credit: Ekiti Heritage Project",
+  "media_rights": {
+    "ownership": "Ekiti Heritage Project (Test Partner)",
+    "permission_scope": "Testing and Demonstrational Pipeline Verification",
+    "attribution_required": true
+  },
+  "consent": {
+    "status": "Granted",
+    "scope": "Project publication testing",
+    "is_synthetic": true
+  }
+}

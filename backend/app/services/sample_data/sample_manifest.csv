@@ -1,0 +1,6 @@
+id,path,category,doc_type,status,source_tier,source_ids,publication_date,last_verified,verified_by,language,translation_of,period_covered,file_sha256,ingestible,reason
+sample-001,01_History/history-of-ekiti.md,history,overview,verified,A,SRC-001,2020-01-01,2026-01-15,,en,,,1111111111111111111111111111111111111111111111111111111111111111,yes,
+sample-002,01_History/ado-ekiti-notes.md,notes,notes,draft,C,SRC-002,,,,en,,,2222222222222222222222222222222222222222222222222222222222222222,no,status is draft
+sample-003,02_LGAs/ekiti-lgas.md,lga,overview,verified,A,SRC-003,2021-06-01,2026-03-10,,en,,,3333333333333333333333333333333333333333333333333333333333333333,yes,
+sample-004,01_History/internal-draft.md,notes,notes,review,C,SRC-004,,2026-04-05,,en,,,4444444444444444444444444444444444444444444444444444444444444444,No,under review
+sample-005,03_Tourism/ekiti-tourism.md,tourism,guide,verified,B,SRC-005,2022-09-01,2026-05-20,,en,,,5555555555555555555555555555555555555555555555555555555555555555,yes,

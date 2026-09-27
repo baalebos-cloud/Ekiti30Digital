@@ -1,0 +1,145 @@
+[
+  {
+    "title": "Ikogosi Warm Springs",
+    "slug": "ikogosi-warm-springs",
+    "subcategory": "Tourist Attraction / Natural Site",
+    "location": "Ikogosi-Ekiti",
+    "lga": "Ekiti West LGA",
+    "verification_status": "Verified",
+    "traditional_account": true,
+    "source_url": "https://ekitistate.gov.ng/newsite/about-us/tourism/",
+    "last_verified": "2026-09-23"
+  },
+  {
+    "title": "Arinta Waterfall",
+    "slug": "arinta-waterfall",
+    "subcategory": "Tourist Attraction / Natural Site",
+    "location": "Ipole-Iloro",
+    "lga": "Ekiti West LGA",
+    "verification_status": "Verified",
+    "traditional_account": true,
+    "source_url": "https://rsistest.ramsar.org/RISapp/files/RISrep/NG2565RIS_2503_en.pdf",
+    "last_verified": "2026-09-23"
+  },
+  {
+    "title": "Fajuyi Memorial Park",
+    "slug": "fajuyi-memorial-park",
+    "subcategory": "Monument / Tourist Attraction",
+    "location": "Ado-Ekiti",
+    "lga": "Ado-Ekiti LGA",
+    "verification_status": "Verified",
+    "traditional_account": false,
+    "source_url": "https://ekitistate.gov.ng/newsite/about-us/tourism/",
+    "last_verified": "2026-09-23"
+  },
+  {
+    "title": "Motif Funland",
+    "slug": "motif-funland",
+    "subcategory": "Tourist Attraction (Amusement Park)",
+    "location": "Ado-Ekiti",
+    "lga": "Ado-Ekiti LGA",
+    "verification_status": "Needs verification",
+    "traditional_account": false,
+    "source_url": "https://kikio.ng/tourist-attractions-ekiti-state/",
+    "last_verified": "2026-09-23"
+  },
+  {
+    "title": "Ewi of Ado-Ekiti Palace",
+    "slug": "ewi-of-ado-ekiti-palace",
+    "subcategory": "Historical Landmark / Heritage Site",
+    "location": "Ado-Ekiti",
+    "lga": "Ado-Ekiti LGA",
+    "verification_status": "Needs verification",
+    "traditional_account": true,
+    "source_url": "https://www.ekitistate.gov.ng/?p=4314",
+    "last_verified": "2026-09-23"
+  },
+  {
+    "title": "Olowe of Ise Ancestral Compound & Workshop",
+    "slug": "olowe-of-ise-ancestral-compound-workshop",
+    "subcategory": "Historical Landmark / Heritage Site",
+    "location": "Ise-Ekiti",
+    "lga": "Ise/Orun LGA",
+    "verification_status": "Verified",
+    "traditional_account": false,
+    "source_url": "https://www.ekitistate.gov.ng/?p=27348",
+    "last_verified": "2026-09-23"
+  },
+  {
+    "title": "Abanijorin Rocks & Cave",
+    "slug": "abanijorin-rocks-cave",
+    "subcategory": "Historical Landmark / Natural Site",
+    "location": "Iyin-Ekiti",
+    "lga": "Irepodun/Ifelodun LGA",
+    "verification_status": "Needs verification",
+    "traditional_account": false,
+    "source_url": "https://visitekiti.ek.gov.ng/",
+    "last_verified": "2026-09-23"
+  },
+  {
+    "title": "Esa Cave",
+    "slug": "esa-cave",
+    "subcategory": "Historical Landmark / Natural Site",
+    "location": "Iyin-Ekiti",
+    "lga": "Irepodun/Ifelodun LGA",
+    "verification_status": "Needs verification",
+    "traditional_account": false,
+    "source_url": "https://en.wikipedia.org/wiki/Iyin_Ekiti",
+    "last_verified": "2026-09-23"
+  },
+  {
+    "title": "Ero Dam & Lake",
+    "slug": "ero-dam-lake",
+    "subcategory": "Natural Site / Landscape",
+    "location": "Ikun-Ekiti",
+    "lga": "Moba LGA",
+    "verification_status": "Verified",
+    "traditional_account": false,
+    "source_url": "https://ekitistate.gov.ng/newsite/about-us/tourism/",
+    "last_verified": "2026-09-23"
+  },
+  {
+    "title": "Egbe Dam",
+    "slug": "egbe-dam",
+    "subcategory": "Natural Site / Landscape",
+    "location": "Egbe-Ekiti",
+    "lga": "Gbonyin LGA (also known as Aiyekire LGA)",
+    "verification_status": "Verified",
+    "traditional_account": false,
+    "source_url": "https://ekitistate.gov.ng/newsite/about-us/tourism/",
+    "last_verified": "2026-09-23"
+  },
+  {
+    "title": "Olosunta & Orole Hills",
+    "slug": "olosunta-orole-hills",
+    "subcategory": "Natural Site / Landscape",
+    "location": "Ikere-Ekiti",
+    "lga": "Ikere LGA",
+    "verification_status": "Needs verification",
+    "traditional_account": true,
+    "source_url": "https://en.wikipedia.org/wiki/Ikere-Ekiti",
+    "last_verified": "2026-09-23"
+  },
+  {
+    "title": "Erin Ayonigba Sacred Fish River",
+    "slug": "erin-ayonigba-sacred-fish-river",
+    "subcategory": "Natural Site / Landscape",
+    "location": "Erin-Ayonigba (exact LGA unconfirmed — possibly Ekiti West LGA)",
+    "lga": "Needs confirmation",
+    "verification_status": "Needs verification",
+    "traditional_account": true,
+    "source_url": "https://kikio.ng/tourist-attractions-ekiti-state/",
+    "last_verified": "2026-09-23"
+  },
+  {
+    "title": "Olowe of Ise Museum (under construction)",
+    "slug": "olowe-of-ise-museum-under-construction",
+    "subcategory": "Museum / Monument / Cultural Institution",
+    "location": "Ise-Ekiti",
+    "lga": "Ise/Orun LGA",
+    "verification_status": "Verified",
+    "traditional_account": false,
+    "source_url": "https://thewillnews.com/ekiti-to-host-fundraiser-for-olowe-of-ise-museum",
+    "last_verified": "2026-09-23"
+  }
+]

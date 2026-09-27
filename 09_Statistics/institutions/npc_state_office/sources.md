@@ -1,0 +1,2 @@
+- Ekiti State Government website — "About Ekiti" (cites NPC 1991 and 2006 figures)
+- citypopulation.de — "Ekiti (State, Nigeria)" (sourced to "National Population Commission of Nigeria (web), National Bureau of Statistics (web)")

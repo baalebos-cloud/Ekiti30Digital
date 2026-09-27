@@ -1,0 +1,18 @@
+{
+  "record_id": "VISION-001",
+  "record_type": "TEST_FIXTURE",
+  "title": "Ekiti 2056 Tech Hub Concept",
+  "internal_contributor_identity": "TEST-CONTRIBUTOR-003",
+  "public_credit_preference": "Public Name",
+  "attribution_text": "Ekiti 2056 Future Labs",
+  "media_rights": {
+    "ownership": "Synthetic Concept Asset",
+    "permission_scope": "Local Integration Testing Only",
+    "attribution_required": false
+  },
+  "consent": {
+    "status": "Granted",
+    "scope": "Synthetic test data for pipeline ingestion testing",
+    "is_synthetic": true
+  }
+}

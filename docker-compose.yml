@@ -1,0 +1,48 @@
+# Optional local stack: backend + Postgres.
+#
+# Not required for day-to-day development — SQLite is the backend's
+# default (see backend/.env.example), so nobody needs Docker to get
+# started. Use this when you specifically want to develop against
+# Postgres, e.g. before deploying.
+#
+# Usage:
+#   docker compose up --build
+
+services:
+  db:
+    # pgvector-enabled Postgres image, needed for the Ask Ekiti knowledge
+    # base's Chunk.embedding column (see app/models/knowledge.py). Whatever
+    # hosts this in production must also support the pgvector extension
+    # (e.g. Supabase, Neon, or self-managed Postgres with pgvector installed)
+    # — plain Postgres will fail to create that column.
+    image: pgvector/pgvector:pg16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ekiti30
+      POSTGRES_PASSWORD: ekiti30
+      POSTGRES_DB: ekiti30
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ekiti30"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://ekiti30:ekiti30@db:5432/ekiti30
+      FRONTEND_ORIGIN: http://localhost:3000
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db_data:

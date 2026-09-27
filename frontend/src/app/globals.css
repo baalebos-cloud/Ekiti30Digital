@@ -1,0 +1,218 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens sourced from 17_Design/design-tokens.md (v4 — PR #14 design
+ * handoff, marked as implementation source of truth). Extend this file when
+ * new tokens are approved there — don't hardcode colors/fonts in components.
+ *
+ * No dark mode: explicit team decision recorded in design-tokens.md.
+ * Do not add a `prefers-color-scheme` branch here.
+ */
+:root {
+  --bg: #ffffff;
+  --bg-warm: #fff8ea;
+  --bg-raised: #fcefd2;
+  --ink: #221b12;
+  --ink-soft: #6b5f49;
+  --forest: #0b6b41;
+  --forest-2: #1fa35f;
+  --gold: #f2a400;
+  --gold-soft: #ffd866;
+  --rust: #e8451f;
+  --teal: #0e8c8c;
+  --teal-deep: #095f5f;
+  --line: rgba(34, 27, 18, 0.12);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-warm: var(--bg-warm);
+  --color-bg-raised: var(--bg-raised);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-forest: var(--forest);
+  --color-forest-2: var(--forest-2);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-rust: var(--rust);
+  --color-teal: var(--teal);
+  --color-teal-deep: var(--teal-deep);
+  --color-line: var(--line);
+
+  /* Fraunces (display/headings) + Work Sans (body/UI), per design-tokens.md */
+  --font-display: var(--font-fraunces);
+  --font-body: var(--font-work-sans);
+  --font-sans: var(--font-work-sans);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+}
+/* ============================================================
+   Appended by Member 6 (UI/UX) — component styles for homepage
+   sections (Hero, Leaders, Landmarks, Moments, Feature grid,
+   Footer), from 17_Design/homepage-preview.html.
+
+   Does NOT touch the :root tokens or @theme block above —
+   those stay as the single source of truth. Nav/header styling
+   is intentionally left out here since Nav.tsx already covers
+   that with Tailwind utilities.
+   ============================================================ */
+
+:root {
+  --radius-s: 6px;
+  --radius-m: 14px;
+}
+
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 56px); }
+
+/* ---------- Hero: warm welcome + memory-board collage ---------- */
+.hero { background: var(--bg-warm); border-bottom: 1px solid var(--line); overflow: hidden; }
+.hero-inner { padding: clamp(44px, 6vw, 76px) 0 clamp(56px, 7vw, 92px); display: grid; grid-template-columns: 1fr 0.9fr; gap: clamp(28px, 5vw, 56px); align-items: center; }
+@media (max-width: 940px) { .hero-inner { grid-template-columns: 1fr; } }
+
+.eyebrow-row { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; font-size: 13.5px; color: var(--ink-soft); }
+.eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--rust); display: inline-block; }
+h1.hero-title { font-family: var(--font-fraunces), serif; font-weight: 500; font-size: clamp(34px, 4.6vw, 54px); line-height: 1.08; letter-spacing: -0.01em; margin: 0 0 18px; }
+h1.hero-title em { font-style: italic; font-weight: 500; color: var(--forest-2); }
+.hero-sub { font-size: clamp(15.5px, 1.4vw, 17.5px); color: var(--ink-soft); max-width: 44ch; margin: 0 0 30px; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-primary, .btn-secondary { font-weight: 600; font-size: 14.5px; padding: 12px 22px; border-radius: var(--radius-s); cursor: pointer; text-decoration: none; display: inline-block; border: none; }
+.btn-primary { background: var(--rust); color: #fff; border: 1px solid var(--rust); }
+.btn-secondary { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+
+.board { position: relative; height: clamp(320px, 38vw, 440px); }
+.polaroid { position: absolute; background: #fff; padding: 9px 9px 30px; box-shadow: 0 16px 30px rgba(36, 30, 20, 0.16); border-radius: 3px; }
+.polaroid .frame { display: flex; align-items: center; justify-content: center; color: var(--ink-soft); }
+.polaroid .frame svg { width: 30%; height: 30%; opacity: 0.55; }
+.polaroid .cap { font-family: var(--font-fraunces), serif; font-style: italic; font-size: 12.5px; text-align: center; margin-top: 8px; color: var(--ink-soft); }
+.p1 { width: 56%; left: 0; top: 4%; transform: rotate(-4deg); z-index: 3; }
+.p1 .frame { aspect-ratio: 4 / 3.2; background: linear-gradient(135deg, var(--gold-soft), var(--gold)); }
+.p2 { width: 40%; right: 0; top: 0; transform: rotate(5deg); z-index: 2; }
+.p2 .frame { aspect-ratio: 1 / 1.1; background: linear-gradient(135deg, var(--gold-soft), var(--gold)); }
+.p3 { width: 42%; left: 14%; bottom: 0; transform: rotate(3deg); z-index: 4; }
+.p3 .frame { aspect-ratio: 4 / 3; background: linear-gradient(135deg, var(--forest-2), var(--forest)); }
+.p3 .frame svg { stroke: var(--bg-warm); }
+.pin { position: absolute; top: -7px; left: 50%; transform: translateX(-50%); width: 12px; height: 12px; border-radius: 50%; background: var(--rust); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); z-index: 5; }
+
+/* ---------- Section shell ---------- */
+section { padding: clamp(48px, 6.5vw, 84px) 0; }
+.section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 32px; flex-wrap: wrap; }
+h2.section-title { font-family: var(--font-fraunces), serif; font-weight: 500; font-size: clamp(24px, 3vw, 34px); letter-spacing: -0.01em; margin: 0; max-width: 22ch; }
+.section-desc { color: var(--ink-soft); max-width: 42ch; font-size: 15px; margin: 8px 0 0; }
+
+/* ---------- Leaders ---------- */
+.leaders { border-bottom: 1px solid var(--line); }
+.leader-row { display: flex; gap: 22px; overflow-x: auto; padding-bottom: 10px; }
+.leader-row::-webkit-scrollbar { height: 5px; }
+.leader-row::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+.leader-card { flex: 0 0 auto; width: 128px; text-align: center; }
+.leader-photo { width: 128px; height: 128px; border-radius: 50%; background: linear-gradient(160deg, var(--teal), var(--teal-deep)); border: 3px solid #fff; outline: 3px solid var(--gold-soft); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; color: #fff; }
+.leader-photo svg { width: 38px; height: 38px; opacity: 0.5; }
+.leader-name { font-family: var(--font-fraunces), serif; font-weight: 600; font-size: 14.5px; margin: 0 0 2px; }
+.leader-term { font-size: 12px; color: var(--ink-soft); }
+
+/* ---------- Landmarks ---------- */
+.landmarks { background: var(--bg-warm); border-bottom: 1px solid var(--line); }
+.land-row { display: flex; gap: 18px; overflow-x: auto; padding-bottom: 10px; }
+.land-row::-webkit-scrollbar { height: 5px; }
+.land-row::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+.land-card { flex: 0 0 auto; width: 240px; background: #fff; border-radius: var(--radius-m); overflow: hidden; box-shadow: 0 8px 20px rgba(34, 27, 18, 0.1); }
+.land-photo { aspect-ratio: 4 / 3.3; display: flex; align-items: center; justify-content: center; color: #fff; }
+.land-photo svg { width: 34px; height: 34px; opacity: 0.9; }
+.l1 .land-photo { background: linear-gradient(160deg, var(--teal), var(--teal-deep)); }
+.l2 .land-photo { background: linear-gradient(160deg, var(--forest-2), var(--forest)); }
+.l3 .land-photo { background: linear-gradient(160deg, var(--gold-soft), var(--rust)); }
+.l4 .land-photo { background: linear-gradient(160deg, var(--rust), #8F2A10); }
+.land-meta { padding: 14px 16px; }
+.land-meta .name { font-family: var(--font-fraunces), serif; font-weight: 600; font-size: 15px; margin: 0 0 3px; }
+.land-meta .loc { font-size: 12px; color: var(--ink-soft); }
+.land-more { flex: 0 0 auto; width: 240px; border: 2px dashed var(--line); border-radius: var(--radius-m); display: flex; align-items: center; justify-content: center; text-align: center; color: var(--ink-soft); font-family: var(--font-fraunces), serif; font-style: italic; font-size: 14px; padding: 20px; }
+
+/* ---------- Moments (bold color band) ---------- */
+.moments { background: var(--forest); color: #fff; }
+.moments .section-title, .moments .section-desc { color: #fff; }
+.moments .section-desc { opacity: 0.82; }
+.spine { position: relative; display: flex; gap: 0; overflow-x: auto; padding: 8px 0 12px; }
+.spine::-webkit-scrollbar { height: 5px; }
+.spine::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.25); border-radius: 3px; }
+.spine-line { position: absolute; left: 0; right: 0; top: 96px; height: 2px; background: rgba(255, 255, 255, 0.25); z-index: 0; }
+.m-item { position: relative; flex: 0 0 auto; width: clamp(150px, 20vw, 210px); text-align: center; padding: 0 10px; }
+.m-photo { width: 76px; height: 76px; border-radius: 50%; margin: 0 auto 14px; background: linear-gradient(160deg, var(--teal), var(--teal-deep)); border: 3px solid var(--forest); outline: 3px solid rgba(255, 255, 255, 0.35); display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; color: #fff; }
+.m-photo svg { width: 26px; height: 26px; opacity: 0.9; }
+.m-item.is-anchor .m-photo { background: linear-gradient(160deg, var(--gold-soft), var(--gold)); outline-color: #fff; }
+.m-year { font-family: var(--font-fraunces), serif; font-weight: 600; font-size: 15px; margin: 0 0 4px; color: var(--gold-soft); }
+.m-label { font-size: 12.5px; color: rgba(255, 255, 255, 0.85); }
+.m-more { flex: 0 0 auto; width: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.m-more .m-more-circle { width: 76px; height: 76px; border-radius: 50%; border: 2px dashed rgba(255, 255, 255, 0.5); display: flex; align-items: center; justify-content: center; font-family: var(--font-fraunces), serif; font-size: 13px; color: rgba(255, 255, 255, 0.85); margin-bottom: 14px; }
+
+/* ---------- Feature bento grid ---------- */
+.bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+.card { background: var(--bg-raised); border: 1px solid var(--line); border-radius: var(--radius-m); padding: 26px; display: flex; flex-direction: column; justify-content: space-between; min-height: 200px; }
+.card.c-timeline { grid-column: span 3; background: var(--forest); color: #fff; border-color: var(--forest); }
+.card.c-ask { grid-column: span 3; }
+.card.c-explore { grid-column: span 2; }
+.card.c-story { grid-column: span 2; }
+.card.c-2056 { grid-column: span 2; background: var(--gold-soft); color: var(--forest); border-color: var(--gold); }
+.card.c-kb { grid-column: span 6; flex-direction: row; align-items: center; gap: 28px; }
+@media (max-width: 900px) {
+  .bento { grid-template-columns: repeat(2, 1fr); }
+  .card.c-timeline, .card.c-ask, .card.c-explore, .card.c-story, .card.c-2056 { grid-column: span 2; }
+  .card.c-kb { flex-direction: column; align-items: flex-start; }
+}
+.card-icon { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+.card-icon svg { width: 100%; height: 100%; }
+.card h3 { font-family: var(--font-fraunces), serif; font-weight: 500; font-size: 19px; margin: 0 0 7px; }
+.card p { margin: 0; font-size: 14px; opacity: 0.85; max-width: 34ch; }
+.card-tag { font-size: 12px; font-weight: 600; opacity: 0.65; margin-bottom: 10px; }
+
+/* ---------- Footer ---------- */
+footer { padding: 36px clamp(20px, 5vw, 56px) calc(36px + env(safe-area-inset-bottom, 0px)); text-align: center; color: var(--ink-soft); font-size: 13px; border-top: 1px solid var(--line); }
+footer .wordmark { justify-content: center; margin-bottom: 8px; display: flex; align-items: baseline; gap: 6px; font-family: var(--font-fraunces), serif; font-weight: 600; }
+footer .wordmark .num { color: var(--rust); font-style: italic; font-weight: 500; }
+/* ============================================================
+   Appended by Member 6 (UI/UX) — Timeline page styles.
+   Uses the same tokens as the homepage (no new colors added).
+   Verification-status colors are semantic, not decorative:
+   forest = Verified, teal = Single source, gold = Needs primary
+   source, rust = Conflicting sources (most caution).
+   ============================================================ */
+
+.tl-hero { background: var(--bg-warm); border-bottom: 1px solid var(--line); padding: clamp(36px, 5vw, 60px) 0; }
+
+.tl-legend { display: flex; flex-wrap: wrap; gap: 16px; padding: 24px 0 0; font-size: 12.5px; color: var(--ink-soft); }
+.tl-legend-item { display: flex; align-items: center; gap: 6px; }
+.tl-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+
+.tl-filters { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px 0 6px; }
+.tl-chip { font-size: 13px; font-weight: 500; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); background: #fff; color: var(--ink-soft); cursor: pointer; }
+.tl-chip.is-active { background: var(--forest); border-color: var(--forest); color: #fff; }
+
+.tl-count { font-size: 13px; color: var(--ink-soft); margin: 8px 0 0; }
+
+.tl-list { position: relative; padding: 32px 0 64px; }
+.tl-rail { position: absolute; left: calc(clamp(20px, 5vw, 56px) + 5px); top: 32px; bottom: 64px; width: 2px; background: var(--line); }
+@media (max-width: 700px) { .tl-rail { left: 25px; } }
+
+.tl-event { position: relative; display: flex; gap: 20px; padding-left: 8px; margin-bottom: 24px; }
+.tl-marker { flex: 0 0 auto; width: 12px; height: 12px; border-radius: 50%; margin-top: 8px; border: 2px solid #fff; box-shadow: 0 0 0 2px var(--line); position: relative; z-index: 1; }
+
+.tl-card { flex: 1; background: var(--bg-raised); border: 1px solid var(--line); border-radius: var(--radius-m); padding: 20px 22px; }
+.tl-card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.tl-date { font-family: var(--font-fraunces), serif; font-weight: 600; font-size: 14px; color: var(--forest); }
+.tl-category { font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-soft); }
+.tl-title { font-family: var(--font-fraunces), serif; font-weight: 500; font-size: 17px; margin: 0 0 8px; }
+.tl-desc { font-size: 14px; color: var(--ink-soft); margin: 0 0 14px; line-height: 1.55; }
+
+.tl-card-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.tl-badge { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 999px; color: #fff; }
+.tl-source { font-size: 12.5px; color: var(--ink-soft); text-decoration: underline; text-underline-offset: 2px; }
+.tl-source:hover { color: var(--ink); }
+
+/* Verification-status semantic colors, shared by dots and badges */
+.status-verified { background: var(--forest); }
+.status-single { background: var(--teal); }
+.status-needs { background: var(--gold); }
+.status-conflict { background: var(--rust); }

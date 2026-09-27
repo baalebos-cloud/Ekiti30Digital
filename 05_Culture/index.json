@@ -1,0 +1,134 @@
+[
+  {
+    "title": "Ado ni Ile Ifa (Ado-Ekiti's Ifa heritage)",
+    "slug": "ado-ni-ile-ifa-ado-ekiti-s-ifa-heritage",
+    "subcategory": "Cultural Tradition",
+    "location": "Ado-Ekiti",
+    "lga": "Ado-Ekiti LGA",
+    "verification_status": "Community claim",
+    "traditional_account": true,
+    "source_url": "https://kupi.com/en-ae/explore/nigeria/ado-ekiti/history",
+    "last_verified": "2026-09-23"
+  },
+  {
+    "title": "Olosunta and Orole Hill Deity Veneration",
+    "slug": "olosunta-and-orole-hill-deity-veneration",
+    "subcategory": "Cultural Tradition",
+    "location": "Ikere-Ekiti",
+    "lga": "Ikere LGA",
+    "verification_status": "Community claim",
+    "traditional_account": true,
+    "source_url": "https://ekitistate.gov.ng/newsite/about-us/tourism/",
+    "last_verified": "2026-09-23"
+  },
+  {
+    "title": "Udiroko Festival",
+    "slug": "udiroko-festival",
+    "subcategory": "Festival / Cultural Event",
+    "location": "Ado-Ekiti (palace grounds) — annual, August",
+    "lga": "Ado-Ekiti LGA",
+    "verification_status": "Verified",
+    "traditional_account": true,
+    "source_url": "https://www.ekitistate.gov.ng/?p=4314",
+    "last_verified": "2026-09-23"
+  },
+  {
+    "title": "Olosunta Orun Ikere Festival",
+    "slug": "olosunta-orun-ikere-festival",
+    "subcategory": "Festival / Cultural Event",
+    "location": "Ikere-Ekiti — annual, August",
+    "lga": "Ikere LGA",
+    "verification_status": "Needs verification",
+    "traditional_account": true,
+    "source_url": "https://thearthubng.com/?p=10340",
+    "last_verified": "2026-09-23"
+  },
+  {
+    "title": "Ogun Onire Festival",
+    "slug": "ogun-onire-festival",
+    "subcategory": "Festival / Cultural Event",
+    "location": "Ire-Ekiti — annual, around August/September",
+    "lga": "Oye LGA",
+    "verification_status": "Mixed — see verification breakdown",
+    "traditional_account": true,
+    "source_url": "https://en.wikipedia.org/wiki/Ogun",
+    "last_verified": "2026-09-23"
+  },
+  {
+    "title": "Ijesu (New Yam Festival)",
+    "slug": "ijesu-new-yam-festival",
+    "subcategory": "Festival / Cultural Event",
+    "location": "Statewide (all LGAs) — annual",
+    "lga": "Statewide — not LGA-specific",
+    "verification_status": "Verified",
+    "traditional_account": false,
+    "source_url": "https://ekitistate.gov.ng/newsite/about-us/tourism/",
+    "last_verified": "2026-09-23"
+  },
+  {
+    "title": "Epa Masquerade Festival (Isan-Ekiti)",
+    "slug": "epa-masquerade-festival-isan-ekiti",
+    "subcategory": "Festival / Cultural Event",
+    "location": "Isan-Ekiti — annual, May",
+    "lga": "Oye LGA",
+    "verification_status": "Verified",
+    "traditional_account": false,
+    "source_url": "https://ekitistate.gov.ng/newsite/about-us/tourism/",
+    "last_verified": "2026-09-23"
+  },
+  {
+    "title": "Aeregbe Festival",
+    "slug": "aeregbe-festival",
+    "subcategory": "Festival / Cultural Event",
+    "location": "Afao-Ekiti (Irepodun/Ifelodun LGA), Igbara-Odo-Ekiti (Ekiti South-West LGA), Emure-Ekiti (Emure LGA) — annual, August",
+    "lga": "Spans three LGAs: Irepodun/Ifelodun, Ekiti South-West, Emure",
+    "verification_status": "Needs verification",
+    "traditional_account": false,
+    "source_url": "https://ekitistate.gov.ng/newsite/about-us/tourism/",
+    "last_verified": "2026-09-23"
+  },
+  {
+    "title": "Efon-Alaaye Woodcarving Tradition (Adeshina Workshop)",
+    "slug": "efon-alaaye-woodcarving-tradition-adeshina-workshop",
+    "subcategory": "Traditional Art / Craft",
+    "location": "Efon-Alaaye",
+    "lga": "Efon LGA",
+    "verification_status": "Verified",
+    "traditional_account": false,
+    "source_url": "https://si.edu/object/archives/components/sova-eepa-1973-001-ref33050",
+    "last_verified": "2026-09-23"
+  },
+  {
+    "title": "Olowe of Ise Sculpture Legacy",
+    "slug": "olowe-of-ise-sculpture-legacy",
+    "subcategory": "Traditional Art / Craft",
+    "location": "Ise-Ekiti",
+    "lga": "Ise/Orun LGA",
+    "verification_status": "Verified",
+    "traditional_account": false,
+    "source_url": "https://www.ekitistate.gov.ng/?p=27348",
+    "last_verified": "2026-09-23"
+  },
+  {
+    "title": "Ado-Ekiti Cotton Weaving Tradition",
+    "slug": "ado-ekiti-cotton-weaving-tradition",
+    "subcategory": "Traditional Art / Craft",
+    "location": "Ado-Ekiti",
+    "lga": "Ado-Ekiti LGA",
+    "verification_status": "Verified",
+    "traditional_account": false,
+    "source_url": "https://www.britannica.com/place/Ado-Ekiti",
+    "last_verified": "2026-09-23"
+  },
+  {
+    "title": "Ekiti State Bureau of Tourism Development / EKIFEST",
+    "slug": "ekiti-state-bureau-of-tourism-development-ekifest",
+    "subcategory": "Cultural Institution",
+    "location": "Ado-Ekiti (state-level agency)",
+    "lga": "Ado-Ekiti LGA",
+    "verification_status": "Verified",
+    "traditional_account": false,
+    "source_url": "https://www.ekitistate.gov.ng/?p=4505",
+    "last_verified": "2026-09-23"
+  }
+]
