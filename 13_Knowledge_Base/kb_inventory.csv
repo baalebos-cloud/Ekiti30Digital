@@ -1,0 +1,177 @@
+path,classification,size_bytes,first_nonblank_line
+01_History/EKITI30_History_Storytelling_Draft_v2 (1).md,candidate_kb_content,51698,**EKITI@30**
+01_History/EKITI30_History_Storytelling_Draft_v2.md,candidate_kb_content,51698,**EKITI@30**
+01_History/founding-of-ado-ekiti-by-ewi-awamaro.md,malformed_frontmatter,1950,---
+01_History/ikere-ekiti-s-unconquered-status-in-inter-tribal-wars.md,malformed_frontmatter,1945,---
+01_History/state-creation-1996.md,kb_document,1177,---
+02_LGAs/README.md,likely_support_file,4490,﻿# Ekiti State LGAs Geographic Dataset
+02_LGAs/media/README.md,likely_support_file,6204,﻿# Ekiti LGA Geography and Media Assets
+03_Timeline/README_Timeline_Data_Dictionary (1).md,candidate_kb_content,4437,# EKITI@30 Timeline Dataset: Data Dictionary
+03_Timeline/README_Timeline_Data_Dictionary.md,candidate_kb_content,4437,# EKITI@30 Timeline Dataset: Data Dictionary
+04_Tourism/abanijorin-rocks-cave.md,malformed_frontmatter,1802,---
+04_Tourism/arinta-waterfall.md,malformed_frontmatter,2430,---
+04_Tourism/egbe-dam.md,malformed_frontmatter,1653,---
+04_Tourism/erin-ayonigba-sacred-fish-river.md,malformed_frontmatter,2562,---
+04_Tourism/ero-dam-lake.md,malformed_frontmatter,1511,---
+04_Tourism/esa-cave.md,malformed_frontmatter,1652,---
+04_Tourism/ewi-of-ado-ekiti-palace.md,malformed_frontmatter,2696,---
+04_Tourism/fajuyi-memorial-park.md,malformed_frontmatter,1874,---
+04_Tourism/ikogosi-warm-springs.md,malformed_frontmatter,2695,---
+04_Tourism/motif-funland.md,malformed_frontmatter,1542,---
+04_Tourism/olosunta-orole-hills.md,malformed_frontmatter,2957,---
+04_Tourism/olowe-of-ise-ancestral-compound-workshop.md,malformed_frontmatter,2140,---
+04_Tourism/olowe-of-ise-museum-under-construction.md,malformed_frontmatter,2548,---
+05_Culture/ado-ekiti-cotton-weaving-tradition.md,malformed_frontmatter,1754,---
+05_Culture/ado-ni-ile-ifa-ado-ekiti-s-ifa-heritage.md,malformed_frontmatter,2057,---
+05_Culture/aeregbe-festival.md,malformed_frontmatter,2103,---
+05_Culture/efon-alaaye-woodcarving-tradition-adeshina-workshop.md,malformed_frontmatter,2409,---
+05_Culture/ekiti-state-bureau-of-tourism-development-ekifest.md,malformed_frontmatter,1582,---
+05_Culture/epa-masquerade-festival-isan-ekiti.md,malformed_frontmatter,1987,---
+05_Culture/ijesu-new-yam-festival.md,malformed_frontmatter,1456,---
+05_Culture/ogun-onire-festival.md,malformed_frontmatter,4768,---
+05_Culture/olosunta-and-orole-hill-deity-veneration.md,malformed_frontmatter,2179,---
+05_Culture/olosunta-orun-ikere-festival.md,malformed_frontmatter,1840,---
+05_Culture/olowe-of-ise-sculpture-legacy.md,malformed_frontmatter,1999,---
+05_Culture/udiroko-festival.md,malformed_frontmatter,2789,---
+06_Education/Education_Gaps_and_Follow-ups.md,malformed_frontmatter,1610,---
+06_Education/INTEGRATION_NOTES_FOR_MEMBER4.md,candidate_kb_content,1626,# Integration Notes for Member 4 --- 06_Education
+06_Education/README.md,malformed_frontmatter,2483,---
+06_Education/data/2023-2024_annual_school_census_summary.md,malformed_frontmatter,1663,---
+06_Education/institutions/abuad/metadata.md,malformed_frontmatter,522,---
+06_Education/institutions/abuad/permission.md,candidate_kb_content,450,"# Media Permission --- Afe Babalola University (ABUAD), Ado-Ekiti"
+06_Education/institutions/abuad/sources.md,candidate_kb_content,1006,# Sources --- ABUAD
+06_Education/institutions/bouesti/metadata.md,malformed_frontmatter,635,---
+06_Education/institutions/bouesti/permission.md,candidate_kb_content,428,"# Media Permission --- BOUESTI, Ikere-Ekiti"
+06_Education/institutions/bouesti/sources.md,candidate_kb_content,207,# Sources --- BOUESTI
+06_Education/institutions/christs-school/metadata.md,malformed_frontmatter,557,---
+06_Education/institutions/christs-school/permission.md,candidate_kb_content,434,"# Media Permission --- Christ's School, Ado-Ekiti"
+06_Education/institutions/christs-school/sources.md,candidate_kb_content,735,"# Sources --- Christ's School, Ado-Ekiti"
+06_Education/institutions/cohesti-ijero-ekiti/metadata.md,malformed_frontmatter,1532,---
+06_Education/institutions/cohesti-ijero-ekiti/permission.md,candidate_kb_content,224,# Media Permission — Ekiti State College of Health Sciences and Technology (COHE
+06_Education/institutions/cohesti-ijero-ekiti/sources.md,candidate_kb_content,811,"# Sources — COHESTI, Ijero-Ekiti"
+06_Education/institutions/ekspoly-isan-ekiti/metadata.md,malformed_frontmatter,1151,---
+06_Education/institutions/ekspoly-isan-ekiti/permission.md,candidate_kb_content,193,"# Media Permission — Ekiti State Polytechnic (EKSPOLY), Isan-Ekiti"
+06_Education/institutions/ekspoly-isan-ekiti/sources.md,candidate_kb_content,645,"# Sources — EKSPOLY, Isan-Ekiti"
+06_Education/institutions/eksu/metadata.md,malformed_frontmatter,582,---
+06_Education/institutions/eksu/permission.md,candidate_kb_content,448,"# Media Permission --- Ekiti State University (EKSU), Ado-Ekiti"
+06_Education/institutions/eksu/sources.md,candidate_kb_content,694,# Sources --- Ekiti State University
+06_Education/institutions/fedpoly-ado-ekiti/metadata.md,malformed_frontmatter,512,---
+06_Education/institutions/fedpoly-ado-ekiti/permission.md,candidate_kb_content,438,"# Media Permission --- Federal Polytechnic, Ado-Ekiti"
+06_Education/institutions/fedpoly-ado-ekiti/sources.md,candidate_kb_content,800,"# Sources --- Federal Polytechnic, Ado-Ekiti"
+06_Education/institutions/fuoye/metadata.md,malformed_frontmatter,523,---
+06_Education/institutions/fuoye/permission.md,candidate_kb_content,444,# Media Permission --- Federal University Oye-Ekiti (FUOYE)
+06_Education/institutions/fuoye/sources.md,candidate_kb_content,1182,# Sources --- FUOYE
+06_Education/institutions/futes-iyin-ekiti/metadata.md,malformed_frontmatter,1436,---
+06_Education/institutions/futes-iyin-ekiti/permission.md,candidate_kb_content,165,"# Media Permission — FUTES, Iyin-Ekiti"
+06_Education/institutions/futes-iyin-ekiti/sources.md,candidate_kb_content,694,"# Sources — FUTES, Iyin-Ekiti"
+06_Education/policy/free_education_and_levy_history.md,malformed_frontmatter,1995,---
+06_Education/timeline/education_timeline_1996-2026.md,malformed_frontmatter,10224,---
+07_Health/GAPS.md,likely_support_file,3287,# Evidence Gaps / Items Requiring Verification
+07_Health/INTEGRATION_NOTES.md,likely_support_file,2958,# Integration Notes — Health Content
+07_Health/README.md,likely_support_file,1838,# Ekiti State Health Sector Knowledge Base Package
+07_Health/current_projects/EK-HEA-CP-001_EKSUTH_80_Bed_Multipurpose_Facility.md,candidate_kb_content,685,# EKSUTH 80-bed multipurpose facility
+07_Health/current_projects/EK-HEA-CP-002_Ikogosi_Awo_Ipao_Hospitals.md,candidate_kb_content,695,"# Ikogosi, Awo and Ipao hospital expansion"
+07_Health/current_projects/EK-HEA-CP-003_Nine_General_Hospitals_Renovation_Solar_Equipment.md,candidate_kb_content,644,"# Nine general hospitals renovation, solar and equipment programme"
+07_Health/current_projects/EK-HEA-CP-004_103_PHC_Revitalisation.md,candidate_kb_content,438,# 103 PHC revitalisation
+07_Health/current_projects/EK-HEA-CP-005_FMC_Ikole_Upgrade.md,candidate_kb_content,412,# Federal Medical Centre Ikole upgrade
+07_Health/current_projects/EK-HEA-CP-006_Pharmacy_Warehouse_Modernisation.md,candidate_kb_content,296,# Pharma-grade drug warehouse
+07_Health/current_projects/EK-HEA-CP-007_EKSUTH_Power_Infrastructure.md,candidate_kb_content,520,# EKSUTH power infrastructure
+07_Health/data/EK-HEA-HEALTH-FACILITY-LANDSCAPE.md,candidate_kb_content,726,# Health Facility Landscape
+07_Health/docs/RESEARCH_METHOD.md,candidate_kb_content,1044,# Research Method
+07_Health/institutions/EK-HEA-INST-001_Ekiti_Ministry_of_Health_and_Human_Services.md,candidate_kb_content,632,# Ministry of Health and Human Services
+07_Health/institutions/EK-HEA-INST-002_Primary_Health_Care_Development_Agency.md,candidate_kb_content,405,# Ekiti State Primary Health Care Development Agency
+07_Health/institutions/EK-HEA-INST-003_Hospitals_Management_Board.md,candidate_kb_content,429,# Hospitals Management Board
+07_Health/institutions/EK-HEA-INST-004_EKSUTH.md,candidate_kb_content,424,# Ekiti State University Teaching Hospital (EKSUTH)
+07_Health/institutions/EK-HEA-INST-005_Federal_Teaching_Hospital_Ido_Ekiti.md,candidate_kb_content,403,"# Federal Teaching Hospital, Ido-Ekiti"
+07_Health/institutions/EK-HEA-INST-006_Federal_Medical_Centre_Ikole_Ekiti.md,candidate_kb_content,444,"# Federal Medical Centre, Ikole-Ekiti"
+07_Health/institutions/EK-HEA-INST-007_Ekiti_State_Health_Insurance_Scheme.md,candidate_kb_content,350,# Ekiti State Health Insurance Scheme (EKHIS)
+07_Health/institutions/EK-HEA-INST-008_Drug_Management_Agency.md,candidate_kb_content,369,# Ekiti State Drug Management Agency
+07_Health/institutions/EK-HEA-INST-009_EKSU_College_of_Medicine.md,candidate_kb_content,380,# EKSU College of Medicine
+07_Health/institutions/EK-HEA-INST-010_Bureau_of_Statistics_Health_Data.md,candidate_kb_content,364,# Ekiti State Bureau of Statistics — Health Data
+07_Health/programmes/EK-HEA-PROG-001_Ulerawa_Health_Programme.md,candidate_kb_content,441,# Ulerawa Health Programme
+07_Health/programmes/EK-HEA-PROG-002_BHCPF.md,candidate_kb_content,469,# Basic Health Care Provision Fund in Ekiti
+07_Health/programmes/EK-HEA-PROG-003_Free_Health_Missions.md,candidate_kb_content,537,# Free Health Missions / Ulera Ekiti / Ilera Ayo
+07_Health/programmes/EK-HEA-PROG-004_Operation_Renovate_All_Hospitals.md,candidate_kb_content,324,# Operation Renovate All Hospitals (ORAH)
+07_Health/programmes/EK-HEA-PROG-005_IMPACT_103_PHC_Revitalisation.md,candidate_kb_content,426,# IMPACT-supported PHC revitalisation
+07_Health/programmes/EK-HEA-PROG-006_Maternal_Newborn_Child_Health.md,candidate_kb_content,539,"# Maternal, Newborn and Child Health"
+07_Health/programmes/EK-HEA-PROG-007_Immunisation_Nutrition.md,candidate_kb_content,359,# Immunisation and Nutrition
+07_Health/programmes/EK-HEA-PROG-008_HIV_TB_STI.md,candidate_kb_content,487,"# HIV/AIDS, TB and STI services"
+07_Health/programmes/EK-HEA-PROG-009_Malaria.md,candidate_kb_content,368,# Malaria control and treatment
+07_Health/programmes/EK-HEA-PROG-010_Emergency_Preparedness_and_Response.md,candidate_kb_content,534,# Emergency preparedness and response
+07_Health/programmes/EK-HEA-PROG-011_NCD_Cancer_Sickle_Cell.md,candidate_kb_content,532,"# Non-communicable diseases, cancer and sickle-cell care"
+07_Health/programmes/EK-HEA-PROG-012_Health_Workforce_and_Training.md,candidate_kb_content,457,"# Health workforce, nursing, midwifery and medical education"
+07_Health/programmes/EK-HEA-PROG-013_Drug_and_Commodity_Security.md,candidate_kb_content,457,# Medicines and commodity security
+07_Health/programmes/EK-HEA-PROG-014_Digital_Health_and_Data.md,candidate_kb_content,554,"# Digital health, surveillance and health data"
+07_Health/sector_snapshots/EK-HEA-SNAPSHOT-2024_State_of_Health.md,candidate_kb_content,866,# 2024 State of Health Snapshot
+07_Health/sector_snapshots/EK-HEA-SNAPSHOT-2026_Budget_and_Current_System.md,candidate_kb_content,1063,# 2026 Current-System Snapshot
+07_Health/timeline/EK-HEA-TL-001.md,candidate_kb_content,692,# Creation of Ekiti State and transition of health administration
+07_Health/timeline/EK-HEA-TL-002.md,candidate_kb_content,570,# Early consolidation of state secondary health administration
+07_Health/timeline/EK-HEA-TL-003.md,candidate_kb_content,432,# Ikole hospital upgraded to State Specialist Hospital
+07_Health/timeline/EK-HEA-TL-004.md,candidate_kb_content,510,# EKSUTH established in law
+07_Health/timeline/EK-HEA-TL-005.md,candidate_kb_content,810,"# Fayemi-era free-care, maternal health and hospital-renovation expansion"
+07_Health/timeline/EK-HEA-TL-006.md,candidate_kb_content,376,# Commissioning of 300-bed Oba Adejugbe Hospital
+07_Health/timeline/EK-HEA-TL-007.md,candidate_kb_content,505,# Grassroots/mobile free-health outreach under the Fayose administration
+07_Health/timeline/EK-HEA-TL-008.md,candidate_kb_content,439,# Primary Health Care Development Agency legal framework
+07_Health/timeline/EK-HEA-TL-009.md,candidate_kb_content,476,# Ekiti State Health Insurance Scheme law
+07_Health/timeline/EK-HEA-TL-010.md,candidate_kb_content,718,# Renewed health-system rebuilding and medical workforce strengthening
+07_Health/timeline/EK-HEA-TL-011.md,candidate_kb_content,634,# COVID-19 emergency response architecture
+07_Health/timeline/EK-HEA-TL-012.md,candidate_kb_content,464,# Launch of the Ekiti State Health Insurance Scheme
+07_Health/timeline/EK-HEA-TL-013.md,candidate_kb_content,600,# BHCPF implementation and PHC financing
+07_Health/timeline/EK-HEA-TL-014.md,candidate_kb_content,654,"# Oyebanji administration: Ulerawa, hospital modernization and PHC expansion"
+07_Health/timeline/EK-HEA-TL-015.md,candidate_kb_content,580,# Conversion of Ikole Specialist Hospital to Federal Medical Centre
+07_Health/timeline/EK-HEA-TL-016.md,candidate_kb_content,685,"# Secondary-hospital renovation, equipment and pharmaceutical-supply modernizati"
+07_Health/timeline/EK-HEA-TL-017.md,candidate_kb_content,879,# Current UHC/PHC strengthening and major hospital expansion
+08_Agriculture/Agriculture_Gaps_and_Follow-ups.md,malformed_frontmatter,3456,---
+08_Agriculture/INTEGRATION_NOTES.md,likely_support_file,3551,# Integration Notes — Agriculture Content
+08_Agriculture/README.md,malformed_frontmatter,3048,---
+08_Agriculture/data/agriculture_sector_snapshot.md,malformed_frontmatter,1881,---
+08_Agriculture/institutions/agro-allied-cargo-airport/metadata.md,malformed_frontmatter,1712,---
+08_Agriculture/institutions/agro-allied-cargo-airport/permission.md,candidate_kb_content,173,# Media Permission — agro allied cargo airport
+08_Agriculture/institutions/agro-allied-cargo-airport/sources.md,candidate_kb_content,1564,# Sources — Ekiti Agro-Allied International Cargo Airport
+08_Agriculture/institutions/ekiti-adp/metadata.md,malformed_frontmatter,1512,---
+08_Agriculture/institutions/ekiti-adp/permission.md,candidate_kb_content,157,# Media Permission — ekiti adp
+08_Agriculture/institutions/ekiti-adp/sources.md,candidate_kb_content,1070,# Sources — Ekiti State ADP
+08_Agriculture/institutions/ikun-dairy-farm/metadata.md,malformed_frontmatter,1676,---
+08_Agriculture/institutions/ikun-dairy-farm/permission.md,candidate_kb_content,163,# Media Permission — ikun dairy farm
+08_Agriculture/institutions/ikun-dairy-farm/sources.md,candidate_kb_content,1454,# Sources — Ikun Dairy Farm
+08_Agriculture/programmes/cbn_anchor_borrowers_rice.md,malformed_frontmatter,1484,---
+08_Agriculture/programmes/cocoa_revival_1970s_to_2026.md,malformed_frontmatter,2822,---
+08_Agriculture/programmes/l_pres_livestock_programme.md,malformed_frontmatter,1673,---
+08_Agriculture/programmes/poultry_broiler_scheme.md,malformed_frontmatter,1071,---
+08_Agriculture/programmes/tractorisation_subsidy_scheme.md,malformed_frontmatter,1108,---
+08_Agriculture/programmes/ycad_youth_commercial_agric.md,malformed_frontmatter,1282,---
+08_Agriculture/timeline/agriculture_timeline_1996-2026.md,malformed_frontmatter,13695,---
+09_Statistics/GAPS.md,likely_support_file,3461,# Open Gaps — 09_Statistics package
+09_Statistics/INTEGRATION_NOTES.md,likely_support_file,1955,# Integration Notes — 09_Statistics package
+09_Statistics/README.md,likely_support_file,1482,# 09_Statistics — Ekiti State Knowledge Base
+09_Statistics/sector_snapshot.md,malformed_frontmatter,3378,---
+09_Statistics/datasets/EK-STAT-DATA-001.md,candidate_kb_content,80,# EK-STAT-DATA-001
+09_Statistics/datasets/EK-STAT-DATA-002.md,candidate_kb_content,80,# EK-STAT-DATA-002
+09_Statistics/datasets/EK-STAT-DATA-003.md,candidate_kb_content,80,# EK-STAT-DATA-003
+09_Statistics/datasets/EK-STAT-DATA-004.md,candidate_kb_content,80,# EK-STAT-DATA-004
+09_Statistics/datasets/EK-STAT-DATA-005.md,candidate_kb_content,80,# EK-STAT-DATA-005
+09_Statistics/datasets/fiscal-igr-series.md,malformed_frontmatter,1021,---
+09_Statistics/datasets/labour-force-series.md,malformed_frontmatter,996,---
+09_Statistics/datasets/literacy-education-stats.md,malformed_frontmatter,818,---
+09_Statistics/datasets/population-census-series.md,malformed_frontmatter,1164,---
+09_Statistics/datasets/poverty-mpi-series.md,malformed_frontmatter,1526,---
+09_Statistics/institutions/npc_state_office/index.md,likely_support_file,100,# National Population Commission (NPC) Ekiti State Office Profile
+09_Statistics/institutions/npc_state_office/metadata.md,malformed_frontmatter,698,---
+09_Statistics/institutions/npc_state_office/permission.md,candidate_kb_content,87,Public-domain government/encyclopedic material; no restricted or private content
+09_Statistics/institutions/npc_state_office/sources.md,candidate_kb_content,234,"- Ekiti State Government website — ""About Ekiti"" (cites NPC 1991 and 2006 figure"
+09_Statistics/institutions/sbs_statcloud/index.md,likely_support_file,93,# Ekiti State Bureau of Statistics (SBS) StatCloud Profile
+09_Statistics/institutions/sbs_statcloud/metadata.md,malformed_frontmatter,983,---
+09_Statistics/institutions/sbs_statcloud/permission.md,candidate_kb_content,268,Public-domain government material; no restricted or private content used. Note: 
+09_Statistics/institutions/sbs_statcloud/sources.md,candidate_kb_content,149,"- Ekiti State Government website — ""Ekiti State Bureau of Statistics – StatCloud"
+09_Statistics/timeline/EK-STAT-001.md,malformed_frontmatter,601,---
+09_Statistics/timeline/EK-STAT-002.md,malformed_frontmatter,720,---
+09_Statistics/timeline/EK-STAT-003.md,malformed_frontmatter,841,---
+09_Statistics/timeline/EK-STAT-004.md,malformed_frontmatter,1007,---
+09_Statistics/timeline/EK-STAT-005.md,malformed_frontmatter,667,---
+09_Statistics/timeline/EK-STAT-006.md,malformed_frontmatter,708,---
+09_Statistics/timeline/EK-STAT-007.md,malformed_frontmatter,943,---
+09_Statistics/timeline/EK-STAT-008.md,malformed_frontmatter,1390,---
+09_Statistics/timeline/EK-STAT-009.md,malformed_frontmatter,857,---
+09_Statistics/timeline/EK-STAT-010.md,malformed_frontmatter,839,---
+09_Statistics/timeline/EK-STAT-011.md,malformed_frontmatter,950,---
+09_Statistics/timeline/EK-STAT-012.md,malformed_frontmatter,644,---
