@@ -45,7 +45,7 @@ class KnowledgeDocument(Base):
     last_verified: Mapped[date] = mapped_column(Date)
     ingestible: Mapped[bool] = mapped_column(Boolean)
 
-    # Source file path relative to 13_Knowledge_Base/, and its SHA-256 from
+    # Source file path relative to the repository root, and its SHA-256 from
     # the manifest — the latter lets future ingestion skip unchanged files.
     path: Mapped[str | None]
     file_sha256: Mapped[str | None]
@@ -80,6 +80,9 @@ class Chunk(Base):
     chunk_index: Mapped[int]
 
     content: Mapped[str] = mapped_column(Text)
+    source_ids: Mapped[str] = mapped_column(Text, default="")
+    source_titles: Mapped[str] = mapped_column(Text, default="")
+    source_urls: Mapped[str] = mapped_column(Text, default="")
 
     embedding: Mapped[list[float] | None] = mapped_column(Vector(EMBEDDING_DIMENSIONS))
 
