@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import { HomeSectionNav } from "@/components/HomeSectionNav";
 import LeadersStrip from "@/components/LeadersStrip";
 import LandmarksStrip from "@/components/LandmarksStrip";
 import MomentsSpine from "@/components/MomentsSpine";
@@ -10,8 +11,9 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <>
-      <main className="flex-1">
+      <main className="home flex-1">
         <Hero />
+        <HomeSectionNav />
         <LeadersStrip />
         <LandmarksStrip />
         <MomentsSpine />

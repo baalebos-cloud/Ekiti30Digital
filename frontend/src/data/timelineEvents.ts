@@ -6,9 +6,9 @@
 // verification_status values used as-is from the dataset:
 // "Verified" | "Single source" | "Needs primary source" | "Conflicting sources"
 //
-// This file is a static snapshot for the initial launch. Once the backend's
-// /api/timeline endpoint is ingesting this dataset (see ARCHITECTURE.md),
-// this should be replaced with a fetch call rather than edited by hand.
+// The Timeline page doesn't render this array: it fetches /api/timeline
+// through /api/content/timeline. The `TimelineEvent` type is the shape that
+// endpoint should return, and the array is ready-made seed data for it.
 
 export type VerificationStatus =
   | "Verified"
