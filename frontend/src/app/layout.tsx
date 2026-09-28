@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, Work_Sans } from "next/font/google";
+import { AskEkitiWidget } from "@/components/AskEkitiWidget";
+import { MotionProvider } from "@/components/MotionProvider";
 import { Nav } from "@/components/Nav";
 import "./globals.css";
 
@@ -32,8 +34,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${fraunces.variable} ${workSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-bg text-ink">
-        <Nav />
-        <div className="flex flex-1 flex-col">{children}</div>
+        <MotionProvider>
+          <Nav />
+          <div className="flex flex-1 flex-col">{children}</div>
+          <AskEkitiWidget />
+        </MotionProvider>
       </body>
     </html>
   );
