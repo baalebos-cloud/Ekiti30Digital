@@ -264,8 +264,8 @@ def validate_doc(doc, registry, today):
             (E if status == "verified" else W)(f"{sid} is in Conflict; resolve it before verifying (spec A6)")
         if r["tier"] == "D":
             (E if status in ("verified", "needs_review") else W)(f"{sid} is Tier D, which is not used at launch")
-        if status == "verified" and r["status"] not in ("Verified",):
-            W(f"{sid} record status is '{r['status']}', not 'Verified'")
+        if status == "verified" and r["status"] != "Verified":
+            E(f"{sid} record status is '{r['status']}', not 'Verified'")
     if first:
         sid, r = first
         if r["stage"] == "Identified":
@@ -440,6 +440,7 @@ def selftest():
         w.writerow(["SRC-008", "Identified", "Census", "https://example.org/c", "A", "Conflict"])
         w.writerow(["SRC-026", "Source needed", "", "", "D", "Blocked"])
         w.writerow(["SRC-030", "Identified", "News item", "https://example.org/n", "C", "Verified"])
+        w.writerow(["SRC-031", "Identified", "Pending source", "https://example.org/p", "A", "Needs review"])
 
     def doc(path, **over):
         fm = dict(id="doc-" + os.path.basename(path)[:-3].lower(), title="T " + path, category="history",
@@ -464,6 +465,8 @@ def selftest():
         source_url="https://example.org/n")
     doc("01_History/yo.md", language="yo")
     doc("01_History/unknown.md", source_ids="[SRC-999]")
+    doc("01_History/pending.md", source_ids="[SRC-031]", source_name="Pending source",
+        source_url="https://example.org/p")
     doc("01_History/missing.md", source_name=None)
     doc("01_History/mismatch.md", source_name="Other Title")
     doc("01_History/tierd.md", source_ids="[SRC-026]", source_tier="D", source_name="", source_url="")
@@ -483,6 +486,7 @@ def selftest():
         "01_History/tierc.md": "Tier C needs two",
         "01_History/yo.md": "translation_of",
         "01_History/unknown.md": "not in the Source Inventory",
+        "01_History/pending.md": "not 'Verified'",
         "01_History/missing.md": "missing required field",
         "01_History/mismatch.md": "does not match",
         "01_History/tierd.md": "Tier D",

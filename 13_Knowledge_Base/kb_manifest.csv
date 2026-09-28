@@ -2,6 +2,22 @@ id,path,category,doc_type,status,source_tier,source_ids,publication_date,last_ve
 ,01_History/founding-of-ado-ekiti-by-ewi-awamaro.md,history,,,,,null,2026-09-23,,,,,38eccd5db7c99441ca43c55be7ce80f6cd0c6bfd3a471b62c338f15fc422080b,no,has errors
 ,01_History/ikere-ekiti-s-unconquered-status-in-inter-tribal-wars.md,history,,,,,null,2026-09-23,,,,,732a65f2433494fa7f2aa888645f9a3ab47e129e99acc926d7fdfb2ee1f8b914,no,has errors
 history-state-creation-1996,01_History/state-creation-1996.md,history,event,draft,A,SRC-001,2021-10-01,,,en,,1996,8e1d708622839d6ccdcb759c7af90c3238d229ec676a259c6b36f7fc822f9a1c,no,status is draft
+lga-ado-ekiti,02_LGAs/lga-ado-ekiti.md,lgas,entity,draft,A,SRC-028;SRC-029,Not stated,,,en,,1996-2026,e5407a3ec83689c868dbb06af66b9c567b76b0683c0fec40c8cb7fbb49373c41,no,status is draft
+lga-aiyekire,02_LGAs/lga-aiyekire.md,lgas,entity,draft,A,SRC-028;SRC-035,Not stated,,,en,,1996-2026,cb1d17b056f160fd61ca168d1fc26479cec41c59df424e56bee26ab4727a0279,no,status is draft
+lga-efon,02_LGAs/lga-efon.md,lgas,entity,draft,A,SRC-028;SRC-030,Not stated,,,en,,1996-2026,9fba70c08c6567c91795d31a58879507c5880303584bb6c9cf5d76fdf7a1b7e7,no,status is draft
+lga-ekiti-east,02_LGAs/lga-ekiti-east.md,lgas,entity,draft,A,SRC-028;SRC-031,Not stated,,,en,,1996-2026,e97ea837c7fbabf19d67a20ffc654d9e77cedf5e11944c1df26b206257b67b71,no,status is draft
+lga-ekiti-south-west,02_LGAs/lga-ekiti-south-west.md,lgas,entity,draft,A,SRC-028;SRC-032,Not stated,,,en,,1996-2026,965577781254ae1d983e034e3cbd5d12805594ae04db26a3127a0c23c3f8a2ce,no,status is draft
+lga-ekiti-west,02_LGAs/lga-ekiti-west.md,lgas,entity,draft,A,SRC-028;SRC-033,Not stated,,,en,,1996-2026,cbd571d08c610530c9d420e8bb958b4e25706d3f8015c918eaec4b5b3c365052,no,status is draft
+lga-emure,02_LGAs/lga-emure.md,lgas,entity,draft,A,SRC-028;SRC-034,Not stated,,,en,,1996-2026,37d0cc5338856cb18edafa550c82efc8fca638f567a9185a90742cb90025ce3b,no,status is draft
+lga-ido-osi,02_LGAs/lga-ido-osi.md,lgas,entity,draft,A,SRC-028;SRC-036,Not stated,,,en,,1996-2026,77c4402b4927b6ea5e3dca53dc669a35057708f87031fed6d13daccab5fabf6c,no,status is draft
+lga-ijero,02_LGAs/lga-ijero.md,lgas,entity,draft,A,SRC-028;SRC-037,Not stated,,,en,,1996-2026,9e7a2bcbf30da72210add875eaf1d7f8ac6353e5cbcd5a3fab573c2fe3993ef4,no,status is draft
+lga-ikere,02_LGAs/lga-ikere.md,lgas,entity,draft,A,SRC-028;SRC-038,Not stated,,,en,,1996-2026,47574d152a872b6a92bda703b93bb48a5ec424e3e163ab0101fe51c15bb53a7a,no,status is draft
+lga-ikole,02_LGAs/lga-ikole.md,lgas,entity,draft,A,SRC-028;SRC-039,Not stated,,,en,,1996-2026,7eac95ba1c489361cfa77217f13bf7fc2263356bd6ab6cd7d9a707d23d7ca4f6,no,status is draft
+lga-ilejemeje,02_LGAs/lga-ilejemeje.md,lgas,entity,draft,A,SRC-028;SRC-040,Not stated,,,en,,1996-2026,e328d7faaa1f78cd3039bdd6739a9a7109a33dfc5bf9479615c6139dd26b353b,no,status is draft
+lga-irepodun-ifelodun,02_LGAs/lga-irepodun-ifelodun.md,lgas,entity,draft,A,SRC-028;SRC-041;SRC-042,Not stated,,,en,,1996-2026,7db334b37e4acfa37af3a9f363064957e80d9e621927a7f4ee30cddc6e8980cd,no,status is draft
+lga-ise-orun,02_LGAs/lga-ise-orun.md,lgas,entity,draft,A,SRC-028;SRC-043,Not stated,,,en,,1996-2026,31a3926bfcddd203079e7573640958bddfae2361ebf7cd5fce2e867d33c04543,no,status is draft
+lga-moba,02_LGAs/lga-moba.md,lgas,entity,draft,A,SRC-028;SRC-044,Not stated,,,en,,1996-2026,7b20c0710ee6be5771c9c87cc6df16b0130318a3aeaca9d758c0aa478f550597,no,status is draft
+lga-oye,02_LGAs/lga-oye.md,lgas,entity,draft,A,SRC-028;SRC-045;SRC-046,Not stated,,,en,,1996-2026,8daf3fb7ab1e72e45ddf5b57b1d9a63f13a413af681938f2afa38f97bab1b39d,no,status is draft
 ,04_Tourism/abanijorin-rocks-cave.md,tourism,,,,,null,2026-09-23,,,,,cb686e5883222779f643da3976fb433d523a638c9fbb667886ee81f4952c991c,no,has errors
 ,04_Tourism/arinta-waterfall.md,tourism,,,,,null,2026-09-23,,,,,1d5bf1734dc8f7224679f14fd8b74e82b29eb4f08ebe79ba07c9a7edc5707a61,no,has errors
 ,04_Tourism/egbe-dam.md,tourism,,,,,null,2026-09-23,,,,,00a429714fd1712e4da76ab7124e70aeb91f257d7cd99989d4c027c48332e6a2,no,has errors

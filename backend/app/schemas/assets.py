@@ -6,7 +6,15 @@ from pydantic import BaseModel, ConfigDict, Field
 
 
 class UploadInitRequest(BaseModel):
-    contributor: str = Field(min_length=1)
+    """What a signed-in member may describe about their own upload.
+
+    There is deliberately no `contributor` field: who is uploading comes from
+    the verified login, never from the request. A client that still sends one
+    has it ignored (not rejected), so older clients keep working.
+    """
+
+    model_config = ConfigDict(extra="ignore")
+
     source: str | None = None
     location_lga: str | None = None
     description: str | None = None
