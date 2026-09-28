@@ -31,7 +31,16 @@ class Asset(Base):
     # One of app/services/cloudinary_convention.py:ALLOWED_FOLDERS.
     folder: Mapped[str]
 
+    # Display label shown to reviewers. Set by the server from the verified
+    # login (never from the request body).
     contributor: Mapped[str]
+
+    # Verified identity (normalized email) of whoever called POST /init.
+    # POST /complete only accepts the same identity, so one account cannot
+    # finish or modify another's pending upload. Nullable only so rows that
+    # predate this column survive the migration; they can never be completed.
+    created_by: Mapped[str | None] = mapped_column(index=True)
+
     source: Mapped[str | None]
     location_lga: Mapped[str | None]
     description: Mapped[str | None] = mapped_column(Text)

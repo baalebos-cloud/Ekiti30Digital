@@ -73,18 +73,24 @@ class Settings(BaseSettings):
     # --- Media uploads (Cloudinary) -------------------------------------
     #
     # The browser uploads files directly to Cloudinary using an unsigned
-    # preset, so the backend only needs these two public, non-secret
-    # values (returned to the frontend by POST /api/uploads/init). The
-    # Cloudinary API key/secret are never needed by the app — only by
-    # scripts/setup_cloudinary_preset.py, run once by hand.
+    # preset; these two public, non-secret values are returned to the
+    # frontend by POST /api/uploads/init.
     CLOUDINARY_CLOUD_NAME: str | None = None
     CLOUDINARY_UPLOAD_PRESET: str | None = None
 
+    # Secret. Used server-side only, by POST /api/uploads/{id}/complete to
+    # look the uploaded resource up via the Cloudinary Admin API (see
+    # app/services/cloudinary_admin.py). Never returned to the frontend.
+    # Unset means uploads can't be completed (fail closed).
+    CLOUDINARY_API_KEY: str | None = None
+    CLOUDINARY_API_SECRET: str | None = None
+
     # --- Admin auth -----------------------------------------------------
     #
-    # Shared secret used to verify the admin JWTs issued by NextAuth in the
+    # Shared secret used to verify the JWTs issued by NextAuth in the
     # frontend (see app/core/auth.py). Must equal the frontend's
-    # NEXTAUTH_SECRET. Unset means every admin route rejects requests.
+    # NEXTAUTH_SECRET. Unset means every admin and upload route rejects
+    # requests.
     NEXTAUTH_SECRET: str | None = None
 
 
