@@ -2,7 +2,10 @@
 doc_id: EK-STAT-009
 date: "2023"
 title: NBS Nigeria Labour Force Survey — Ekiti records lowest labour-force participation rate nationally
-category: Labour / Employment
+category: statistics
+id: ek-stat-009
+status: needs_review
+research_category: "Labour / Employment"
 ---
 The NBS Nigeria Labour Force Survey Annual Report 2023 recorded Ekiti State with the lowest labour-force participation rate among all states, at 63.4% — against a national high of 92.3% recorded in Bauchi State. The report is one of the few NBS national statistical products that carries dedicated state-level breakdown tables for Ekiti (by sex, place of residence, educational level, and age-group).
 

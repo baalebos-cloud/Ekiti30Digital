@@ -5,6 +5,10 @@ class: education
 tier: A/B
 last_verified: 2026-09-25
 ingestible: no
+id: ek-edu-inst-futes
+title: "Federal University of Technology and Environmental Sciences (FUTES), Iyin-Ekiti — Institutional Record"
+status: needs_review
+category: education
 ---
 # Federal University of Technology and Environmental Sciences (FUTES), Iyin-Ekiti
 - Established 20 February 2025 when President Bola Ahmed Tinubu signed the bill into

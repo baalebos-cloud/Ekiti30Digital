@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: false
 notes: "Sourced only from Wikipedia and a brief government mention — no primary or on-the-ground source yet. Needs corroboration with a local/community source before its status can be upgraded."
+id: 04-tourism-esa-cave
+status: needs_review
 ---
 
 # Esa Cave

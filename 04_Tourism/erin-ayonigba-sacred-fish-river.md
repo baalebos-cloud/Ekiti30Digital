@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: true
 notes: "LGA/location corrected from the previous draft's \"Erinjiyan-Ekiti\": a school named \"Erin-Ayonigba\" appears in the Ekiti State Government's own Ekiti West LGA town listing, suggesting this may be a distinct settlement from Erinjiyan-Ekiti rather than the same place. This entry rests on a single blog source with no confirmed LGA — flagged for direct community/Bureau of Tourism verification before publishing, including the correct settlement name and LGA."
+id: 04-tourism-erin-ayonigba-sacred-fish-river
+status: needs_review
 ---
 
 # Erin Ayonigba Sacred Fish River

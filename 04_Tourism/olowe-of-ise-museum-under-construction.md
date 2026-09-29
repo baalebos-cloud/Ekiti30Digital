@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: false
 notes: "STATUS FLAG: project in progress, not yet operational as of this research pass (September 2026). Reconfirm current construction/opening status with the Ekiti State Government or the Olowe of Ise Arts Foundation before this is presented on the platform as an existing, visitable museum."
+id: 04-tourism-olowe-of-ise-museum-under-construction
+status: needs_review
 ---
 
 # Olowe of Ise Museum (under construction)

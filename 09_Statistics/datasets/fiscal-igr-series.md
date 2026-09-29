@@ -3,6 +3,9 @@ doc_id: EK-STAT-DATA-004
 name: Fiscal statistics — Internally Generated Revenue (IGR) and FAAC ranking
 period: "2022-2024"
 lead_agency: Ekiti State Government (Ministry of Finance) / Joint Tax Board (national ranking body)
+id: ek-stat-data-004
+status: needs_review
+category: statistics
 ---
 | Year | IGR (₦) | National ranking context |
 |---|---|---|

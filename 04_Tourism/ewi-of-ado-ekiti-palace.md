@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: true
 notes: "The palace's existence and ceremonial role are well established; the \"architectural showcase / mini-museum\" characterisation is promotional description from a single government source and should be verified against an independent architectural or museum-studies source before being stated as fact."
+id: 04-tourism-ewi-of-ado-ekiti-palace
+status: needs_review
 ---
 
 # Ewi of Ado-Ekiti Palace

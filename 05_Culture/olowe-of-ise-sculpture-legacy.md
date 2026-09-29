@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: false
 notes: "Corroborated by broader art-historical literature beyond the government source (see also Efon-Alaaye Woodcarving Tradition entry for comparable Ekiti carving documentation)."
+id: 05-culture-olowe-of-ise-sculpture-legacy
+status: needs_review
 ---
 
 # Olowe of Ise Sculpture Legacy

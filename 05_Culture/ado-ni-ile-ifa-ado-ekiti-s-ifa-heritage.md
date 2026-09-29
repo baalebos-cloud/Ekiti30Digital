@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: true
 notes: "Entirely a traditional/oral-history attribution; sourced from a single non-academic aggregator. Cross-check against academic Yoruba-religion literature before treating any part of this as settled historical fact."
+id: 05-culture-ado-ni-ile-ifa-ado-ekiti-s-ifa-heritage
+status: needs_review
 ---
 
 # Ado ni Ile Ifa (Ado-Ekiti's Ifa heritage)

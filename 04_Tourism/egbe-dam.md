@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: false
 notes: "CORRECTED in this revision: earlier draft listed \"Ekiti East LGA\"; the Ekiti State Government's own Gbonyin/Aiyekire LGA profile lists Egbe-Ekiti as one of that LGA's eight major towns, so Gbonyin (Aiyekire) LGA is used here."
+id: 04-tourism-egbe-dam
+status: needs_review
 ---
 
 # Egbe Dam

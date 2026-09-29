@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: false
 notes: "LGA breakdown added in this revision (Afao is in Irepodun/Ifelodun LGA per the Ekiti State Government's own town-hall records; Igbara-Odo is in Ekiti South-West LGA per that LGA's official profile; Emure-Ekiti is the headquarters town of Emure LGA). The festival itself is listed only in the government's summary table with no independent account found — needs corroboration."
+id: 05-culture-aeregbe-festival
+status: needs_review
 ---
 
 # Aeregbe Festival

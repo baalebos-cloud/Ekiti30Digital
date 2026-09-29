@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: false
 notes: "The 1966 coup and Fajuyi's death are well-documented national history, independently corroborated beyond the state tourism page."
+id: 04-tourism-fajuyi-memorial-park
+status: needs_review
 ---
 
 # Fajuyi Memorial Park

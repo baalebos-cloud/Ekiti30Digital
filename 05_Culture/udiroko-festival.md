@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: true
 notes: "The festival's existence, annual occurrence, and 2024 UNWTO visit are corroborated by independent press coverage. The 1310 AD origin date is oral tradition and is labelled as such."
+id: 05-culture-udiroko-festival
+status: needs_review
 ---
 
 # Udiroko Festival

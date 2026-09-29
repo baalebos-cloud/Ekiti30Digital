@@ -3,6 +3,9 @@ doc_id: EK-STAT-DATA-001
 name: Population & census time series (1991-2016 projection)
 period: "1991-2016 (projection); no full census since 2006"
 lead_agency: National Population Commission (NPC) / National Bureau of Statistics (NBS)
+id: ek-stat-data-001
+status: needs_review
+category: statistics
 ---
 | Year | Population | Basis |
 |---|---|---|

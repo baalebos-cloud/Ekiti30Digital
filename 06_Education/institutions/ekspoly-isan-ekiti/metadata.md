@@ -5,6 +5,11 @@ class: education
 tier: B
 last_verified: 2026-09-25
 ingestible: no
+id: ek-edu-inst-ekspoly
+title: "Ekiti State Polytechnic (EKSPOLY), Isan-Ekiti — Institutional Record"
+status: needs_review
+source_tier: B
+category: education
 ---
 # Ekiti State Polytechnic (EKSPOLY), Isan-Ekiti
 - Resolves the open item flagged in `Education_Gaps_and_Follow-ups.md` (#3, prior

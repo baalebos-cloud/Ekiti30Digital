@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: false
 notes: "The state's own tourism portal (visitekiti.ek.gov.ng) was suspended/offline when this entry was researched. Re-check the live site, or corroborate with the Bureau of Tourism Development directly, before upgrading this entry's status."
+id: 04-tourism-abanijorin-rocks-cave
+status: needs_review
 ---
 
 # Abanijorin Rocks & Cave

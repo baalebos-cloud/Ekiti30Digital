@@ -5,6 +5,11 @@ ingestible: false
 last_verified: 2026-09-25
 source_title: Afe Babalola University (ABUAD) --- Institutional Record
 tier: A
+id: ek-edu-inst-abuad
+title: "Afe Babalola University (ABUAD) --- Institutional Record"
+status: needs_review
+source_tier: A
+category: education
 ---
 
 # Afe Babalola University (ABUAD), Ado-Ekiti

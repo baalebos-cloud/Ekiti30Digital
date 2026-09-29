@@ -3,6 +3,9 @@ doc_id: EK-STAT-DATA-002
 name: Poverty & Multidimensional Poverty Index (MPI) time series
 period: "2010-2022"
 lead_agency: National Bureau of Statistics (NBS), with NASSCO/UNDP/UNICEF/OPHI on the 2022 MPI
+id: ek-stat-data-002
+status: needs_review
+category: statistics
 ---
 | Year | Metric | Ekiti figure | National context |
 |---|---|---|---|

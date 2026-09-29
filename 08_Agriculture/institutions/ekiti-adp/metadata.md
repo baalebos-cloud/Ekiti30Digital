@@ -5,6 +5,11 @@ class: agriculture
 tier: B
 last_verified: 2026-09-25
 ingestible: no
+id: ek-agr-inst-adp
+title: "Ekiti State Agricultural Development Programme (ADP) — Institutional Record"
+status: needs_review
+source_tier: B
+category: agriculture
 ---
 # Ekiti State Agricultural Development Programme (ADP)
 - Lineage: Ekiti-Akoko Agricultural Development Project (est. Aug 1981, old Ondo

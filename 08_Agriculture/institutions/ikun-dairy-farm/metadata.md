@@ -5,6 +5,11 @@ class: agriculture
 tier: B
 last_verified: 2026-09-25
 ingestible: no
+id: ek-agr-inst-ikundairy
+title: "Ikun Dairy Farm, Ikun-Ekiti — Institutional Record"
+status: needs_review
+source_tier: B
+category: agriculture
 ---
 # Ikun Dairy Farm, Ikun-Ekiti (Moba LGA)
 - Established 1980 under President Shehu Shagari and the Benin-Owena River Basin

@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: false
 notes: "Statewide/generic entry; local variations by town are not yet documented and would need LGA-level follow-up."
+id: 05-culture-ijesu-new-yam-festival
+status: needs_review
 ---
 
 # Ijesu (New Yam Festival)

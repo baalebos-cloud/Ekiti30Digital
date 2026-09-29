@@ -5,6 +5,11 @@ ingestible: false
 last_verified: 2026-09-25
 source_title: Federal Polytechnic Ado-Ekiti --- Institutional Record
 tier: A
+id: ek-edu-inst-fedpoly
+title: "Federal Polytechnic Ado-Ekiti --- Institutional Record"
+status: needs_review
+source_tier: A
+category: education
 ---
 
 # Federal Polytechnic, Ado-Ekiti

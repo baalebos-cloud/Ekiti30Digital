@@ -6,6 +6,10 @@ tier: mixed
 last_verified: 2026-09-25
 ingestible: no
 note: "ingestible=no pending Yoruba review and Verification Lead tier confirmation; see per-entry status below"
+id: ek-agr-timeline
+title: "Ekiti State Agriculture Timeline, 1996-2026"
+status: needs_review
+category: agriculture
 ---
 
 # Ekiti State Agriculture Timeline (1996–2026)

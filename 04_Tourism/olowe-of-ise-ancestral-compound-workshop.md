@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: false
 notes: "Olowe of Ise's stature as a sculptor is corroborated in broader art-historical literature beyond the government source (see Efon-Alaaye Woodcarving Tradition entry for related Smithsonian documentation)."
+id: 04-tourism-olowe-of-ise-ancestral-compound-workshop
+status: needs_review
 ---
 
 # Olowe of Ise Ancestral Compound & Workshop

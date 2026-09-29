@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: true
 notes: "Entirely an oral-tradition founding narrative, as presented by Wikipedia. Should be labelled as tradition/legend in any platform display, not stated as settled history."
+id: 01-history-founding-of-ado-ekiti-by-ewi-awamaro
+status: needs_review
 ---
 
 # Founding of Ado-Ekiti by Ewi Awamaro

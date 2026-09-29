@@ -5,6 +5,11 @@ class: agriculture
 tier: B
 last_verified: 2026-09-25
 ingestible: no
+id: ek-agr-prog-poultry
+title: "Ekiti Broiler Production Scheme / Poultry Programme"
+status: needs_review
+source_tier: B
+category: agriculture
 ---
 # Ekiti Broiler Production Scheme / Poultry Programme
 

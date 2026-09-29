@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: false
 notes: "Whether the weaving tradition is still actively practised today (versus purely historical) is not established by this source and would need direct community verification."
+id: 05-culture-ado-ekiti-cotton-weaving-tradition
+status: needs_review
 ---
 
 # Ado-Ekiti Cotton Weaving Tradition

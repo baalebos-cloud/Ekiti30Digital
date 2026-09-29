@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: false
 notes: "The Epa masking tradition generally is well documented in art scholarship; the specific detail that Isan-Ekiti holds its own annual Epa festival comes only from the government's festival calendar and has not been separately corroborated."
+id: 05-culture-epa-masquerade-festival-isan-ekiti
+status: needs_review
 ---
 
 # Epa Masquerade Festival (Isan-Ekiti)

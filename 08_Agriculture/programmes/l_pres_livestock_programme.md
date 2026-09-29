@@ -5,6 +5,11 @@ class: agriculture
 tier: B
 last_verified: 2026-09-25
 ingestible: no
+id: ek-agr-prog-lpres
+title: "Livestock Productivity and Resilience Support (L-PRES) Project"
+status: needs_review
+source_tier: B
+category: agriculture
 ---
 # Livestock Productivity and Resilience Support (L-PRES)
 

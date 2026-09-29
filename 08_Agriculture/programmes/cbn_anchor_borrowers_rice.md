@@ -5,6 +5,11 @@ class: agriculture
 tier: C
 last_verified: 2026-09-25
 ingestible: no
+id: ek-agr-prog-abprice
+title: "CBN Anchor Borrowers' Programme — Rice Financing in Ekiti State"
+status: needs_review
+source_tier: C
+category: agriculture
 ---
 # CBN Anchor Borrowers' Programme (ABP) — Rice Financing in Ekiti State
 

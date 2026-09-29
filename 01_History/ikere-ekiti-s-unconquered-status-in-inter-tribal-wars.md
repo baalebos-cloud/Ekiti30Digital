@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: true
 notes: "A local-pride/oral-tradition claim repeated by government tourism material, not independently verified against historical war records. Should not be stated as settled military history."
+id: 01-history-ikere-ekiti-s-unconquered-status-in-inter-tribal-wars
+status: needs_review
 ---
 
 # Ikere-Ekiti's Unconquered Status in Inter-tribal Wars

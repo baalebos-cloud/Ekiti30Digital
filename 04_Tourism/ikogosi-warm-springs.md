@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: true
 notes: "Core facts (existence of the two springs, 1978 development takeover) are government-sourced. The husband-and-wife origin story and healing-property claims are oral tradition, not independently verified, and are labelled as such above."
+id: 04-tourism-ikogosi-warm-springs
+status: needs_review
 ---
 
 # Ikogosi Warm Springs

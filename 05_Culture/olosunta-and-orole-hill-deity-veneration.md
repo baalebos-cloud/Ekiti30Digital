@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: true
 notes: "This entry documents a religious/traditional belief as such; it should not be presented on the platform as historically verified fact."
+id: 05-culture-olosunta-and-orole-hill-deity-veneration
+status: needs_review
 ---
 
 # Olosunta and Orole Hill Deity Veneration
