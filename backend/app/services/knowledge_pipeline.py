@@ -6,7 +6,7 @@ import math
 from datetime import date
 from pathlib import Path
 
-from sqlalchemy import select
+from sqlalchemy import select, text as sql_text
 from sqlalchemy.orm import Session
 
 from app.core.config import settings
@@ -63,11 +63,31 @@ def verified_facts(text):
 
 
 def _frontmatter(text):
-    if not text.startswith("---\n") or "\n---\n" not in text[4:]:
+    lines = text.splitlines()
+    if not lines or lines[0] != "---":
+        raise ValueError("missing document front matter")
+    end = next((i for i in range(1, len(lines)) if lines[i] == "---"), None)
+    if end is None:
         raise ValueError("missing document front matter")
     return {key.strip(): value.strip() for key, value in
-            (line.split(":", 1) for line in text.split("\n---\n", 1)[0].splitlines()[1:]
+            (line.split(":", 1) for line in lines[1:end]
              if ":" in line)}
+
+
+def check_embedding_dimensions(db):
+    """Fail before embedding if settings, ORM, or deployed schema disagree."""
+    if settings.EMBEDDING_DIMENSIONS != EMBEDDING_DIMENSIONS:
+        raise RuntimeError("embedding dimensions changed after model import; restart required")
+    if db.bind.dialect.name == "postgresql":
+        actual = db.scalar(sql_text("""
+            SELECT format_type(atttypid, atttypmod)
+            FROM pg_attribute
+            WHERE attrelid = to_regclass('chunks')
+              AND attname = 'embedding' AND NOT attisdropped
+        """))
+        if actual != f"vector({EMBEDDING_DIMENSIONS})":
+            raise RuntimeError("database embedding dimension differs from settings; "
+                               "apply an explicit migration and rebuild embeddings")
 
 
 def _safe_file(root: Path, relative: str):
@@ -81,8 +101,7 @@ def _safe_file(root: Path, relative: str):
 
 def ingest_manifest(manifest: Path, root: Path, db: Session, embed):
     """Embed and atomically replace changed verified documents; report rejected rows."""
-    if settings.EMBEDDING_DIMENSIONS != EMBEDDING_DIMENSIONS:
-        raise ValueError("embedding dimension differs from vector column")
+    check_embedding_dimensions(db)
     result = {"ingested": 0, "unchanged": 0, "rejected": []}
     with manifest.open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
@@ -181,6 +200,7 @@ def retrieve(question: str, db: Session, embed=local_embed, limit=5, category=No
         eligible = eligible.where(KnowledgeDocument.class_ == category)
     if db.scalar(eligible.limit(1)) is None:
         return []
+    check_embedding_dimensions(db)
     vector = embed([question])[0]
     if len(vector) != EMBEDDING_DIMENSIONS:
         raise ValueError("question embedding dimension mismatch")

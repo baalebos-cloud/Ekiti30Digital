@@ -13,12 +13,11 @@ from sqlalchemy import Boolean, Date, DateTime, ForeignKey, Text, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.models.base import Base
+from app.core.config import settings
 
-# Output dimension of the configured embedding model,
-# paraphrase-multilingual-MiniLM-L12-v2 (384). Must match
-# EMBEDDING_DIMENSIONS in app/core/config.py — changing the model or this
-# value requires a new migration.
-EMBEDDING_DIMENSIONS = 384
+# Snapshot at table-definition time; settings are the only application default.
+# Existing database columns still require an explicit migration when changed.
+EMBEDDING_DIMENSIONS = settings.EMBEDDING_DIMENSIONS
 
 
 class KnowledgeDocument(Base):
