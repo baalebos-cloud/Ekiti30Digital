@@ -5,6 +5,11 @@ ingestible: false
 last_verified: 2026-09-25
 source_title: Ekiti State University (EKSU) --- Institutional Record
 tier: A
+id: ek-edu-inst-eksu
+title: "Ekiti State University (EKSU) --- Institutional Record"
+status: needs_review
+source_tier: A
+category: education
 ---
 
 # Ekiti State University (EKSU), Ado-Ekiti

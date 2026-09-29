@@ -48,7 +48,7 @@ export default function Footer() {
       </div>
       <div className="wrap site-footer-base">
         <span>Marking 30 years of Ekiti State, 1996–2026</span>
-        <span>Design: Member 6, UI/UX &amp; Design</span>
+        <span>ekiti30digital@gmail.com</span>
       </div>
     </footer>
   );

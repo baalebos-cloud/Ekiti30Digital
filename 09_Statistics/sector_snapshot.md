@@ -2,6 +2,9 @@
 doc_id: EK-STAT-SNAPSHOT-001
 title: Ekiti State Statistics Sector — Sourced Snapshot
 compiled: "2026-09-25"
+id: ek-stat-snapshot-001
+status: needs_review
+category: statistics
 ---
 ## Overview
 This package covers roughly 30 years of Ekiti State's headline statistics: population/census, poverty and multidimensional poverty, labour force, fiscal/IGR performance, and literacy — the cross-cutting numbers other sectors (Education, Agriculture, Health) already lean on, gathered here with full source trails rather than duplicated inline.

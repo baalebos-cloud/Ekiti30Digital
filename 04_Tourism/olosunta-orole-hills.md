@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: true
 notes: "DOWNGRADED in this revision per reviewer feedback: the general existence/naming of the hills is supported by the government tourism page and Wikipedia, but Wikipedia is a tertiary source and the significance claims (founding mythology, \"unconquered\" status) are oral tradition, not institutionally documented. Overall status lowered from \"Verified\" to \"Needs verification\" until a stronger primary/institutional source is found for the geographic description, and the mythological content is kept clearly separate."
+id: 04-tourism-olosunta-orole-hills
+status: needs_review
 ---
 
 # Olosunta & Orole Hills

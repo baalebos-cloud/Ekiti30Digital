@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: false
 notes: "Strongest-sourced entry in the inventory — corroborated by institutional museum archive documentation and named art-historical scholarship (William Fagg)."
+id: 05-culture-efon-alaaye-woodcarving-tradition-adeshina-workshop
+status: needs_review
 ---
 
 # Efon-Alaaye Woodcarving Tradition (Adeshina Workshop)

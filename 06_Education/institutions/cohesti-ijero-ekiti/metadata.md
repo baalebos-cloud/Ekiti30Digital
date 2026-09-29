@@ -5,6 +5,11 @@ class: education
 tier: B
 last_verified: 2026-09-25
 ingestible: no
+id: ek-edu-inst-cohesti
+title: "Ekiti State College of Health Sciences and Technology (COHESTI), Ijero-Ekiti — Institutional Record"
+status: needs_review
+source_tier: B
+category: education
 ---
 # Ekiti State College of Health Sciences and Technology (COHESTI), Ijero-Ekiti
 - Also referred to as EKSCOTECH, ESCOHSTI, or ESCOHST across its own sites and press —

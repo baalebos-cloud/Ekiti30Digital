@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: true
 notes: "The Ramsar listing and general location are independently verifiable through the international registry. The 17th-century dating and healing-property claims are oral tradition and are labelled as such."
+id: 04-tourism-arinta-waterfall
+status: needs_review
 ---
 
 # Arinta Waterfall

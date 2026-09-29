@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: false
 notes: "Rests on a single blog source. Confirm operating status, ownership, and \"first private amusement park\" claim with the Bureau of Tourism Development before treating as settled fact."
+id: 04-tourism-motif-funland
+status: needs_review
 ---
 
 # Motif Funland

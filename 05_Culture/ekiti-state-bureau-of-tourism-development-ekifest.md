@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: false
 notes: "Noted as the state's natural verification/collaboration partner for this project's ongoing data collection."
+id: 05-culture-ekiti-state-bureau-of-tourism-development-ekifest
+status: needs_review
 ---
 
 # Ekiti State Bureau of Tourism Development / EKIFEST

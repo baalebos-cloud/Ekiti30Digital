@@ -18,7 +18,7 @@ Classification per file:
                             doesn't match the known support-file patterns
                             -- probably intended as KB content and needs
                             front matter added
-  - "likely_support_file" : no front matter AND matches a known
+  - "likely_support_file" : matches a known
                             non-content pattern (README, index, notes,
                             template, draft-note, etc.) -- probably NOT
                             meant to be ingested; confirm before touching
@@ -38,10 +38,11 @@ TOPIC_DIRS = ["01_History", "02_LGAs", "03_Timeline", "04_Tourism", "05_Culture"
               "06_Education", "07_Health", "08_Agriculture", "09_Statistics"]
 
 # Filename/path patterns that suggest "this file exists to support the repo
-# or the team's workflow, not to be Ask Ekiti content" -- checked only when
-# a file has NO front matter, never used to override a file that does.
+# or the team's workflow, not to be Ask Ekiti content". These are review
+# hints even when front matter exists; they do not change ingestion gates.
 SUPPORT_PATTERNS = [
-    r"^readme\.md$", r"^index\.md$", r"^contributing\.md$", r"^code_of_conduct\.md$",
+    r"^readme(?:[_. -].*)?\.md$", r"^index\.md$", r"^contributing\.md$", r"^code_of_conduct\.md$",
+    r"^(sources|permission|permissions)\.md$", r"gaps(?:[_. -]|\.md$)",
     r"^license\.md$", r"^_meta/", r"^_template", r"template\.md$",
     r"notes?\.md$", r"todo\.md$", r"draft-?notes?\.md$", r"gap[s-]?", r"outline\.md$",
     r"checklist\.md$", r"agenda\.md$", r"minutes?\.md$", r"scratch",
@@ -64,6 +65,8 @@ def has_front_matter(text):
 def classify(rel_path, text):
     fm_state = has_front_matter(text)
     fname = os.path.basename(rel_path)
+    if SUPPORT_RE.search(fname) or SUPPORT_RE.search(rel_path):
+        return "likely_support_file"
     if fm_state == "ok_with_id":
         return "kb_document"
     if fm_state in ("unclosed", "no_id"):
@@ -125,6 +128,9 @@ def run(root, out_path, quiet=False):
 
 
 def selftest():
+    assert classify('09_Statistics/gaps.md', '---\nid: gaps\n---\n') == 'likely_support_file'
+    assert classify('06_Education/sources.md', '# Sources') == 'likely_support_file'
+    assert classify('07_Health/README_HEALTH.md', '# Notes') == 'likely_support_file'
     tmp = tempfile.mkdtemp()
     os.makedirs(os.path.join(tmp, "01_History"))
     open(os.path.join(tmp, "01_History", "with-fm.md"), "w", encoding="utf-8").write(

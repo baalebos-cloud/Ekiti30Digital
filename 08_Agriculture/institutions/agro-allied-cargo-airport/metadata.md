@@ -5,6 +5,11 @@ class: agriculture
 tier: B
 last_verified: 2026-09-25
 ingestible: no
+id: ek-agr-inst-cargoairport
+title: "Ekiti Agro-Allied International Cargo Airport — Institutional Record"
+status: needs_review
+source_tier: B
+category: agriculture
 ---
 # Ekiti Agro-Allied International Cargo Airport, Ado-Ekiti
 - Conceived under Governor Kayode Fayemi as a flagship "legacy project," explicitly

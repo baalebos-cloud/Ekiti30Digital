@@ -5,6 +5,10 @@ class: agriculture
 tier: B/C
 last_verified: 2026-09-25
 ingestible: no
+id: ek-agr-prog-cocoa
+title: "Cocoa Revival in Ekiti State, 1970s–2026"
+status: needs_review
+category: agriculture
 ---
 # Cocoa Revival in Ekiti State, 1970s–2026
 

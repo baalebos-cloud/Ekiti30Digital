@@ -5,6 +5,11 @@ class: agriculture
 tier: C
 last_verified: 2026-09-25
 ingestible: no
+id: ek-agr-prog-ycad
+title: "Youth Commercial Agricultural Development (YCAD) Programme"
+status: needs_review
+source_tier: C
+category: agriculture
 ---
 # Youth Commercial Agricultural Development (YCAD)
 

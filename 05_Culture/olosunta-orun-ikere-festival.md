@@ -15,6 +15,8 @@ publication_date: null
 last_verified: "2026-09-23"
 traditional_account: true
 notes: "Rests on a single tourism-news source. Corroborate with the palace/community account and the Bureau of Tourism Development before upgrading."
+id: 05-culture-olosunta-orun-ikere-festival
+status: needs_review
 ---
 
 # Olosunta Orun Ikere Festival

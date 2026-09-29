@@ -5,6 +5,11 @@ class: agriculture
 tier: B
 last_verified: 2026-09-25
 ingestible: no
+id: ek-agr-data-001
+title: "Ekiti State Agriculture Sector — Snapshot Figures"
+status: needs_review
+source_tier: B
+category: agriculture
 ---
 # Ekiti State Agriculture Sector — Snapshot Figures
 
