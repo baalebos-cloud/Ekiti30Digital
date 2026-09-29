@@ -108,6 +108,10 @@ Some coordinates, communities, institutions, landmarks, and administrative detai
 
 All records currently marked `Pending` require further review before publication as verified information.
 
+## Source of Truth
+
+As of the admin content editor (see PR for feature/admin-content-editing), the live database is the source of truth for day-to-day corrections. The CSV remains the source of truth for bulk research updates and verification_status changes, and re-importing it will overwrite any live-only edits to other fields on the rows it touches (see the --force behavior in scripts/ingest_lgas.py / ingest_timeline.py).
+
 ## Contributor
 
 Akintade Daniel Emmanuel  

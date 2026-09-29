@@ -582,6 +582,25 @@ textarea.ask-input { min-height: 42px; resize: none; max-height: 120px; padding:
 .ask-send { flex: 0 0 auto; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; color: #fff; background: var(--rust); transition: opacity 160ms ease; }
 .ask-send:disabled { opacity: 0.4; cursor: not-allowed; }
 .ask-send:focus-visible { outline: none; box-shadow: 0 0 0 4px color-mix(in srgb, var(--gold) 45%, transparent); }
+.ask-examples button:disabled { opacity: 0.5; cursor: not-allowed; }
+/* "Nothing verified matches yet": honest, not an error. */
+.ask-bubble.is-soft { color: var(--ink-soft); background: color-mix(in srgb, var(--gold-soft) 22%, var(--bg)); border-style: dashed; border-color: color-mix(in srgb, var(--gold) 55%, var(--line)); }
+.ask-bubble-tag { display: inline-block; margin-bottom: 4px; font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: color-mix(in srgb, var(--gold) 70%, var(--ink)); }
+.ask-bubble.is-error { border-left: 3px solid var(--rust); }
+.ask-retry { margin-top: 8px; font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 999px; cursor: pointer; color: var(--forest); background: var(--bg); border: 1px solid color-mix(in srgb, var(--gold) 55%, var(--line)); }
+.ask-retry:hover:not(:disabled) { background: color-mix(in srgb, var(--gold-soft) 35%, var(--bg)); }
+.ask-retry:disabled { opacity: 0.5; cursor: not-allowed; }
+.ask-thinking { display: inline-flex; align-items: center; gap: 10px; color: var(--ink-soft); }
+.ask-dots { display: inline-flex; gap: 4px; }
+.ask-dots span { display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--forest); }
+.ask-sources { margin-top: 10px; padding-top: 8px; border-top: 1px dashed var(--line); }
+.ask-sources-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 6px; }
+.ask-sources ol { display: flex; flex-direction: column; gap: 6px; }
+.ask-sources li { display: flex; flex-direction: column; gap: 2px; }
+.ask-source { display: inline-flex; align-items: baseline; gap: 6px; font-size: 12.5px; font-weight: 600; color: var(--forest); }
+a.ask-source:hover .ask-source-title { text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--gold) 70%, transparent); text-underline-offset: 2px; }
+.ask-source-num { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 50%; font-size: 10px; color: var(--forest); background: color-mix(in srgb, var(--gold-soft) 60%, var(--bg)); }
+.ask-source-meta { margin-left: 22px; font-size: 11px; color: var(--ink-soft); }
 .nav-link-button { background: none; border: none; cursor: pointer; font: inherit; }
 /* Flex + gap so the spinner and "Signing out…" never sit flush together. */
 .nav-signout { display: inline-flex; align-items: center; gap: 6px; }

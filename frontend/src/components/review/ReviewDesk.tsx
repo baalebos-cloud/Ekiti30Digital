@@ -1,21 +1,25 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
+import { ContentManager } from "@/components/content-admin/ContentManager";
 import { ContributorReviewRow } from "@/components/review/ContributorReviewRow";
 import { MediaReviewCard } from "@/components/review/MediaReviewCard";
 import { EmptyState, ErrorState, LoadingState } from "@/components/review/SectionStates";
 import { sendReview, useReviewList, type ListState } from "@/components/review/useReviewList";
 import { Spinner } from "@/components/ui/Spinner";
+import { SuccessToast, useToast } from "@/components/ui/SuccessToast";
 import type { PendingContributor, ReviewKind } from "@/lib/review";
 import type { AssetRecord } from "@/lib/uploads";
 
-type Toast = { id: number; message: string };
+// The two review queues, plus content editing (LGAs and timeline).
+type Tab = ReviewKind | "content";
 
-const TABS: { kind: ReviewKind; label: string }[] = [
+const TABS: { kind: Tab; label: string }[] = [
   { kind: "assets", label: "Pending media" },
   { kind: "contributors", label: "Pending contributors" },
+  { kind: "content", label: "Manage content" },
 ];
 
 // Items leave by shrinking and fading while the rest close the gap.
@@ -30,14 +34,8 @@ const itemMotion = {
 export function ReviewDesk() {
   const media = useReviewList<AssetRecord>("assets");
   const contributors = useReviewList<PendingContributor>("contributors");
-  const [tab, setTab] = useState<ReviewKind>("assets");
-  const [toast, setToast] = useState<Toast | null>(null);
-
-  useEffect(() => {
-    if (!toast) return;
-    const timer = setTimeout(() => setToast(null), 3200);
-    return () => clearTimeout(timer);
-  }, [toast]);
+  const [tab, setTab] = useState<Tab>("assets");
+  const { toast, show } = useToast();
 
   function reviewer<T extends { id: number }>(
     kind: ReviewKind,
@@ -49,7 +47,7 @@ export function ReviewDesk() {
       const failure = await sendReview(kind, item.id, action, reason);
       if (!failure) {
         list.remove(item.id);
-        setToast({ id: Date.now(), message: `${action === "approve" ? "Approved" : "Rejected"} · ${name}` });
+        show(`${action === "approve" ? "Approved" : "Rejected"} · ${name}`);
       }
       return failure;
     };
@@ -59,14 +57,13 @@ export function ReviewDesk() {
     assets: media.state,
     contributors: contributors.state,
   };
-  const active = tab === "assets" ? media : contributors;
+  const active = tab === "assets" ? media : tab === "contributors" ? contributors : null;
 
   return (
     <div className="mt-8">
       <div className="flex flex-wrap items-end justify-between gap-3 border-b border-line">
         <div role="tablist" aria-label="Review queues" className="flex gap-1">
           {TABS.map(({ kind, label }) => {
-            const state = states[kind];
             const selected = tab === kind;
             return (
               <button
@@ -80,7 +77,7 @@ export function ReviewDesk() {
                 className={`review-tab ${selected ? "is-active" : ""}`}
               >
                 {label}
-                <CountBadge state={state} />
+                {kind !== "content" && <CountBadge state={states[kind]} />}
                 {selected && (
                   <motion.span layoutId="review-tab-underline" className="review-tab-underline" transition={{ type: "spring", stiffness: 420, damping: 34 }} />
                 )}
@@ -88,15 +85,17 @@ export function ReviewDesk() {
             );
           })}
         </div>
-        <button
-          type="button"
-          onClick={() => active.reload()}
-          disabled={active.state.status === "loading"}
-          className="link-btn mb-2 flex items-center gap-1.5"
-        >
-          {active.state.status === "loading" && <Spinner size={12} />}
-          Refresh
-        </button>
+        {active && (
+          <button
+            type="button"
+            onClick={() => active.reload()}
+            disabled={active.state.status === "loading"}
+            className="link-btn mb-2 flex items-center gap-1.5"
+          >
+            {active.state.status === "loading" && <Spinner size={12} />}
+            Refresh
+          </button>
+        )}
       </div>
 
       <AnimatePresence mode="wait" initial={false}>
@@ -111,7 +110,9 @@ export function ReviewDesk() {
           transition={{ duration: 0.2 }}
           className="review-panel"
         >
-          {tab === "assets" ? (
+          {tab === "content" ? (
+            <ContentManager />
+          ) : tab === "assets" ? (
             media.state.status === "loading" ? (
               <LoadingState variant="cards" />
             ) : media.state.status === "error" ? (
@@ -149,37 +150,7 @@ export function ReviewDesk() {
         </motion.section>
       </AnimatePresence>
 
-      <div className="review-toast-wrap" aria-live="polite">
-        <AnimatePresence>
-          {toast && (
-            <motion.div
-              key={toast.id}
-              initial={{ opacity: 0, y: 24, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 12, scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 380, damping: 28 }}
-              className="review-toast"
-              role="status"
-            >
-              <svg width="18" height="18" viewBox="0 0 52 52" aria-hidden="true">
-                <circle cx="26" cy="26" r="25" fill="var(--gold-soft)" />
-                <motion.path
-                  d="M15 27l7 7 15-16"
-                  fill="none"
-                  stroke="var(--forest)"
-                  strokeWidth="5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ delay: 0.1, duration: 0.35 }}
-                />
-              </svg>
-              <span className="truncate">{toast.message}</span>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+      <SuccessToast toast={toast} />
     </div>
   );
 }

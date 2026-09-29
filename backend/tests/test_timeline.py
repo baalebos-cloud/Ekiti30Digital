@@ -8,6 +8,9 @@ import pytest
 from app.models.timeline_event import TimelineEvent
 from app.services.timeline_ingestion import ingest_timeline, is_iso_partial_date, load_csv
 
+# What the CLI records as updated_by (see app/services/attribution.py).
+CLI = "cli:test"
+
 REAL_CSV = os.path.join(
     os.path.dirname(__file__), "..", "..", "03_Timeline", "EKITI30_Timeline_Events_1996-2026.csv"
 )
@@ -53,9 +56,9 @@ def test_is_iso_partial_date(value, ok):
 
 
 def test_real_csv_loads_all_50_events_with_expected_statuses(db_session):
-    result = ingest_timeline(load_csv(REAL_CSV), db_session)
+    result = ingest_timeline(load_csv(REAL_CSV), db_session, updated_by=CLI)
 
-    assert (result.created, result.updated, result.skipped) == (50, 0, [])
+    assert (len(result.created), len(result.updated), result.skipped) == (50, 0, [])
     counts = Counter(e.verification_status for e in db_session.query(TimelineEvent))
     assert counts == {
         "Verified": 26,
@@ -66,7 +69,7 @@ def test_real_csv_loads_all_50_events_with_expected_statuses(db_session):
 
 
 def test_ingest_keeps_the_dataset_id_and_stores_values_as_is(db_session):
-    ingest_timeline([make_row()], db_session)
+    ingest_timeline([make_row()], db_session, updated_by=CLI)
 
     event = db_session.get(TimelineEvent, "EK-100")
     assert event.date_start == "2010-07"
@@ -75,19 +78,20 @@ def test_ingest_keeps_the_dataset_id_and_stores_values_as_is(db_session):
 
 
 def test_rerunning_updates_in_place_without_duplicating(db_session):
-    ingest_timeline([make_row()], db_session)
-    result = ingest_timeline([make_row(verification_status="Verified")], db_session)
+    ingest_timeline([make_row()], db_session, updated_by=CLI)
+    result = ingest_timeline([make_row(verification_status="Verified")], db_session, updated_by=CLI)
 
-    assert (result.created, result.updated) == (0, 1)
+    assert (len(result.created), len(result.updated)) == (0, 1)
     assert db_session.query(TimelineEvent).one().verification_status == "Verified"
 
 
 def test_rerunning_the_real_csv_does_not_duplicate(db_session):
     rows = load_csv(REAL_CSV)
-    ingest_timeline(rows, db_session)
-    result = ingest_timeline(rows, db_session)
+    ingest_timeline(rows, db_session, updated_by=CLI)
+    result = ingest_timeline(rows, db_session, updated_by=CLI)
 
-    assert (result.created, result.updated) == (0, 50)
+    # Nothing changed, so nothing is rewritten or re-stamped.
+    assert (len(result.created), len(result.updated), len(result.unchanged)) == (0, 0, 50)
     assert db_session.query(TimelineEvent).count() == 50
 
 
@@ -104,9 +108,9 @@ def test_rerunning_the_real_csv_does_not_duplicate(db_session):
     ],
 )
 def test_bad_rows_are_skipped_and_reported(db_session, overrides, reason):
-    result = ingest_timeline([make_row(id="EK-001"), make_row(id="EK-002", **overrides)], db_session)
+    result = ingest_timeline([make_row(id="EK-001"), make_row(id="EK-002", **overrides)], db_session, updated_by=CLI)
 
-    assert result.created == 1
+    assert len(result.created) == 1
     assert len(result.skipped) == 1
     assert (result.skipped[0].line, result.skipped[0].event_id) == (3, "EK-002")
     assert reason in result.skipped[0].reason
@@ -114,9 +118,9 @@ def test_bad_rows_are_skipped_and_reported(db_session, overrides, reason):
 
 
 def test_rows_sharing_an_id_are_all_skipped(db_session):
-    result = ingest_timeline([make_row(), make_row(event_title="Other")], db_session)
+    result = ingest_timeline([make_row(), make_row(event_title="Other")], db_session, updated_by=CLI)
 
-    assert result.created == 0
+    assert len(result.created) == 0
     assert [s.reason for s in result.skipped] == ["duplicate id 'EK-100' in batch"] * 2
 
 
@@ -124,7 +128,7 @@ def test_rows_sharing_an_id_are_all_skipped(db_session):
 
 
 def test_list_timeline_returns_all_50_sorted_with_status(client, db_session):
-    ingest_timeline(load_csv(REAL_CSV), db_session)
+    ingest_timeline(load_csv(REAL_CSV), db_session, updated_by=CLI)
 
     response = client.get("/api/timeline")
 
@@ -155,6 +159,7 @@ def test_list_timeline_sorts_by_date_start_then_id(client, db_session):
             make_row(id="EK-004", date_start="2000-12"),
         ],
         db_session,
+        updated_by=CLI,
     )
 
     ids = [e["id"] for e in client.get("/api/timeline").json()["events"]]
@@ -163,7 +168,7 @@ def test_list_timeline_sorts_by_date_start_then_id(client, db_session):
 
 
 def test_list_timeline_item_shape(client, db_session):
-    ingest_timeline([make_row()], db_session)
+    ingest_timeline([make_row()], db_session, updated_by=CLI)
 
     [event] = client.get("/api/timeline").json()["events"]
 

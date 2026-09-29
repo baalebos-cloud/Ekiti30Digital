@@ -3,12 +3,13 @@ import csv
 import hashlib
 from pathlib import Path
 from types import SimpleNamespace
+import pytest
 
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import Session
 
 from app.models.base import Base
-from app.models.knowledge import KnowledgeDocument
+from app.models.knowledge import KnowledgeDocument, EMBEDDING_DIMENSIONS
 from app.services.knowledge_pipeline import ingest_manifest, retrieve, verified_facts
 
 FIELDS = ["id", "path", "category", "status", "source_tier", "source_ids",
@@ -52,7 +53,81 @@ def write_manifest(path, rows):
 
 
 def embed(texts):
-    return [[0.1] * 384 for _ in texts]
+    return [[0.1] * EMBEDDING_DIMENSIONS for _ in texts]
+
+
+@pytest.mark.parametrize('newline', ['\n', '\r\n', '\r'])
+def test_ingests_explicit_line_endings(tmp_path, newline):
+    root, doc, row, manifest = fixture(tmp_path)
+    doc.write_bytes(doc.read_text().replace('\n', newline).encode('utf-8'))
+    row['file_sha256'] = hashlib.sha256(doc.read_bytes()).hexdigest()
+    write_manifest(manifest, [row])
+    engine = create_engine('sqlite:///:memory:')
+    Base.metadata.create_all(engine)
+    with Session(engine) as db:
+        result = ingest_manifest(manifest, root, db, embed)
+        assert result['ingested'] == 1
+        assert result['rejected'] == []
+
+
+@pytest.mark.parametrize('content', ['', 'id: x\n---\n', '---\r\nid: x\r\n'])
+def test_frontmatter_requires_both_delimiters(content):
+    from app.services.knowledge_pipeline import _frontmatter
+    with pytest.raises(ValueError, match='front matter'):
+        _frontmatter(content)
+
+
+@pytest.mark.parametrize('actual', ['vector(12)', 'vector', None])
+def test_database_dimension_mismatch_is_rejected(actual):
+    from app.services.knowledge_pipeline import check_embedding_dimensions
+    db = SimpleNamespace(bind=SimpleNamespace(dialect=SimpleNamespace(name='postgresql')),
+                         scalar=lambda statement: actual)
+    with pytest.raises(RuntimeError, match='explicit migration'):
+        check_embedding_dimensions(db)
+
+
+def test_database_dimension_matches():
+    from app.services.knowledge_pipeline import check_embedding_dimensions
+    db = SimpleNamespace(bind=SimpleNamespace(dialect=SimpleNamespace(name='postgresql')),
+                         scalar=lambda statement: f'vector({EMBEDDING_DIMENSIONS})')
+    check_embedding_dimensions(db)
+
+
+def test_retrieval_checks_database_before_embedding():
+    answers = iter([1, 'vector(12)'])
+    db = SimpleNamespace(bind=SimpleNamespace(dialect=SimpleNamespace(name='postgresql')),
+                         scalar=lambda statement: next(answers))
+    def unexpected_embed(texts):
+        pytest.fail('must reject schema mismatch before embedding')
+    with pytest.raises(RuntimeError, match='explicit migration'):
+        retrieve('Question?', db, embed=unexpected_embed)
+
+
+def test_settings_mutation_requires_restart(monkeypatch):
+    from app.core.config import settings
+    from app.services.knowledge_pipeline import check_embedding_dimensions
+    monkeypatch.setattr(settings, 'EMBEDDING_DIMENSIONS', EMBEDDING_DIMENSIONS + 1)
+    with pytest.raises(RuntimeError, match='restart'):
+        check_embedding_dimensions(None)
+
+
+def test_dimension_setting_at_import():
+    import os
+    import subprocess
+    import sys
+    env = dict(os.environ, EMBEDDING_DIMENSIONS='12', DATABASE_URL='sqlite:///:memory:')
+    subprocess.run([sys.executable, '-c',
+        'from app.models.knowledge import Chunk, EMBEDDING_DIMENSIONS; '
+        'assert EMBEDDING_DIMENSIONS == 12; '
+        'assert Chunk.__table__.c.embedding.type.dim == 12'], env=env, check=True)
+
+
+@pytest.mark.parametrize('dimension', [0, -1])
+def test_nonpositive_dimensions_rejected(dimension):
+    from app.core.config import Settings
+    from pydantic import ValidationError
+    with pytest.raises(ValidationError):
+        Settings(EMBEDDING_DIMENSIONS=dimension)
 
 
 def test_ingest_change_and_retire(tmp_path):

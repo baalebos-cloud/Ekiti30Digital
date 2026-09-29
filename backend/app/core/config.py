@@ -7,6 +7,7 @@ elsewhere in the app.
 
 from functools import lru_cache
 
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -64,11 +65,10 @@ class Settings(BaseSettings):
     EMBEDDING_MODEL: str = "paraphrase-multilingual-MiniLM-L12-v2"
 
     # Output dimension of EMBEDDING_MODEL (384 for
-    # paraphrase-multilingual-MiniLM-L12-v2). Also mirrored as the
-    # EMBEDDING_DIMENSIONS constant in app/models/knowledge.py, which the
-    # Chunk.embedding column is defined against directly — keep the two in
-    # sync by hand; changing it requires a new migration.
-    EMBEDDING_DIMENSIONS: int = 384
+    # paraphrase-multilingual-MiniLM-L12-v2). The ORM reads this at import
+    # time. Changing it requires a restart, an explicit database migration,
+    # and re-embedding the corpus; environment changes do not resize columns.
+    EMBEDDING_DIMENSIONS: int = Field(default=384, gt=0)
 
     # --- Media uploads (Cloudinary) -------------------------------------
     #

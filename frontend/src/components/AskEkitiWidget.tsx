@@ -1,23 +1,42 @@
+
 "use client";
 
 /**
  * Ask Ekiti: a floating button on every page that opens a chat panel.
  *
- * UI shell only — the Ask Ekiti API (retrieval + answer generation) isn't
- * built yet, so a question gets an honest "not connected yet" reply instead
- * of a network call. When the API exists, replace `replyTo` with a call to a
- * Next.js route that forwards to it.
+ * Questions go to /api/ask-ekiti (src/app/api/ask-ekiti/route.ts), which
+ * forwards to the backend. Answers are sourced facts from the verified
+ * knowledge base, shown with their sources; when nothing verified matches,
+ * the backend says so ("insufficient") and that's shown as an honest
+ * "not yet", not an error. English only for now: Yoruba answers await human
+ * review on the backend.
  *
  * Other components open it by dispatching ASK_EKITI_OPEN_EVENT; /ask-ekiti
  * redirects to /?ask=1, which opens it on load.
  */
 
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
+
+import {
+  askEkiti,
+  askErrorMessage,
+  MAX_QUESTION_LENGTH,
+  MIN_QUESTION_LENGTH,
+  type AskEkitiCitation,
+} from "@/lib/askEkiti";
 
 export const ASK_EKITI_OPEN_EVENT = "ask-ekiti:open";
 
-type Message = { id: number; from: "you" | "ekiti"; text: string };
+type Message =
+  | { id: number; from: "you"; text: string }
+  | { id: number; from: "ekiti"; kind: "answered"; text: string; citations: AskEkitiCitation[] }
+  | { id: number; from: "ekiti"; kind: "insufficient"; text: string }
+  /** `retry` is the question to ask again, or null if asking again won't help. */
+  | { id: number; from: "ekiti"; kind: "error"; text: string; retry: string | null };
+
+/** A Message before it has an id (Omit applied to each member of the union). */
+type NewMessage = Message extends infer M ? (M extends Message ? Omit<M, "id"> : never) : never;
 
 const EXAMPLES = [
   "When was Ekiti State created?",
@@ -25,14 +44,11 @@ const EXAMPLES = [
   "Which LGAs border Ado Ekiti?",
 ];
 
-function replyTo(): string {
-  return "Ask Ekiti isn't connected yet. Soon it will answer questions like this one from the platform's verified sources — and show you where each answer comes from.";
-}
-
 export function AskEkitiWidget() {
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
+  const [pending, setPending] = useState(false);
   const fab = useRef<HTMLButtonElement>(null);
   const input = useRef<HTMLTextAreaElement>(null);
   const log = useRef<HTMLDivElement>(null);
@@ -67,16 +83,46 @@ export function AskEkitiWidget() {
 
   useEffect(() => {
     log.current?.scrollTo({ top: log.current.scrollHeight, behavior: "smooth" });
-  }, [messages]);
+  }, [messages, pending]);
+
+  function add(message: NewMessage) {
+    setMessages((m) => [...m, { ...message, id: (nextId.current += 1) } as Message]);
+  }
+
+  /**
+   * Ask the backend. A new question is added as a bubble; a retry instead
+   * replaces the error it came from, so failures don't pile up.
+   */
+  async function ask(question: string, retryOf?: number) {
+    if (pending) return;
+    if (retryOf === undefined) add({ from: "you", text: question });
+    else setMessages((m) => m.filter((msg) => msg.id !== retryOf));
+    setPending(true);
+    const result = await askEkiti(question);
+    setPending(false);
+    if (!result.ok) {
+      add({
+        from: "ekiti",
+        kind: "error",
+        text: askErrorMessage(result.error),
+        retry: result.error === "invalid_question" ? null : question,
+      });
+    } else if (result.data.status === "insufficient") {
+      add({ from: "ekiti", kind: "insufficient", text: result.data.answer });
+    } else {
+      add({ from: "ekiti", kind: "answered", text: result.data.answer, citations: result.data.citations });
+    }
+  }
 
   function send(text: string) {
     const question = text.trim();
-    if (!question) return;
-    const id = (nextId.current += 2);
-    setMessages((m) => [...m, { id, from: "you", text: question }, { id: id + 1, from: "ekiti", text: replyTo() }]);
+    if (question.length < MIN_QUESTION_LENGTH || pending) return;
     setDraft("");
     input.current?.focus();
+    ask(question);
   }
+
+  const canSend = draft.trim().length >= MIN_QUESTION_LENGTH && !pending;
 
   return (
     <>
@@ -97,7 +143,7 @@ export function AskEkitiWidget() {
                 <p id="ask-ekiti-title" className="font-display text-xl">
                   Ask <em>Ekiti</em>
                 </p>
-                <p className="text-xs opacity-80">Answers from verified sources · coming soon</p>
+                <p className="text-xs opacity-80">Answers only from verified sources — and says so when it can&apos;t</p>
               </div>
               <button
                 type="button"
@@ -122,7 +168,7 @@ export function AskEkitiWidget() {
                 <div className="ask-examples">
                   <span>Try asking</span>
                   {EXAMPLES.map((q) => (
-                    <button key={q} type="button" onClick={() => send(q)}>
+                    <button key={q} type="button" onClick={() => send(q)} disabled={pending}>
                       {q}
                     </button>
                   ))}
@@ -134,12 +180,22 @@ export function AskEkitiWidget() {
                     key={m.id}
                     initial={{ opacity: 0, y: 8, scale: 0.97 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
-                    transition={{ duration: 0.25, delay: m.from === "ekiti" ? 0.35 : 0 }}
-                    className={`ask-bubble ${m.from === "you" ? "is-you" : "is-ekiti"}`}
+                    transition={{ duration: 0.25 }}
+                    className={`ask-bubble ${bubbleClass(m)}`}
                   >
-                    {m.text}
+                    {m.from === "ekiti" && m.kind === "insufficient" && <span className="ask-bubble-tag">Not in the verified sources yet</span>}
+                    <p className="whitespace-pre-line">{m.text}</p>
+                    {m.from === "ekiti" && m.kind === "answered" && m.citations.length > 0 && (
+                      <Sources citations={m.citations} />
+                    )}
+                    {m.from === "ekiti" && m.kind === "error" && m.retry && (
+                      <button type="button" className="ask-retry" disabled={pending} onClick={() => ask(m.retry!, m.id)}>
+                        Try again
+                      </button>
+                    )}
                   </motion.div>
                 ))}
+                {pending && <Thinking key="thinking" />}
               </AnimatePresence>
             </div>
 
@@ -165,13 +221,14 @@ export function AskEkitiWidget() {
                 }}
                 className="input ask-input"
                 placeholder="Ask about Ekiti…"
+                maxLength={MAX_QUESTION_LENGTH}
               />
               <motion.button
                 type="submit"
                 className="ask-send"
                 aria-label="Send question"
-                disabled={!draft.trim()}
-                whileTap={{ scale: 0.92 }}
+                disabled={!canSend}
+                whileTap={canSend ? { scale: 0.92 } : undefined}
               >
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h13M13 6l6 6-6 6" />
@@ -220,5 +277,97 @@ export function AskEkitiWidget() {
         {!open && <span className="ask-fab-label">Ask Ekiti</span>}
       </motion.button>
     </>
+  );
+}
+
+function bubbleClass(m: Message): string {
+  if (m.from === "you") return "is-you";
+  if (m.kind === "insufficient") return "is-ekiti is-soft";
+  if (m.kind === "error") return "is-ekiti is-error";
+  return "is-ekiti";
+}
+
+/**
+ * "Ekiti is thinking…" with three bouncing dots (still, if motion is reduced).
+ * No exit animation on purpose: the reply takes its place at once, and its
+ * removal never waits on an animation frame.
+ */
+function Thinking() {
+  const still = useReducedMotion();
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8, scale: 0.97 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.25 }}
+      className="ask-bubble is-ekiti ask-thinking"
+      role="status"
+    >
+      <span className="ask-dots" aria-hidden="true">
+        {[0, 1, 2].map((i) => (
+          <motion.span
+            key={i}
+            animate={still ? undefined : { y: [0, -4, 0], opacity: [0.35, 1, 0.35] }}
+            transition={still ? undefined : { duration: 1, repeat: Infinity, delay: i * 0.16, ease: "easeInOut" }}
+          />
+        ))}
+      </span>
+      <span>Ekiti is thinking…</span>
+    </motion.div>
+  );
+}
+
+function formatVerified(value: string | null): string | null {
+  if (!value) return null;
+  const date = new Date(`${value}T00:00:00Z`);
+  if (Number.isNaN(date.getTime())) return value;
+  return date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+}
+
+/** The sources behind an answer: each one once, linked where it has a link. */
+function Sources({ citations }: { citations: AskEkitiCitation[] }) {
+  const seen = new Set<string>();
+  const sources = citations.flatMap((citation) =>
+    citation.sources
+      .filter((source) => {
+        const key = source.url ?? source.title;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      })
+      .map((source) => ({ ...source, tier: citation.tier, verified: formatVerified(citation.lastVerified) })),
+  );
+
+  return (
+    <div className="ask-sources">
+      <p className="ask-sources-label">Sources</p>
+      <ol>
+        {sources.map((source, i) => (
+          <motion.li
+            key={`${source.url ?? source.title}-${i}`}
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 + i * 0.05, duration: 0.2 }}
+          >
+            {source.url ? (
+              <a href={source.url} target="_blank" rel="noopener noreferrer" className="ask-source">
+                <span className="ask-source-num">{i + 1}</span>
+                <span className="ask-source-title">{source.title}</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            ) : (
+              <span className="ask-source">
+                <span className="ask-source-num">{i + 1}</span>
+                <span className="ask-source-title">{source.title}</span>
+              </span>
+            )}
+            {(source.tier || source.verified) && (
+              <span className="ask-source-meta">
+                {[source.tier && `Tier ${source.tier}`, source.verified && `verified ${source.verified}`].filter(Boolean).join(" · ")}
+              </span>
+            )}
+          </motion.li>
+        ))}
+      </ol>
+    </div>
   );
 }

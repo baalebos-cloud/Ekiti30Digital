@@ -8,61 +8,43 @@ Usage, from backend/ (after `alembic upgrade head` on that database):
 
     python scripts/ingest_timeline.py --dry-run    # validate the CSV, write nothing
     python scripts/ingest_timeline.py              # validate and upsert
+    python scripts/ingest_timeline.py --force      # ...including rows admins edited
     python scripts/ingest_timeline.py --csv path/to/other.csv
 
-Invalid rows are skipped and listed; the exit status is 1 if any were.
+For initial loads and emergencies. The normal way to change this data is the
+admin area (edits, or CSV import at POST /api/admin/timeline/import), which
+records the admin's verified email as updated_by. Rows this script changes
+get updated_by = "cli:<your OS username>".
+
+Before writing, the script lists every row the CSV would change that was last
+changed by an admin. Without --force those rows are left untouched (and
+listed as held back); every other row is imported. With --force they are
+overwritten with the CSV's values.
+
+Exit status is 1 if any row was invalid or held back.
 """
 
-import argparse
 import os
 import sys
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from sqlalchemy import create_engine  # noqa: E402
-from sqlalchemy.engine import make_url  # noqa: E402
-from sqlalchemy.orm import sessionmaker  # noqa: E402
+from ingest_common import REPO_ROOT, run  # noqa: E402
 
-from app.services.timeline_ingestion import ingest_timeline, load_csv, validate_rows  # noqa: E402
+from app.services import timeline_ingestion  # noqa: E402
 
-REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DEFAULT_CSV = os.path.join(REPO_ROOT, "03_Timeline", "EKITI30_Timeline_Events_1996-2026.csv")
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--csv", default=DEFAULT_CSV, help="path to the timeline CSV")
-    parser.add_argument(
-        "--dry-run", action="store_true", help="validate the CSV without touching a database"
+def main(argv: list[str] | None = None) -> int:
+    return run(
+        description=__doc__.splitlines()[0],
+        default_csv=DEFAULT_CSV,
+        service=timeline_ingestion,
+        ingest=timeline_ingestion.ingest_timeline,
+        key_attr="event_id",
+        argv=argv,
     )
-    args = parser.parse_args()
-
-    rows = load_csv(args.csv)
-    print(f"Read {len(rows)} row(s) from {args.csv}")
-
-    if args.dry_run:
-        valid, skipped = validate_rows(rows)
-        print(f"Valid: {len(valid)}")
-    else:
-        database_url = os.environ.get("DATABASE_URL")
-        if not database_url:
-            print("DATABASE_URL is not set in this shell (backend/.env is ignored).", file=sys.stderr)
-            return 1
-        url = make_url(database_url)
-        # Never print the password.
-        print(f"Target database: {url.drivername}://{url.host or ''}:{url.port or ''}/{url.database}")
-
-        engine = create_engine(database_url)
-        with sessionmaker(bind=engine)() as session:
-            result = ingest_timeline(rows, session)
-        engine.dispose()
-        skipped = result.skipped
-        print(f"Created: {result.created}  Updated: {result.updated}")
-
-    print(f"Skipped: {len(skipped)}")
-    for row in skipped:
-        print(f"  line {row.line} ({row.event_id}): {row.reason}")
-    return 1 if skipped else 0
 
 
 if __name__ == "__main__":
