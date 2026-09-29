@@ -1,23 +1,23 @@
 id,path,category,doc_type,status,source_tier,source_ids,publication_date,last_verified,verified_by,language,translation_of,period_covered,file_sha256,ingestible,reason
 01-history-founding-of-ado-ekiti-by-ewi-awamaro,01_History/founding-of-ado-ekiti-by-ewi-awamaro.md,history,,needs_review,,,null,2026-09-23,,,,,98e8a81bf76d2de3663af641de5b5897a3dc461c622914367cdc726f1be09851,no,has errors
 01-history-ikere-ekiti-s-unconquered-status-in-inter-tribal-wars,01_History/ikere-ekiti-s-unconquered-status-in-inter-tribal-wars.md,history,,needs_review,,,null,2026-09-23,,,,,97463a64816fa7d390a652e103d7485d41e30fee5ecd413fac5296af4a363945,no,has errors
-history-state-creation-1996,01_History/state-creation-1996.md,history,event,draft,A,SRC-001,2021-10-01,,,en,,1996,8e1d708622839d6ccdcb759c7af90c3238d229ec676a259c6b36f7fc822f9a1c,no,status is draft
-lga-ado-ekiti,02_LGAs/lga-ado-ekiti.md,lgas,entity,draft,A,SRC-028;SRC-029,Not stated,,,en,,1996-2026,e5407a3ec83689c868dbb06af66b9c567b76b0683c0fec40c8cb7fbb49373c41,no,status is draft
-lga-aiyekire,02_LGAs/lga-aiyekire.md,lgas,entity,draft,A,SRC-028;SRC-035,Not stated,,,en,,1996-2026,cb1d17b056f160fd61ca168d1fc26479cec41c59df424e56bee26ab4727a0279,no,status is draft
-lga-efon,02_LGAs/lga-efon.md,lgas,entity,draft,A,SRC-028;SRC-030,Not stated,,,en,,1996-2026,9fba70c08c6567c91795d31a58879507c5880303584bb6c9cf5d76fdf7a1b7e7,no,status is draft
-lga-ekiti-east,02_LGAs/lga-ekiti-east.md,lgas,entity,draft,A,SRC-028;SRC-031,Not stated,,,en,,1996-2026,e97ea837c7fbabf19d67a20ffc654d9e77cedf5e11944c1df26b206257b67b71,no,status is draft
-lga-ekiti-south-west,02_LGAs/lga-ekiti-south-west.md,lgas,entity,draft,A,SRC-028;SRC-032,Not stated,,,en,,1996-2026,965577781254ae1d983e034e3cbd5d12805594ae04db26a3127a0c23c3f8a2ce,no,status is draft
-lga-ekiti-west,02_LGAs/lga-ekiti-west.md,lgas,entity,draft,A,SRC-028;SRC-033,Not stated,,,en,,1996-2026,cbd571d08c610530c9d420e8bb958b4e25706d3f8015c918eaec4b5b3c365052,no,status is draft
-lga-emure,02_LGAs/lga-emure.md,lgas,entity,draft,A,SRC-028;SRC-034,Not stated,,,en,,1996-2026,37d0cc5338856cb18edafa550c82efc8fca638f567a9185a90742cb90025ce3b,no,status is draft
-lga-ido-osi,02_LGAs/lga-ido-osi.md,lgas,entity,draft,A,SRC-028;SRC-036,Not stated,,,en,,1996-2026,77c4402b4927b6ea5e3dca53dc669a35057708f87031fed6d13daccab5fabf6c,no,status is draft
-lga-ijero,02_LGAs/lga-ijero.md,lgas,entity,draft,A,SRC-028;SRC-037,Not stated,,,en,,1996-2026,9e7a2bcbf30da72210add875eaf1d7f8ac6353e5cbcd5a3fab573c2fe3993ef4,no,status is draft
-lga-ikere,02_LGAs/lga-ikere.md,lgas,entity,draft,A,SRC-028;SRC-038,Not stated,,,en,,1996-2026,47574d152a872b6a92bda703b93bb48a5ec424e3e163ab0101fe51c15bb53a7a,no,status is draft
-lga-ikole,02_LGAs/lga-ikole.md,lgas,entity,draft,A,SRC-028;SRC-039,Not stated,,,en,,1996-2026,7eac95ba1c489361cfa77217f13bf7fc2263356bd6ab6cd7d9a707d23d7ca4f6,no,status is draft
-lga-ilejemeje,02_LGAs/lga-ilejemeje.md,lgas,entity,draft,A,SRC-028;SRC-040,Not stated,,,en,,1996-2026,e328d7faaa1f78cd3039bdd6739a9a7109a33dfc5bf9479615c6139dd26b353b,no,status is draft
-lga-irepodun-ifelodun,02_LGAs/lga-irepodun-ifelodun.md,lgas,entity,draft,A,SRC-028;SRC-041;SRC-042,Not stated,,,en,,1996-2026,7db334b37e4acfa37af3a9f363064957e80d9e621927a7f4ee30cddc6e8980cd,no,status is draft
-lga-ise-orun,02_LGAs/lga-ise-orun.md,lgas,entity,draft,A,SRC-028;SRC-043,Not stated,,,en,,1996-2026,31a3926bfcddd203079e7573640958bddfae2361ebf7cd5fce2e867d33c04543,no,status is draft
-lga-moba,02_LGAs/lga-moba.md,lgas,entity,draft,A,SRC-028;SRC-044,Not stated,,,en,,1996-2026,7b20c0710ee6be5771c9c87cc6df16b0130318a3aeaca9d758c0aa478f550597,no,status is draft
-lga-oye,02_LGAs/lga-oye.md,lgas,entity,draft,A,SRC-028;SRC-045;SRC-046,Not stated,,,en,,1996-2026,8daf3fb7ab1e72e45ddf5b57b1d9a63f13a413af681938f2afa38f97bab1b39d,no,status is draft
+history-state-creation-1996,01_History/state-creation-1996.md,history,event,verified,A,SRC-001,2021-10-01,2026-09-29,smartexploit,en,,1996,3ededca99e16f76d90093554769599067ac10e0affde1eb79a3befb203a90e71,yes,
+lga-ado-ekiti,02_LGAs/lga-ado-ekiti.md,lgas,entity,verified,A,SRC-028,Not stated,2026-09-29,smartexploit,en,,1996-2026,f3114b593a22dc2e1025abb4d65dee44d8144f29af28ccb812e5b945fed0e0ee,yes,
+lga-aiyekire,02_LGAs/lga-aiyekire.md,lgas,entity,verified,A,SRC-028,Not stated,2026-09-29,smartexploit,en,,1996-2026,d892116d6e48b32b6fa111f3a1f8a8d3c5910161e515b50eca8d3eb5426261b3,yes,
+lga-efon,02_LGAs/lga-efon.md,lgas,entity,verified,A,SRC-028,Not stated,2026-09-29,smartexploit,en,,1996-2026,5e02f4e628f0d21715ac9d4af6963c0c85d10e2f8385ea6a019dd6760fa8512c,yes,
+lga-ekiti-east,02_LGAs/lga-ekiti-east.md,lgas,entity,verified,A,SRC-028,Not stated,2026-09-29,smartexploit,en,,1996-2026,0b47285e773bfbc45d1a8936d1730fe965275c17bf73504eacc025f153cf2b4d,yes,
+lga-ekiti-south-west,02_LGAs/lga-ekiti-south-west.md,lgas,entity,verified,A,SRC-028,Not stated,2026-09-29,smartexploit,en,,1996-2026,83ac4e47d408c2015634fec4df8c15af2b51865070cc8a1834c6470bf80ba2d0,yes,
+lga-ekiti-west,02_LGAs/lga-ekiti-west.md,lgas,entity,verified,A,SRC-028,Not stated,2026-09-29,smartexploit,en,,1996-2026,f6caf8d0d8bf0f4e4b13ae4ce9c26f0d473da71cbf298f23bf9bf15315534ade,yes,
+lga-emure,02_LGAs/lga-emure.md,lgas,entity,verified,A,SRC-028,Not stated,2026-09-29,smartexploit,en,,1996-2026,b8f81f49bcae74f5fac99141058ec0658a6804ca5c81fe45394e76064e89f501,yes,
+lga-ido-osi,02_LGAs/lga-ido-osi.md,lgas,entity,verified,A,SRC-028,Not stated,2026-09-29,smartexploit,en,,1996-2026,9845e076b5b012814b9fe2736df2fbccdf307af00d48a4445e578a61f65e7580,yes,
+lga-ijero,02_LGAs/lga-ijero.md,lgas,entity,verified,A,SRC-028,Not stated,2026-09-29,smartexploit,en,,1996-2026,7de1b6f828ead50d7af9ac8a0c5ebb727b45f040946e2141470cc3f79a4be669,yes,
+lga-ikere,02_LGAs/lga-ikere.md,lgas,entity,verified,A,SRC-028,Not stated,2026-09-29,smartexploit,en,,1996-2026,6eac8ce08ba0353b4a56067a6ddc6b141c6a0792311a18d29fe3e16959e799ec,yes,
+lga-ikole,02_LGAs/lga-ikole.md,lgas,entity,verified,A,SRC-028,Not stated,2026-09-29,smartexploit,en,,1996-2026,dd00be7f04389d575d8b397292f9c046ca39eaacd448b26d9c32a45852c51cf1,yes,
+lga-ilejemeje,02_LGAs/lga-ilejemeje.md,lgas,entity,verified,A,SRC-028,Not stated,2026-09-29,smartexploit,en,,1996-2026,45705933297162f6b2ac174ed14776a22b97cfb1b7353298a0ef9d36b27cbd27,yes,
+lga-irepodun-ifelodun,02_LGAs/lga-irepodun-ifelodun.md,lgas,entity,verified,A,SRC-028,Not stated,2026-09-29,smartexploit,en,,1996-2026,f0e860fc6c01f71b8c43c404cadba8c54eb2f94cbc44a4acd313ffbfd871f5a3,yes,
+lga-ise-orun,02_LGAs/lga-ise-orun.md,lgas,entity,verified,A,SRC-028,Not stated,2026-09-29,smartexploit,en,,1996-2026,8bad99b9de8f8a037210777ae8ff4b16f22745ad54bef4460820cff7f89108a7,yes,
+lga-moba,02_LGAs/lga-moba.md,lgas,entity,verified,A,SRC-028,Not stated,2026-09-29,smartexploit,en,,1996-2026,cc88b00bbc488c35b4af99dd953befefb9b4bbdcc81c26d7ea6043268a169620,yes,
+lga-oye,02_LGAs/lga-oye.md,lgas,entity,verified,A,SRC-028,Not stated,2026-09-29,smartexploit,en,,1996-2026,bc7b3fe220a111ffb37305448a96ccf89e13954d5d1b4ecbc853c7c697bf2274,yes,
 04-tourism-abanijorin-rocks-cave,04_Tourism/abanijorin-rocks-cave.md,tourism,,needs_review,,,null,2026-09-23,,,,,39d3c51036dfd31b4b0fbdf8c020ace37cf95f4b4ca844ebae5536746a1cb89d,no,has errors
 04-tourism-arinta-waterfall,04_Tourism/arinta-waterfall.md,tourism,,needs_review,,,null,2026-09-23,,,,,2cd93300378efd66c1106133f07ed72ae3c41de7a7616d26e3a04cac42396272,no,has errors
 04-tourism-egbe-dam,04_Tourism/egbe-dam.md,tourism,,needs_review,,,null,2026-09-23,,,,,36ff0d0ddbe5037b7aeab850abd65a35b47c993cc6d95bdd798a57a4d9748f00,no,has errors

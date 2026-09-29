@@ -1,6 +1,6 @@
 {
   "audit_date": "2026-09-29",
-  "working_tree_base": "991ce41a9b65840f18e27805c11cd3009cf8556e",
+  "working_tree_base": "2a685da2e03a688d182107a6b2278ef2e75215fe",
   "scope": "Working tree; links are extracted candidates, not verified evidence or new source IDs.",
   "summary": {
     "parsed_documents": 82,
@@ -12,16 +12,17 @@
       "likely_support_file": 45,
       "malformed_frontmatter": 7
     },
-    "verified_documents": 0,
-    "ingestible_documents": 0,
+    "verified_documents": 17,
+    "ingestible_documents": 17,
     "source_records": 46,
     "source_status_counts": {
-      "Not started": 41,
+      "Verified": 2,
+      "Not started": 39,
       "Needs review": 2,
       "Conflict": 2,
       "Blocked": 1
     },
-    "unique_candidate_urls": 231,
+    "unique_candidate_urls": 214,
     "urls_without_exact_registry_match": 210
   },
   "documents": [
@@ -302,7 +303,7 @@
       "classification": "kb_document",
       "id": "history-state-creation-1996",
       "legacy_doc_id": null,
-      "kb_status": "draft",
+      "kb_status": "verified",
       "author_verification_label": null,
       "metadata_errors": [],
       "metadata_warnings": [],
@@ -315,10 +316,7 @@
       "candidate_source_urls": [
         "https://www.ekitistate.gov.ng/archives/23334"
       ],
-      "remaining_actions": [
-        "KB document approval is not recorded.",
-        "SRC-001: source approval is not recorded as Verified."
-      ]
+      "remaining_actions": []
     },
     {
       "path": "02_LGAs/README.md",
@@ -343,422 +341,320 @@
       "classification": "kb_document",
       "id": "lga-ado-ekiti",
       "legacy_doc_id": null,
-      "kb_status": "draft",
+      "kb_status": "verified",
       "author_verification_label": null,
       "metadata_errors": [],
       "metadata_warnings": [],
       "source_ids": [
-        "SRC-028",
-        "SRC-029"
+        "SRC-028"
       ],
       "source_reference_files": [
         "02_LGAs/lga-ado-ekiti.md"
       ],
       "candidate_source_urls": [
-        "https://www.ekitistate.gov.ng/about-ekiti/local-government",
-        "https://www.latlong.net/place/ado-ekiti-nigeria-24847.html"
+        "https://www.ekitistate.gov.ng/about-ekiti/local-government"
       ],
-      "remaining_actions": [
-        "KB document approval is not recorded.",
-        "SRC-028: source approval is not recorded as Verified.",
-        "SRC-029: source approval is not recorded as Verified."
-      ]
+      "remaining_actions": []
     },
     {
       "path": "02_LGAs/lga-aiyekire.md",
       "classification": "kb_document",
       "id": "lga-aiyekire",
       "legacy_doc_id": null,
-      "kb_status": "draft",
+      "kb_status": "verified",
       "author_verification_label": null,
       "metadata_errors": [],
       "metadata_warnings": [],
       "source_ids": [
-        "SRC-028",
-        "SRC-035"
+        "SRC-028"
       ],
       "source_reference_files": [
         "02_LGAs/lga-aiyekire.md"
       ],
       "candidate_source_urls": [
-        "https://www.ekitistate.gov.ng/about-ekiti/local-government",
-        "https://www.geonames.org/search.html?q=Ode-Ekiti&country=NG"
+        "https://www.ekitistate.gov.ng/about-ekiti/local-government"
       ],
-      "remaining_actions": [
-        "KB document approval is not recorded.",
-        "SRC-028: source approval is not recorded as Verified.",
-        "SRC-035: source approval is not recorded as Verified."
-      ]
+      "remaining_actions": []
     },
     {
       "path": "02_LGAs/lga-efon.md",
       "classification": "kb_document",
       "id": "lga-efon",
       "legacy_doc_id": null,
-      "kb_status": "draft",
+      "kb_status": "verified",
       "author_verification_label": null,
       "metadata_errors": [],
       "metadata_warnings": [],
       "source_ids": [
-        "SRC-028",
-        "SRC-030"
+        "SRC-028"
       ],
       "source_reference_files": [
         "02_LGAs/lga-efon.md"
       ],
       "candidate_source_urls": [
-        "https://www.ekitistate.gov.ng/about-ekiti/local-government",
-        "https://www.geodatos.net/en/coordinates/nigeria/efon-alaaye"
+        "https://www.ekitistate.gov.ng/about-ekiti/local-government"
       ],
-      "remaining_actions": [
-        "KB document approval is not recorded.",
-        "SRC-028: source approval is not recorded as Verified.",
-        "SRC-030: source approval is not recorded as Verified."
-      ]
+      "remaining_actions": []
     },
     {
       "path": "02_LGAs/lga-ekiti-east.md",
       "classification": "kb_document",
       "id": "lga-ekiti-east",
       "legacy_doc_id": null,
-      "kb_status": "draft",
+      "kb_status": "verified",
       "author_verification_label": null,
       "metadata_errors": [],
       "metadata_warnings": [],
       "source_ids": [
-        "SRC-028",
-        "SRC-031"
+        "SRC-028"
       ],
       "source_reference_files": [
         "02_LGAs/lga-ekiti-east.md"
       ],
       "candidate_source_urls": [
-        "https://www.ekitistate.gov.ng/about-ekiti/local-government",
-        "https://www.mindat.org/feature-2325727.html"
+        "https://www.ekitistate.gov.ng/about-ekiti/local-government"
       ],
-      "remaining_actions": [
-        "KB document approval is not recorded.",
-        "SRC-028: source approval is not recorded as Verified.",
-        "SRC-031: source approval is not recorded as Verified."
-      ]
+      "remaining_actions": []
     },
     {
       "path": "02_LGAs/lga-ekiti-south-west.md",
       "classification": "kb_document",
       "id": "lga-ekiti-south-west",
       "legacy_doc_id": null,
-      "kb_status": "draft",
+      "kb_status": "verified",
       "author_verification_label": null,
       "metadata_errors": [],
       "metadata_warnings": [],
       "source_ids": [
-        "SRC-028",
-        "SRC-032"
+        "SRC-028"
       ],
       "source_reference_files": [
         "02_LGAs/lga-ekiti-south-west.md"
       ],
       "candidate_source_urls": [
-        "https://www.ekitistate.gov.ng/about-ekiti/local-government",
-        "https://www.geonames.org/search.html?q=Ilawe-Ekiti&country=NG"
+        "https://www.ekitistate.gov.ng/about-ekiti/local-government"
       ],
-      "remaining_actions": [
-        "KB document approval is not recorded.",
-        "SRC-028: source approval is not recorded as Verified.",
-        "SRC-032: source approval is not recorded as Verified."
-      ]
+      "remaining_actions": []
     },
     {
       "path": "02_LGAs/lga-ekiti-west.md",
       "classification": "kb_document",
       "id": "lga-ekiti-west",
       "legacy_doc_id": null,
-      "kb_status": "draft",
+      "kb_status": "verified",
       "author_verification_label": null,
       "metadata_errors": [],
       "metadata_warnings": [],
       "source_ids": [
-        "SRC-028",
-        "SRC-033"
+        "SRC-028"
       ],
       "source_reference_files": [
         "02_LGAs/lga-ekiti-west.md"
       ],
       "candidate_source_urls": [
-        "https://www.ekitistate.gov.ng/about-ekiti/local-government",
-        "https://www.geonames.org/search.html?q=Aramoko-Ekiti&country=NG"
+        "https://www.ekitistate.gov.ng/about-ekiti/local-government"
       ],
-      "remaining_actions": [
-        "KB document approval is not recorded.",
-        "SRC-028: source approval is not recorded as Verified.",
-        "SRC-033: source approval is not recorded as Verified."
-      ]
+      "remaining_actions": []
     },
     {
       "path": "02_LGAs/lga-emure.md",
       "classification": "kb_document",
       "id": "lga-emure",
       "legacy_doc_id": null,
-      "kb_status": "draft",
+      "kb_status": "verified",
       "author_verification_label": null,
       "metadata_errors": [],
       "metadata_warnings": [],
       "source_ids": [
-        "SRC-028",
-        "SRC-034"
+        "SRC-028"
       ],
       "source_reference_files": [
         "02_LGAs/lga-emure.md"
       ],
       "candidate_source_urls": [
-        "https://www.ekitistate.gov.ng/about-ekiti/local-government",
-        "https://www.geonames.org/search.html?q=Emure-Ekiti&country=NG"
+        "https://www.ekitistate.gov.ng/about-ekiti/local-government"
       ],
-      "remaining_actions": [
-        "KB document approval is not recorded.",
-        "SRC-028: source approval is not recorded as Verified.",
-        "SRC-034: source approval is not recorded as Verified."
-      ]
+      "remaining_actions": []
     },
     {
       "path": "02_LGAs/lga-ido-osi.md",
       "classification": "kb_document",
       "id": "lga-ido-osi",
       "legacy_doc_id": null,
-      "kb_status": "draft",
+      "kb_status": "verified",
       "author_verification_label": null,
       "metadata_errors": [],
       "metadata_warnings": [],
       "source_ids": [
-        "SRC-028",
-        "SRC-036"
+        "SRC-028"
       ],
       "source_reference_files": [
         "02_LGAs/lga-ido-osi.md"
       ],
       "candidate_source_urls": [
-        "https://www.ekitistate.gov.ng/about-ekiti/local-government",
-        "https://www.geonames.org/search.html?q=Ido-Ekiti&country=NG"
+        "https://www.ekitistate.gov.ng/about-ekiti/local-government"
       ],
-      "remaining_actions": [
-        "KB document approval is not recorded.",
-        "SRC-028: source approval is not recorded as Verified.",
-        "SRC-036: source approval is not recorded as Verified."
-      ]
+      "remaining_actions": []
     },
     {
       "path": "02_LGAs/lga-ijero.md",
       "classification": "kb_document",
       "id": "lga-ijero",
       "legacy_doc_id": null,
-      "kb_status": "draft",
+      "kb_status": "verified",
       "author_verification_label": null,
       "metadata_errors": [],
       "metadata_warnings": [],
       "source_ids": [
-        "SRC-028",
-        "SRC-037"
+        "SRC-028"
       ],
       "source_reference_files": [
         "02_LGAs/lga-ijero.md"
       ],
       "candidate_source_urls": [
-        "https://www.ekitistate.gov.ng/about-ekiti/local-government",
-        "https://www.geonames.org/search.html?q=Ijero-Ekiti&country=NG"
+        "https://www.ekitistate.gov.ng/about-ekiti/local-government"
       ],
-      "remaining_actions": [
-        "KB document approval is not recorded.",
-        "SRC-028: source approval is not recorded as Verified.",
-        "SRC-037: source approval is not recorded as Verified."
-      ]
+      "remaining_actions": []
     },
     {
       "path": "02_LGAs/lga-ikere.md",
       "classification": "kb_document",
       "id": "lga-ikere",
       "legacy_doc_id": null,
-      "kb_status": "draft",
+      "kb_status": "verified",
       "author_verification_label": null,
       "metadata_errors": [],
       "metadata_warnings": [],
       "source_ids": [
-        "SRC-028",
-        "SRC-038"
+        "SRC-028"
       ],
       "source_reference_files": [
         "02_LGAs/lga-ikere.md"
       ],
       "candidate_source_urls": [
-        "https://www.ekitistate.gov.ng/about-ekiti/local-government",
-        "https://www.geonames.org/search.html?q=Ikere-Ekiti&country=NG"
+        "https://www.ekitistate.gov.ng/about-ekiti/local-government"
       ],
-      "remaining_actions": [
-        "KB document approval is not recorded.",
-        "SRC-028: source approval is not recorded as Verified.",
-        "SRC-038: source approval is not recorded as Verified."
-      ]
+      "remaining_actions": []
     },
     {
       "path": "02_LGAs/lga-ikole.md",
       "classification": "kb_document",
       "id": "lga-ikole",
       "legacy_doc_id": null,
-      "kb_status": "draft",
+      "kb_status": "verified",
       "author_verification_label": null,
       "metadata_errors": [],
       "metadata_warnings": [],
       "source_ids": [
-        "SRC-028",
-        "SRC-039"
+        "SRC-028"
       ],
       "source_reference_files": [
         "02_LGAs/lga-ikole.md"
       ],
       "candidate_source_urls": [
-        "https://www.ekitistate.gov.ng/about-ekiti/local-government",
-        "https://www.geonames.org/search.html?q=Ikole-Ekiti&country=NG"
+        "https://www.ekitistate.gov.ng/about-ekiti/local-government"
       ],
-      "remaining_actions": [
-        "KB document approval is not recorded.",
-        "SRC-028: source approval is not recorded as Verified.",
-        "SRC-039: source approval is not recorded as Verified."
-      ]
+      "remaining_actions": []
     },
     {
       "path": "02_LGAs/lga-ilejemeje.md",
       "classification": "kb_document",
       "id": "lga-ilejemeje",
       "legacy_doc_id": null,
-      "kb_status": "draft",
+      "kb_status": "verified",
       "author_verification_label": null,
       "metadata_errors": [],
       "metadata_warnings": [],
       "source_ids": [
-        "SRC-028",
-        "SRC-040"
+        "SRC-028"
       ],
       "source_reference_files": [
         "02_LGAs/lga-ilejemeje.md"
       ],
       "candidate_source_urls": [
-        "https://www.ekitistate.gov.ng/about-ekiti/local-government",
-        "https://www.geonames.org/search.html?q=Eda-Oniyo-Ekiti&country=NG"
+        "https://www.ekitistate.gov.ng/about-ekiti/local-government"
       ],
-      "remaining_actions": [
-        "KB document approval is not recorded.",
-        "SRC-028: source approval is not recorded as Verified.",
-        "SRC-040: source approval is not recorded as Verified."
-      ]
+      "remaining_actions": []
     },
     {
       "path": "02_LGAs/lga-irepodun-ifelodun.md",
       "classification": "kb_document",
       "id": "lga-irepodun-ifelodun",
       "legacy_doc_id": null,
-      "kb_status": "draft",
+      "kb_status": "verified",
       "author_verification_label": null,
       "metadata_errors": [],
       "metadata_warnings": [],
       "source_ids": [
-        "SRC-028",
-        "SRC-041",
-        "SRC-042"
+        "SRC-028"
       ],
       "source_reference_files": [
         "02_LGAs/lga-irepodun-ifelodun.md"
       ],
       "candidate_source_urls": [
-        "https://www.ekitistate.gov.ng/about-ekiti/local-government",
-        "https://www.futa.edu.ng/home/newsd/1419",
-        "https://www.geonames.org/search.html?q=Igede-Ekiti&country=NG"
+        "https://www.ekitistate.gov.ng/about-ekiti/local-government"
       ],
-      "remaining_actions": [
-        "KB document approval is not recorded.",
-        "SRC-028: source approval is not recorded as Verified.",
-        "SRC-041: source approval is not recorded as Verified.",
-        "SRC-042: source approval is not recorded as Verified."
-      ]
+      "remaining_actions": []
     },
     {
       "path": "02_LGAs/lga-ise-orun.md",
       "classification": "kb_document",
       "id": "lga-ise-orun",
       "legacy_doc_id": null,
-      "kb_status": "draft",
+      "kb_status": "verified",
       "author_verification_label": null,
       "metadata_errors": [],
       "metadata_warnings": [],
       "source_ids": [
-        "SRC-028",
-        "SRC-043"
+        "SRC-028"
       ],
       "source_reference_files": [
         "02_LGAs/lga-ise-orun.md"
       ],
       "candidate_source_urls": [
-        "https://www.ekitistate.gov.ng/about-ekiti/local-government",
-        "https://www.geonames.org/search.html?q=Ise-Ekiti&country=NG"
+        "https://www.ekitistate.gov.ng/about-ekiti/local-government"
       ],
-      "remaining_actions": [
-        "KB document approval is not recorded.",
-        "SRC-028: source approval is not recorded as Verified.",
-        "SRC-043: source approval is not recorded as Verified."
-      ]
+      "remaining_actions": []
     },
     {
       "path": "02_LGAs/lga-moba.md",
       "classification": "kb_document",
       "id": "lga-moba",
       "legacy_doc_id": null,
-      "kb_status": "draft",
+      "kb_status": "verified",
       "author_verification_label": null,
       "metadata_errors": [],
       "metadata_warnings": [],
       "source_ids": [
-        "SRC-028",
-        "SRC-044"
+        "SRC-028"
       ],
       "source_reference_files": [
         "02_LGAs/lga-moba.md"
       ],
       "candidate_source_urls": [
-        "https://www.ekitistate.gov.ng/about-ekiti/local-government",
-        "https://www.geonames.org/search.html?q=Otun-Ekiti&country=NG"
+        "https://www.ekitistate.gov.ng/about-ekiti/local-government"
       ],
-      "remaining_actions": [
-        "KB document approval is not recorded.",
-        "SRC-028: source approval is not recorded as Verified.",
-        "SRC-044: source approval is not recorded as Verified."
-      ]
+      "remaining_actions": []
     },
     {
       "path": "02_LGAs/lga-oye.md",
       "classification": "kb_document",
       "id": "lga-oye",
       "legacy_doc_id": null,
-      "kb_status": "draft",
+      "kb_status": "verified",
       "author_verification_label": null,
       "metadata_errors": [],
       "metadata_warnings": [],
       "source_ids": [
-        "SRC-028",
-        "SRC-045",
-        "SRC-046"
+        "SRC-028"
       ],
       "source_reference_files": [
         "02_LGAs/lga-oye.md"
       ],
       "candidate_source_urls": [
-        "https://www.ekitistate.gov.ng/about-ekiti/local-government",
-        "https://www.ekspoly.edu.ng/",
-        "https://www.geonames.org/search.html?q=Oye-Ekiti&country=NG"
+        "https://www.ekitistate.gov.ng/about-ekiti/local-government"
       ],
-      "remaining_actions": [
-        "KB document approval is not recorded.",
-        "SRC-028: source approval is not recorded as Verified.",
-        "SRC-045: source approval is not recorded as Verified.",
-        "SRC-046: source approval is not recorded as Verified."
-      ]
+      "remaining_actions": []
     },
     {
       "path": "02_LGAs/media/README.md",
@@ -7212,7 +7108,6 @@
     {
       "url": "https://www.ekspoly.edu.ng/",
       "referencing_documents": [
-        "02_LGAs/lga-oye.md",
         "06_Education/institutions/ekspoly-isan-ekiti/metadata.md"
       ],
       "exact_registry_matches": [
@@ -7247,156 +7142,6 @@
       "action": "Check source relevance, existing aliases, and register if appropriate"
     },
     {
-      "url": "https://www.futa.edu.ng/home/newsd/1419",
-      "referencing_documents": [
-        "02_LGAs/lga-irepodun-ifelodun.md"
-      ],
-      "exact_registry_matches": [
-        "SRC-042"
-      ],
-      "action": "Review existing source approval"
-    },
-    {
-      "url": "https://www.geodatos.net/en/coordinates/nigeria/efon-alaaye",
-      "referencing_documents": [
-        "02_LGAs/lga-efon.md"
-      ],
-      "exact_registry_matches": [
-        "SRC-030"
-      ],
-      "action": "Review existing source approval"
-    },
-    {
-      "url": "https://www.geonames.org/search.html?q=Aramoko-Ekiti&country=NG",
-      "referencing_documents": [
-        "02_LGAs/lga-ekiti-west.md"
-      ],
-      "exact_registry_matches": [
-        "SRC-033"
-      ],
-      "action": "Review existing source approval"
-    },
-    {
-      "url": "https://www.geonames.org/search.html?q=Eda-Oniyo-Ekiti&country=NG",
-      "referencing_documents": [
-        "02_LGAs/lga-ilejemeje.md"
-      ],
-      "exact_registry_matches": [
-        "SRC-040"
-      ],
-      "action": "Review existing source approval"
-    },
-    {
-      "url": "https://www.geonames.org/search.html?q=Emure-Ekiti&country=NG",
-      "referencing_documents": [
-        "02_LGAs/lga-emure.md"
-      ],
-      "exact_registry_matches": [
-        "SRC-034"
-      ],
-      "action": "Review existing source approval"
-    },
-    {
-      "url": "https://www.geonames.org/search.html?q=Ido-Ekiti&country=NG",
-      "referencing_documents": [
-        "02_LGAs/lga-ido-osi.md"
-      ],
-      "exact_registry_matches": [
-        "SRC-036"
-      ],
-      "action": "Review existing source approval"
-    },
-    {
-      "url": "https://www.geonames.org/search.html?q=Igede-Ekiti&country=NG",
-      "referencing_documents": [
-        "02_LGAs/lga-irepodun-ifelodun.md"
-      ],
-      "exact_registry_matches": [
-        "SRC-041"
-      ],
-      "action": "Review existing source approval"
-    },
-    {
-      "url": "https://www.geonames.org/search.html?q=Ijero-Ekiti&country=NG",
-      "referencing_documents": [
-        "02_LGAs/lga-ijero.md"
-      ],
-      "exact_registry_matches": [
-        "SRC-037"
-      ],
-      "action": "Review existing source approval"
-    },
-    {
-      "url": "https://www.geonames.org/search.html?q=Ikere-Ekiti&country=NG",
-      "referencing_documents": [
-        "02_LGAs/lga-ikere.md"
-      ],
-      "exact_registry_matches": [
-        "SRC-038"
-      ],
-      "action": "Review existing source approval"
-    },
-    {
-      "url": "https://www.geonames.org/search.html?q=Ikole-Ekiti&country=NG",
-      "referencing_documents": [
-        "02_LGAs/lga-ikole.md"
-      ],
-      "exact_registry_matches": [
-        "SRC-039"
-      ],
-      "action": "Review existing source approval"
-    },
-    {
-      "url": "https://www.geonames.org/search.html?q=Ilawe-Ekiti&country=NG",
-      "referencing_documents": [
-        "02_LGAs/lga-ekiti-south-west.md"
-      ],
-      "exact_registry_matches": [
-        "SRC-032"
-      ],
-      "action": "Review existing source approval"
-    },
-    {
-      "url": "https://www.geonames.org/search.html?q=Ise-Ekiti&country=NG",
-      "referencing_documents": [
-        "02_LGAs/lga-ise-orun.md"
-      ],
-      "exact_registry_matches": [
-        "SRC-043"
-      ],
-      "action": "Review existing source approval"
-    },
-    {
-      "url": "https://www.geonames.org/search.html?q=Ode-Ekiti&country=NG",
-      "referencing_documents": [
-        "02_LGAs/lga-aiyekire.md"
-      ],
-      "exact_registry_matches": [
-        "SRC-035"
-      ],
-      "action": "Review existing source approval"
-    },
-    {
-      "url": "https://www.geonames.org/search.html?q=Otun-Ekiti&country=NG",
-      "referencing_documents": [
-        "02_LGAs/lga-moba.md"
-      ],
-      "exact_registry_matches": [
-        "SRC-044"
-      ],
-      "action": "Review existing source approval"
-    },
-    {
-      "url": "https://www.geonames.org/search.html?q=Oye-Ekiti&country=NG",
-      "referencing_documents": [
-        "02_LGAs/lga-oye.md"
-      ],
-      "exact_registry_matches": [
-        "SRC-045"
-      ],
-      "action": "Review existing source approval"
-    },
-    {
       "url": "https://www.ikogosiresort.com/history-of-the-resort-1952/",
       "referencing_documents": [
         "01_History/EKITI30_History_Storytelling_Draft_v2 (1).md",
@@ -7415,16 +7160,6 @@
       "action": "Check source relevance, existing aliases, and register if appropriate"
     },
     {
-      "url": "https://www.latlong.net/place/ado-ekiti-nigeria-24847.html",
-      "referencing_documents": [
-        "02_LGAs/lga-ado-ekiti.md"
-      ],
-      "exact_registry_matches": [
-        "SRC-029"
-      ],
-      "action": "Review existing source approval"
-    },
-    {
       "url": "https://www.legit.ng/politics/1715377-ekiti-election-2026-live-update-news-latest-developments/",
       "referencing_documents": [
         "01_History/EKITI30_History_Storytelling_Draft_v2 (1).md",
@@ -7441,16 +7176,6 @@
       ],
       "exact_registry_matches": [],
       "action": "Check source relevance, existing aliases, and register if appropriate"
-    },
-    {
-      "url": "https://www.mindat.org/feature-2325727.html",
-      "referencing_documents": [
-        "02_LGAs/lga-ekiti-east.md"
-      ],
-      "exact_registry_matches": [
-        "SRC-031"
-      ],
-      "action": "Review existing source approval"
     },
     {
       "url": "https://www.nairaland.com/6572906/overview-ekiti-states-ikun-dairy",
