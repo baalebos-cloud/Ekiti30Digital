@@ -61,6 +61,13 @@ class TimelineEvent(Base):
     additional_sources: Mapped[str | None] = mapped_column(Text)
 
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
+    # When the row last changed (UTC), by any route: admin edit, admin
+    # import, or the CLI script.
     updated_at: Mapped[datetime] = mapped_column(
         DateTime, server_default=func.now(), onupdate=func.now()
     )
+    # Email from the verified admin token of whoever last changed the row
+    # through the admin API. Never taken from the request. None means the
+    # last change came from outside the admin API (the CLI ingestion script
+    # or the initial load), which has no verified identity.
+    updated_by: Mapped[str | None]

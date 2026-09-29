@@ -8,6 +8,8 @@ pgvector==0.5.0
 sentence-transformers==6.1.0
 alembic==1.20.0
 PyJWT==2.15.0
+# Needed by FastAPI for multipart uploads (admin CSV import).
+python-multipart==0.0.32
 passlib==1.7.4
 # Held at 4.0.1: later releases break passlib 1.7.4 (see app/core/passwords.py).
 bcrypt==4.0.1

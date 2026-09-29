@@ -44,3 +44,7 @@ Proposal for alignment with PR #9 (`VERIFIED`, `ATTRIBUTED`, `NEEDS_EVIDENCE`, `
 - Nothing from a personal account is in this dataset. Personal and citizen accounts belong in the citizen-stories workflow (issue #8).
 - Traditional history (for example the c. 1310 AD origin of Udiroko) appears only in `claims_and_disputes`, labelled as a traditional account.
 - Money figures and forecasts published by governments are recorded as claims, not as verified facts.
+
+## Source of truth
+
+As of the admin content editor (see PR for feature/admin-content-editing), the live database is the source of truth for day-to-day corrections. The CSV remains the source of truth for bulk research updates and verification_status changes, and re-importing it will overwrite any live-only edits to other fields on the rows it touches (see the --force behavior in scripts/ingest_lgas.py / ingest_timeline.py).

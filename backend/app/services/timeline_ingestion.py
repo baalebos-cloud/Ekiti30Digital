@@ -1,19 +1,30 @@
 """Timeline dataset ingestion.
 
-Loads 03_Timeline/EKITI30_Timeline_Events_1996-2026.csv, validates it, and
-upserts TimelineEvent rows by the dataset's own id (e.g. "EK-001"). Values
-are stored as the source has them (see app/models/timeline_event.py);
-nothing here changes verification_status.
+Source of truth: as of the admin content editor (see PR for
+feature/admin-content-editing), the live database is the source of truth for
+day-to-day corrections. The CSV remains the source of truth for bulk research
+updates and verification_status changes, and re-importing it will overwrite
+any live-only edits to other fields on the rows it touches (see the --force
+behavior in scripts/ingest_lgas.py / ingest_timeline.py).
+
+Loads timeline rows from CSV (03_Timeline/EKITI30_Timeline_Events_1996-2026.csv,
+or an admin upload), validates them, and upserts TimelineEvent rows by the
+dataset's own id (e.g. "EK-001"). The one implementation used by
+scripts/ingest_timeline.py, the admin import endpoint, and admin create/edit
+(via validate_rows / row_values). Values are stored as the source has them
+(see app/models/timeline_event.py); nothing here changes verification_status.
 """
 
 import csv
 import logging
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
+from typing import IO
 
 from sqlalchemy.orm import Session
 
 from app.models.timeline_event import VERIFICATION_STATUSES, TimelineEvent
+from app.services.attribution import is_admin_attribution
 
 logger = logging.getLogger(__name__)
 
@@ -21,7 +32,7 @@ logger = logging.getLogger(__name__)
 NONE = "none"
 
 # Must be present, and not "none", on every row.
-_REQUIRED_FIELDS = (
+REQUIRED_FIELDS = (
     "id",
     "date_display",
     "date_start",
@@ -33,7 +44,7 @@ _REQUIRED_FIELDS = (
 )
 
 # Optional columns copied onto the model unchanged (empty -> None).
-_OPTIONAL_FIELDS = (
+OPTIONAL_FIELDS = (
     "date_end",
     "date_precision",
     "date_basis",
@@ -46,6 +57,9 @@ _OPTIONAL_FIELDS = (
     "notes_limitations",
     "additional_sources",
 )
+
+# Every column an edit can set. `id` is the key, so it isn't editable.
+EDITABLE_FIELDS = REQUIRED_FIELDS[1:] + OPTIONAL_FIELDS
 
 # date_start / date_end precisions: YYYY, YYYY-MM or YYYY-MM-DD.
 _ISO_FORMATS = {4: "%Y", 7: "%Y-%m", 10: "%Y-%m-%d"}
@@ -61,27 +75,54 @@ class SkippedRow:
 
 
 @dataclass
-class IngestionResult:
-    """Outcome of an ingest_timeline() run."""
+class AdminEdit:
+    """A row the CSV would change that was last changed by an admin."""
 
-    created: int = 0
-    updated: int = 0
+    key: str
+    updated_by: str
+
+
+@dataclass
+class IngestionResult:
+    """Outcome of an ingest_timeline() run (or, with dry_run, what it would do)."""
+
+    created: list[str] = field(default_factory=list)
+    updated: list[str] = field(default_factory=list)
+    # Valid rows identical to what's stored: left alone, not re-stamped.
+    unchanged: list[str] = field(default_factory=list)
     skipped: list[SkippedRow] = field(default_factory=list)
+    # Changed rows whose last change was an admin's. Overwritten (and also
+    # listed in `updated`) unless protect_admin_edits held them back.
+    admin_edited: list[AdminEdit] = field(default_factory=list)
+    # With protect_admin_edits: the admin-edited rows left untouched.
+    held_back: list[AdminEdit] = field(default_factory=list)
 
     @property
     def ingested(self) -> int:
-        return self.created + self.updated
+        return len(self.created) + len(self.updated)
 
 
-def load_csv(csv_path: str) -> list[dict]:
-    """Read the timeline CSV. No validation happens here — see validate_rows()."""
-    # utf-8-sig: tolerate a byte-order mark if the file is re-saved in Excel.
-    with open(csv_path, newline="", encoding="utf-8-sig") as f:
-        return list(csv.DictReader(f))
+def read_csv(source: str | IO[str]) -> list[dict]:
+    """Read timeline rows from a path or an open text stream. No validation here."""
+    if isinstance(source, str):
+        # utf-8-sig: tolerate a byte-order mark if the file is re-saved in Excel.
+        with open(source, newline="", encoding="utf-8-sig") as f:
+            return list(csv.DictReader(f))
+    return list(csv.DictReader(source))
 
 
-def _clean(value: str | None) -> str | None:
-    value = (value or "").strip()
+# The CLI's original name for read_csv.
+load_csv = read_csv
+
+
+def missing_columns(rows: list[dict]) -> list[str]:
+    """Required columns absent from the CSV header (e.g. the wrong file)."""
+    header = set(rows[0]) if rows else set()
+    return [name for name in REQUIRED_FIELDS if name not in header]
+
+
+def _clean(value) -> str | None:
+    value = ("" if value is None else str(value)).strip()
     return value or None
 
 
@@ -120,7 +161,7 @@ def validate_rows(rows: list[dict]) -> tuple[list[dict], list[SkippedRow]]:
         event_id = _clean(row.get("id"))
 
         missing = [
-            f for f in _REQUIRED_FIELDS if (_clean(row.get(f)) or NONE).lower() == NONE
+            f for f in REQUIRED_FIELDS if (_clean(row.get(f)) or NONE).lower() == NONE
         ]
         if missing:
             skipped.append(
@@ -128,7 +169,7 @@ def validate_rows(rows: list[dict]) -> tuple[list[dict], list[SkippedRow]]:
             )
             continue
 
-        date_start = row["date_start"].strip()
+        date_start = _clean(row["date_start"])
         if not is_iso_partial_date(date_start):
             skipped.append(
                 SkippedRow(
@@ -151,7 +192,7 @@ def validate_rows(rows: list[dict]) -> tuple[list[dict], list[SkippedRow]]:
             )
             continue
 
-        status = row["verification_status"].strip()
+        status = _clean(row["verification_status"])
         if status not in VERIFICATION_STATUSES:
             skipped.append(
                 SkippedRow(
@@ -172,13 +213,59 @@ def validate_rows(rows: list[dict]) -> tuple[list[dict], list[SkippedRow]]:
     return valid, skipped
 
 
-def ingest_timeline(rows: list[dict], db_session: Session) -> IngestionResult:
+def row_values(row: dict) -> dict:
+    """The column values a validated row stores, keyed by model attribute."""
+    return {name: _clean(row.get(name)) for name in EDITABLE_FIELDS}
+
+
+def row_from_model(event: TimelineEvent) -> dict:
+    """A stored event as a CSV-shaped row, so an edit can be re-validated whole."""
+    row = {name: getattr(event, name) or "" for name in EDITABLE_FIELDS}
+    row["id"] = event.id
+    return row
+
+
+def _now() -> datetime:
+    # Stored naive in UTC, matching the other DateTime columns.
+    return datetime.now(timezone.utc).replace(tzinfo=None)
+
+
+def apply_values(event: TimelineEvent, values: dict, updated_by: str | None) -> None:
+    """Write values onto an event and record who changed it and when."""
+    for name, value in values.items():
+        setattr(event, name, value)
+    event.updated_by = updated_by
+    event.updated_at = _now()
+
+
+def changed_fields(event: TimelineEvent, values: dict) -> list[str]:
+    return [name for name, value in values.items() if getattr(event, name) != value]
+
+
+def ingest_timeline(
+    rows: list[dict],
+    db_session: Session,
+    *,
+    updated_by: str,
+    dry_run: bool = False,
+    protect_admin_edits: bool = False,
+) -> IngestionResult:
     """Validate CSV rows and upsert the valid ones into TimelineEvent, keyed by id.
 
-    Expects rows as returned by load_csv(). Re-running with the same CSV
-    updates rows in place rather than duplicating them. Rows no longer in
-    the CSV are left alone. Invalid rows are skipped rather than failing the
-    run; the result lists them with a reason.
+    Expects rows as returned by read_csv(). A row whose values all match
+    what's stored is counted as unchanged and not written, so re-running the
+    same CSV changes nothing. Rows no longer in the CSV are left alone.
+    Invalid rows are skipped rather than failing the run; the result lists
+    them with a reason.
+
+    Every created or changed row gets updated_by — the importing admin's
+    verified email, or the CLI's "cli:<user>" marker (see
+    app/services/attribution.py) — and updated_at.
+
+    Changed rows last changed by an admin are listed in admin_edited. With
+    protect_admin_edits (the CLI without --force) they are held back rather
+    than overwritten. With dry_run, nothing is written and the result says
+    what would happen.
     """
     valid_rows, skipped = validate_rows(rows)
     for row in skipped:
@@ -187,19 +274,30 @@ def ingest_timeline(rows: list[dict], db_session: Session) -> IngestionResult:
     result = IngestionResult(skipped=skipped)
 
     for row in valid_rows:
-        event_id = row["id"].strip()
+        event_id = _clean(row["id"])
+        values = row_values(row)
         event = db_session.get(TimelineEvent, event_id)
         if event is None:
-            event = TimelineEvent(id=event_id)
-            db_session.add(event)
-            result.created += 1
+            result.created.append(event_id)
+            if not dry_run:
+                event = TimelineEvent(id=event_id)
+                db_session.add(event)
+                apply_values(event, values, updated_by)
+        elif changed_fields(event, values):
+            if is_admin_attribution(event.updated_by):
+                edit = AdminEdit(event_id, event.updated_by)
+                result.admin_edited.append(edit)
+                if protect_admin_edits:
+                    result.held_back.append(edit)
+                    continue
+            result.updated.append(event_id)
+            if not dry_run:
+                apply_values(event, values, updated_by)
         else:
-            result.updated += 1
+            result.unchanged.append(event_id)
 
-        for name in _REQUIRED_FIELDS[1:]:
-            setattr(event, name, row[name].strip())
-        for name in _OPTIONAL_FIELDS:
-            setattr(event, name, _clean(row.get(name)))
-
-    db_session.commit()
+    if dry_run:
+        db_session.rollback()
+    else:
+        db_session.commit()
     return result

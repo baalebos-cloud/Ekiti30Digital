@@ -7,6 +7,9 @@ import pytest
 from app.models.lga import Lga
 from app.services.lga_ingestion import ingest_lgas, load_csv, slugify
 
+# What the CLI records as updated_by (see app/services/attribution.py).
+CLI = "cli:test"
+
 REAL_CSV = os.path.join(os.path.dirname(__file__), "..", "..", "02_LGAs", "ekiti_lgas.csv")
 
 
@@ -52,16 +55,16 @@ def test_slugify(name, slug):
 
 
 def test_real_csv_loads_all_16_lgas_as_pending(db_session):
-    result = ingest_lgas(load_csv(REAL_CSV), db_session)
+    result = ingest_lgas(load_csv(REAL_CSV), db_session, updated_by=CLI)
 
-    assert (result.created, result.updated, result.skipped) == (16, 0, [])
+    assert (len(result.created), len(result.updated), result.skipped) == (16, 0, [])
     assert db_session.query(Lga).count() == 16
     # Stored as the source has it — nothing is promoted to "Verified".
     assert {lga.verification_status for lga in db_session.query(Lga)} == {"Pending"}
 
 
 def test_ingest_stores_values_as_the_source_has_them(db_session):
-    ingest_lgas([make_row()], db_session)
+    ingest_lgas([make_row()], db_session, updated_by=CLI)
 
     lga = db_session.query(Lga).one()
     assert lga.slug == "ido-osi"
@@ -72,20 +75,21 @@ def test_ingest_stores_values_as_the_source_has_them(db_session):
 
 
 def test_rerunning_updates_in_place_without_duplicating(db_session):
-    ingest_lgas([make_row()], db_session)
-    result = ingest_lgas([make_row(headquarters="Changed", verification_status="Verified")], db_session)
+    ingest_lgas([make_row()], db_session, updated_by=CLI)
+    result = ingest_lgas([make_row(headquarters="Changed", verification_status="Verified")], db_session, updated_by=CLI)
 
-    assert (result.created, result.updated) == (0, 1)
+    assert (len(result.created), len(result.updated)) == (0, 1)
     lga = db_session.query(Lga).one()
     assert (lga.headquarters, lga.verification_status) == ("Changed", "Verified")
 
 
 def test_rerunning_the_real_csv_does_not_duplicate(db_session):
     rows = load_csv(REAL_CSV)
-    ingest_lgas(rows, db_session)
-    result = ingest_lgas(rows, db_session)
+    ingest_lgas(rows, db_session, updated_by=CLI)
+    result = ingest_lgas(rows, db_session, updated_by=CLI)
 
-    assert (result.created, result.updated) == (0, 16)
+    # Nothing changed, so nothing is rewritten or re-stamped.
+    assert (len(result.created), len(result.updated), len(result.unchanged)) == (0, 0, 16)
     assert db_session.query(Lga).count() == 16
 
 
@@ -101,9 +105,9 @@ def test_rerunning_the_real_csv_does_not_duplicate(db_session):
 )
 def test_bad_rows_are_skipped_and_reported(db_session, overrides, reason):
     good = make_row(lga_name="Moba")
-    result = ingest_lgas([good, make_row(**overrides)], db_session)
+    result = ingest_lgas([good, make_row(**overrides)], db_session, updated_by=CLI)
 
-    assert result.created == 1
+    assert len(result.created) == 1
     assert len(result.skipped) == 1
     assert result.skipped[0].line == 3
     assert reason in result.skipped[0].reason
@@ -112,9 +116,9 @@ def test_bad_rows_are_skipped_and_reported(db_session, overrides, reason):
 
 def test_rows_sharing_a_slug_are_all_skipped(db_session):
     # "Ido/Osi" and "Ido Osi" both slugify to "ido-osi".
-    result = ingest_lgas([make_row(), make_row(lga_name="Ido Osi")], db_session)
+    result = ingest_lgas([make_row(), make_row(lga_name="Ido Osi")], db_session, updated_by=CLI)
 
-    assert result.created == 0
+    assert len(result.created) == 0
     assert [s.reason for s in result.skipped] == ["duplicate slug 'ido-osi' in batch"] * 2
     assert db_session.query(Lga).count() == 0
 
@@ -123,7 +127,7 @@ def test_rows_sharing_a_slug_are_all_skipped(db_session):
 
 
 def test_list_lgas_returns_all_16_with_verification_status(client, db_session):
-    ingest_lgas(load_csv(REAL_CSV), db_session)
+    ingest_lgas(load_csv(REAL_CSV), db_session, updated_by=CLI)
 
     response = client.get("/api/lgas")
 
@@ -147,6 +151,7 @@ def test_list_lgas_item_shape(client, db_session):
             )
         ],
         db_session,
+        updated_by=CLI,
     )
 
     [lga] = client.get("/api/lgas").json()["lgas"]
