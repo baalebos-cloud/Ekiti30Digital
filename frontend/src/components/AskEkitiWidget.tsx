@@ -242,7 +242,8 @@ export function AskEkitiWidget() {
       <motion.button
         ref={fab}
         type="button"
-        className="ask-fab"
+        // is-idle: the soft pulse ring (globals.css) only while the panel is closed.
+        className={`ask-fab ${open ? "" : "is-idle"}`}
         aria-label={open ? "Close Ask Ekiti" : "Open Ask Ekiti"}
         aria-expanded={open}
         onClick={() => setOpen((o) => !o)}

@@ -559,6 +559,19 @@ footer.site-footer .wordmark { justify-content: flex-start; font-size: 18px; }
 .ask-fab:hover { background: color-mix(in srgb, var(--forest) 88%, var(--forest-2)); }
 .ask-fab:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--bg-warm), 0 0 0 7px color-mix(in srgb, var(--gold) 80%, transparent), 0 16px 32px -12px rgba(11, 107, 65, 0.6); }
 .ask-fab-label { font-weight: 600; font-size: 14px; color: #fff; }
+/* A soft gold ring that expands and fades around the closed button, so it's
+   easy to notice. The button itself doesn't move; the ring starts just outside
+   its gold outline (inset -4px) and grows its spread, which stays even around
+   the pill shape. Only while closed (.is-idle), paused on hover/focus, and
+   off entirely with reduced motion. */
+.ask-fab.is-idle::before { content: ""; position: absolute; inset: -4px; border-radius: inherit; pointer-events: none; animation: ask-fab-ping 3.2s ease-out infinite; }
+.ask-fab.is-idle:hover::before, .ask-fab.is-idle:focus-visible::before { animation: none; }
+/* Expands and fades over ~2s, then rests ~1.3s before the next ring. */
+@keyframes ask-fab-ping {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--gold) 50%, transparent); }
+  60%, 100% { box-shadow: 0 0 0 14px color-mix(in srgb, var(--gold) 0%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) { .ask-fab.is-idle::before { animation: none; } }
 @media (max-width: 520px) { .ask-fab-label { display: none; } .ask-fab { padding: 0; } }
 
 .ask-panel { position: fixed; right: calc(20px + env(safe-area-inset-right, 0px)); bottom: calc(88px + env(safe-area-inset-bottom, 0px)); z-index: 70; width: min(380px, calc(100vw - 32px)); height: min(540px, calc(100dvh - 120px)); display: flex; flex-direction: column; overflow: hidden; transform-origin: bottom right; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius-m); box-shadow: 0 30px 60px -20px rgba(34, 27, 18, 0.45); }
