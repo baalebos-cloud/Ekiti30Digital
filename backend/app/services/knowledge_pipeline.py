@@ -193,6 +193,9 @@ def local_embed(texts):
 def retrieve(question: str, db: Session, embed=local_embed, limit=5, category=None):
     if db.bind.dialect.name != "postgresql":
         raise RuntimeError("Ask Ekiti vector search requires PostgreSQL with pgvector")
+    if settings.ASK_EKITI_RETRIEVAL_MODE == "fulltext":
+        from app.services.knowledge_fulltext import retrieve_fulltext
+        return retrieve_fulltext(question, db, limit=limit, category=category)
     # An empty approved corpus should decline immediately, without downloading
     # or running the embedding model for a question that cannot be answered.
     eligible = select(KnowledgeDocument.id).where(KnowledgeDocument.ingestible.is_(True))
