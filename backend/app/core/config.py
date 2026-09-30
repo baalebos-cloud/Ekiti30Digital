@@ -6,6 +6,7 @@ elsewhere in the app.
 """
 
 from functools import lru_cache
+from typing import Literal
 
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -62,6 +63,9 @@ class Settings(BaseSettings):
     # self-hosted) rather than through the gateway. The model is
     # multilingual so Yoruba content embeds meaningfully.
     EMBEDDING_PROVIDER: str = "sentence-transformers"
+    # fulltext avoids loading an embedding model in the web process.
+    # Existing deployments retain vector mode until explicitly switched.
+    ASK_EKITI_RETRIEVAL_MODE: Literal["vector", "fulltext"] = "vector"
     EMBEDDING_MODEL: str = "paraphrase-multilingual-MiniLM-L12-v2"
 
     # Output dimension of EMBEDDING_MODEL (384 for

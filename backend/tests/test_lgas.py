@@ -180,6 +180,8 @@ def test_list_lgas_item_shape(client, db_session):
         "verificationStatus": "Pending",
         "limitations": "Coordinates require review",
         "owner": "Researcher",
+        # Only an admin upload sets it; ingestion never does.
+        "imageUrl": None,
     }
 
 

@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useAnimationControls } from "motion/react";
 import { useEffect, useId, useRef, useState } from "react";
 
 import { AuditLine } from "@/components/content-admin/AuditLine";
+import { LgaImageField } from "@/components/content-admin/LgaImageField";
 import { FieldError } from "@/components/ui/FieldError";
 import { Spinner } from "@/components/ui/Spinner";
 import {
@@ -12,9 +13,11 @@ import {
   NOUN,
   recordKey,
   recordTitle,
+  uploadLgaImage,
   type ContentAdminKind,
   type ContentRecord,
   type FieldDef,
+  type LgaRecord,
 } from "@/lib/contentAdmin";
 
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
@@ -28,8 +31,16 @@ type Props = {
   /** The record being edited, or null to create a new one. */
   record: ContentRecord | null;
   onCancel: () => void;
-  /** Called with the saved record (its key may have changed on an LGA rename). */
+  /**
+   * Called when everything saved, with the saved record and the key the list
+   * knew it by (null if new; LGA keys change on a rename). The editor closes.
+   */
   onSaved: (saved: ContentRecord, previousKey: string | null) => void;
+  /**
+   * Called when the record saved but its image didn't: the list updates, and
+   * the editor stays open with the error so the image can be retried.
+   */
+  onRecordChanged: (saved: ContentRecord, previousKey: string | null) => void;
 };
 
 function initialValues(kind: ContentAdminKind, record: ContentRecord | null): Record<string, string> {
@@ -44,12 +55,19 @@ function initialValues(kind: ContentAdminKind, record: ContentRecord | null): Re
   return values;
 }
 
-export function ContentEditor({ kind, record, onCancel, onSaved }: Props) {
+export function ContentEditor({ kind, record, onCancel, onSaved, onRecordChanged }: Props) {
   const formId = useId();
   const controls = useAnimationControls();
   const alertRef = useRef<HTMLDivElement>(null);
-  const original = initialValues(kind, record);
-  const [values, setValues] = useState(original);
+  // What's saved on the server. Starts as the record opened; becomes the
+  // saved one if a save succeeds but its image upload doesn't (the editor
+  // stays open, now editing that saved record).
+  const [persisted, setPersisted] = useState<ContentRecord | null>(record);
+  const original = initialValues(kind, persisted);
+  const [values, setValues] = useState(() => initialValues(kind, record));
+  // LGAs only: an image chosen but not uploaded yet, and its upload progress.
+  const [stagedImage, setStagedImage] = useState<File | null>(null);
+  const [imageProgress, setImageProgress] = useState<number | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
@@ -62,8 +80,9 @@ export function ContentEditor({ kind, record, onCancel, onSaved }: Props) {
     // Save sits at the bottom of a long form; bring the message to the admin.
     if (failTick && formError) alertRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
   }, [failTick, formError]);
-  const creating = record === null;
+  const creating = persisted === null;
   const fields = FIELD_GROUPS[kind].flatMap((g) => g.fields);
+  const hasImages = kind === "lgas";
 
   function setField(name: string, value: string) {
     setValues((v) => ({ ...v, [name]: value }));
@@ -127,19 +146,47 @@ export function ContentEditor({ kind, record, onCancel, onSaved }: Props) {
           .filter((f) => !f.createOnly && values[f.name].trim() !== original[f.name].trim())
           .map((f) => [f.name, toPayloadValue(f, values[f.name])]),
       );
-      if (Object.keys(payload).length === 0) {
+      if (Object.keys(payload).length === 0 && !stagedImage) {
         setNotice("Nothing has changed yet.");
         return;
       }
     }
 
+    // The key the list knows this record by (null: not in the list yet).
+    const listKey = persisted ? recordKey(kind, persisted) : null;
     setBusy(true);
-    const result = creating
-      ? await contentApi.create(kind, payload)
-      : await contentApi.update(kind, recordKey(kind, record), payload);
+
+    // 1. The record itself (skipped when only a new image was chosen).
+    let saved: ContentRecord | null = persisted;
+    if (creating || Object.keys(payload).length > 0) {
+      const result = creating
+        ? await contentApi.create(kind, payload)
+        : await contentApi.update(kind, recordKey(kind, persisted), payload);
+      if (!result.ok) {
+        setBusy(false);
+        return fail(result.message);
+      }
+      saved = result.data;
+    }
+
+    // 2. Then its image, once the LGA exists (POST .../lgas/{slug}/image).
+    if (hasImages && stagedImage && saved) {
+      setImageProgress(0);
+      const upload = await uploadLgaImage(recordKey(kind, saved), stagedImage, setImageProgress);
+      setImageProgress(null);
+      if (!upload.ok) {
+        setBusy(false);
+        onRecordChanged(saved, listKey);
+        setPersisted(saved);
+        return fail(
+          `${creating || Object.keys(payload).length > 0 ? "The LGA was saved, but the" : "The"} image didn't upload: ${upload.message} Save again to retry the image.`,
+        );
+      }
+      saved = upload.data;
+    }
+
     setBusy(false);
-    if (!result.ok) return fail(result.message);
-    onSaved(result.data, creating ? null : recordKey(kind, record));
+    if (saved) onSaved(saved, listKey);
   }
 
   return (
@@ -151,8 +198,8 @@ export function ContentEditor({ kind, record, onCancel, onSaved }: Props) {
             <p className="eyebrow-row">
               <span className="eyebrow-dot" /> {creating ? `New ${NOUN[kind].one}` : `Editing ${NOUN[kind].one}`}
             </p>
-            <h2 className="font-display text-2xl">{creating ? `Add ${kind === "lgas" ? "an LGA" : "a timeline event"}` : recordTitle(kind, record)}</h2>
-            {record && <AuditLine updatedBy={record.updated_by} updatedAt={record.updated_at} />}
+            <h2 className="font-display text-2xl">{creating ? `Add ${kind === "lgas" ? "an LGA" : "a timeline event"}` : recordTitle(kind, persisted)}</h2>
+            {persisted && <AuditLine updatedBy={persisted.updated_by} updatedAt={persisted.updated_at} />}
           </div>
           <button type="button" onClick={onCancel} className="link-btn" disabled={busy}>
             ← Back to the list
@@ -198,6 +245,24 @@ export function ContentEditor({ kind, record, onCancel, onSaved }: Props) {
                 </div>
               </motion.section>
             ))}
+            {/* LGAs only — the timeline has no images. */}
+            {hasImages && (
+              <motion.section variants={rise} className="form-section">
+                <h3 className="section-heading">
+                  <span className="section-num">{FIELD_GROUPS[kind].length + 1}</span> Image
+                </h3>
+                <LgaImageField
+                  currentUrl={(persisted as LgaRecord | null)?.image_url ?? null}
+                  staged={stagedImage}
+                  onStage={(file) => {
+                    setStagedImage(file);
+                    setNotice(null);
+                  }}
+                  progress={imageProgress}
+                  disabled={busy}
+                />
+              </motion.section>
+            )}
           </fieldset>
         </motion.div>
 
@@ -214,7 +279,7 @@ export function ContentEditor({ kind, record, onCancel, onSaved }: Props) {
           >
             {busy ? (
               <>
-                <Spinner size={14} /> Saving…
+                <Spinner size={14} /> {imageProgress !== null ? "Uploading image…" : "Saving…"}
               </>
             ) : creating ? (
               `Add ${NOUN[kind].one}`

@@ -30,16 +30,19 @@ async function checkSession(requireRole?: "admin"): Promise<Response | null> {
 async function relay(upstream: Response): Promise<Response> {
   // A 204 must not carry a body, not even an empty string.
   if (upstream.status === 204) return new Response(null, { status: 204 });
-  return new Response(await upstream.text(), {
-    status: upstream.status,
-    headers: { "Content-Type": upstream.headers.get("content-type") ?? "application/json" },
-  });
+  const headers: Record<string, string> = {
+    "Content-Type": upstream.headers.get("content-type") ?? "application/json",
+  };
+  // Keeps file downloads (e.g. the CSV import templates) downloads.
+  const disposition = upstream.headers.get("content-disposition");
+  if (disposition) headers["Content-Disposition"] = disposition;
+  return new Response(await upstream.text(), { status: upstream.status, headers });
 }
 
-async function send(path: string, init: RequestInit): Promise<Response> {
+async function send(path: string, init: RequestInit, timeoutMs = 30_000): Promise<Response> {
   try {
     return await relay(
-      await fetch(`${API_URL}${path}`, { ...init, cache: "no-store", signal: AbortSignal.timeout(30_000) }),
+      await fetch(`${API_URL}${path}`, { ...init, cache: "no-store", signal: AbortSignal.timeout(timeoutMs) }),
     );
   } catch {
     return Response.json({ detail: "The backend can't be reached" }, { status: 504 });
@@ -76,28 +79,44 @@ export async function forwardToBackend(
 }
 
 /**
- * Forward a multipart upload's `file` field to `path` as the signed-in user.
- * Only that one field is passed on; fetch sets the multipart boundary.
+ * Forward a multipart upload's required `file` field — plus any of
+ * `optionalFields` that hold a non-empty file — to `path` as the signed-in
+ * user. Nothing else in the form is passed on; fetch sets the boundary.
  */
 export async function forwardFileUpload(
   request: Request,
   path: string,
-  { requireRole }: Pick<ForwardOptions, "requireRole">,
+  {
+    requireRole,
+    optionalFields = [],
+    missingFileMessage = "Choose a file to upload",
+  }: Pick<ForwardOptions, "requireRole"> & {
+    /** Other file fields to pass on when present (e.g. "images"). */
+    optionalFields?: string[];
+    missingFileMessage?: string;
+  },
 ): Promise<Response> {
   const refused = await checkSession(requireRole);
   if (refused) return refused;
 
-  let file: FormDataEntryValue | null;
+  let incoming: FormData;
   try {
-    file = (await request.formData()).get("file");
+    incoming = await request.formData();
   } catch {
     return Response.json({ detail: "Expected a multipart form with a file" }, { status: 400 });
   }
-  if (!(file instanceof File)) return Response.json({ detail: "Choose a CSV file to upload" }, { status: 400 });
+  const file = incoming.get("file");
+  if (!(file instanceof File)) return Response.json({ detail: missingFileMessage }, { status: 400 });
 
   const form = new FormData();
   form.append("file", file, file.name);
-  return send(path, { method: "POST", headers: await getBackendAuthHeader(), body: form });
+  for (const name of optionalFields) {
+    const extra = incoming.get(name);
+    if (extra instanceof File && extra.size > 0) form.append(name, extra, extra.name);
+  }
+  // Uploads can include images the backend passes on to Cloudinary one by
+  // one, so allow far longer than a JSON request.
+  return send(path, { method: "POST", headers: await getBackendAuthHeader(), body: form }, 300_000);
 }
 
 /** POST the incoming JSON body to `path` as the signed-in user. */

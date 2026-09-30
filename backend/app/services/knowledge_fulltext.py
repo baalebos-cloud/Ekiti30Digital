@@ -1,0 +1,54 @@
+"""PostgreSQL text retrieval without importing an embedding runtime."""
+import re
+
+from sqlalchemy import text
+
+
+def search_text(question: str) -> str:
+    # Source facts spell out Local Government Area; users often use LGA.
+    # No topic terms, dates, or numbers are dropped to force a match.
+    return re.sub(r"\blgas?\b", "local government area", question, flags=re.I)
+
+
+SEARCH = text("""
+    SELECT d.doc_id, c.content, d.class AS category, d.tier,
+           d.last_verified, d.path, d.source_url,
+           c.source_ids, c.source_titles, c.source_urls,
+           ts_rank_cd(to_tsvector('english', c.content),
+                      plainto_tsquery('english', :question)) AS search_rank
+    FROM chunks AS c
+    JOIN knowledge_documents AS d ON d.id = c.document_id
+    WHERE d.ingestible IS TRUE
+      AND d.last_verified IS NOT NULL
+      AND d.last_verified <= CURRENT_DATE
+      AND coalesce(c.source_ids, '') <> ''
+      AND coalesce(c.source_titles, '') <> ''
+      AND coalesce(c.source_urls, '') <> ''
+      AND (CAST(:category AS text) IS NULL OR d.class = CAST(:category AS text))
+      AND to_tsvector('english', c.content)
+          @@ plainto_tsquery('english', :question)
+    ORDER BY search_rank DESC, d.doc_id, c.chunk_index
+    LIMIT :limit
+""")
+
+
+def retrieve_fulltext(question, db, limit=5, category=None):
+    """Require all non-stopword search terms in the same cited fact.
+
+    This intentionally returns no evidence when wording does not match.
+    It does not combine document titles with unrelated fact text to make
+    a match, and does not fall back to the embedding model.
+    """
+    rows = db.execute(SEARCH, {
+        "question": search_text(question), "category": category,
+        "limit": max(1, min(int(limit), 20)),
+    }).mappings().all()
+    hits = []
+    for row in rows:
+        hit = dict(row)
+        for key in ("source_ids", "source_titles", "source_urls"):
+            hit[key] = hit[key].split(";")
+        hit["last_verified"] = hit["last_verified"].isoformat()
+        hit["search_rank"] = float(hit["search_rank"])
+        hits.append(hit)
+    return hits

@@ -47,6 +47,8 @@ class LgaOut(_CamelModel):
     verification_status: str
     limitations: str | None
     owner: str | None
+    # Serialized as imageUrl; null until an admin uploads one.
+    image_url: str | None
 
     @classmethod
     def from_model(cls, lga: Lga) -> "LgaOut":
@@ -75,6 +77,7 @@ class LgaOut(_CamelModel):
             verification_status=lga.verification_status,
             limitations=lga.limitations,
             owner=lga.owner,
+            image_url=lga.image_url,
         )
 
 
