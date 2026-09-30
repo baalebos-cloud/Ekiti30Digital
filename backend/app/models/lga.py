@@ -59,6 +59,12 @@ class Lga(Base):
     limitations: Mapped[str | None] = mapped_column(Text)
     owner: Mapped[str | None]
 
+    # Cloudinary secure_url of the LGA's image. Set only by an admin upload
+    # (POST /api/admin/lgas/{slug}/image, or a zip with the CSV import) —
+    # never from a CSV cell, and never cleared by an import that has no
+    # image for this LGA.
+    image_url: Mapped[str | None]
+
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
     # When the row last changed (UTC), by any route: admin edit, admin
     # import, or the CLI script.

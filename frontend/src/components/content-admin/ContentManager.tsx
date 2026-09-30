@@ -173,6 +173,8 @@ export function ContentManager() {
                 show(`${previousKey === null ? "Added" : "Saved"} · ${recordTitle(kind, saved)}`);
                 setView({ mode: "list" });
               }}
+              // Saved, but its image didn't upload: keep the list right and the editor open.
+              onRecordChanged={(saved, previousKey) => list.replace(saved, previousKey)}
             />
           ) : view.mode === "import" ? (
             <CsvImport

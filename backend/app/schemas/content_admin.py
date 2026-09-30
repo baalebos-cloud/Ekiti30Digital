@@ -103,6 +103,8 @@ class LgaAdminOut(BaseModel):
     verification_status: str
     limitations: str | None
     owner: str | None
+    # Set only by an image upload, never by a create/edit body.
+    image_url: str | None
     created_at: datetime
     updated_at: datetime
     updated_by: str | None
@@ -197,3 +199,20 @@ class ImportResult(BaseModel):
     updated: list[str]
     unchanged: list[str]
     skipped: list[SkippedRowOut]
+
+
+class ImageResultOut(BaseModel):
+    """One file from the images zip of an LGA import."""
+
+    filename: str
+    # The LGA it matched (or would have), if its name was a slug.
+    slug: str | None
+    # attached | would_attach (dry run) | skipped | failed
+    status: str
+    reason: str | None
+
+
+class LgaImportResult(ImportResult):
+    """LGA imports only: the timeline has no images."""
+
+    images: list[ImageResultOut]

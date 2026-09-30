@@ -61,6 +61,55 @@ OPTIONAL_FIELDS = (
 # Every column an edit can set. `id` is the key, so it isn't editable.
 EDITABLE_FIELDS = REQUIRED_FIELDS[1:] + OPTIONAL_FIELDS
 
+# The CSV's columns in the source file's order
+# (03_Timeline/EKITI30_Timeline_Events_1996-2026.csv), for the downloadable
+# import template.
+CSV_COLUMNS = (
+    "id",
+    "date_display",
+    "date_start",
+    "date_end",
+    "date_precision",
+    "date_basis",
+    "event_title",
+    "description",
+    "category",
+    "evidence_type",
+    "source",
+    "source_link",
+    "source_type",
+    "verification_status",
+    "claim_source_map",
+    "unconfirmed_details",
+    "claims_and_disputes",
+    "notes_limitations",
+    "additional_sources",
+)
+
+# The template's example row. An id no real event uses, so importing the
+# template unedited adds one visibly fake event rather than overwriting one.
+TEMPLATE_EXAMPLE = {
+    "id": "EK-EXAMPLE",
+    "date_display": "1 Oct 1996",
+    "date_start": "1996-10-01",
+    "date_end": "none",
+    "date_precision": "day",
+    "date_basis": "confirmed",
+    "event_title": "Example event title",
+    "description": "One or two sentences describing only what the cited source supports.",
+    "category": "Government",
+    "evidence_type": "official_statement",
+    "source": "Ekiti State Government: About Ekiti",
+    "source_link": "https://www.ekitistate.gov.ng/?p=444",
+    "source_type": "Government website",
+    "verification_status": "Single source",
+    "claim_source_map": "none",
+    "unconfirmed_details": "none",
+    "claims_and_disputes": "none",
+    "notes_limitations": "none",
+    "additional_sources": "none",
+}
+
 # date_start / date_end precisions: YYYY, YYYY-MM or YYYY-MM-DD.
 _ISO_FORMATS = {4: "%Y", 7: "%Y-%m", 10: "%Y-%m-%d"}
 

@@ -32,10 +32,12 @@ export type LgaRecord = Audit & {
   longitude: number;
   last_checked: string;
   verification_status: string;
+  /** Cloudinary secure_url; set only by an image upload. */
+  image_url: string | null;
   [field: string]: string | number | null;
 };
 
-/** Mirrors backend TimelineAdminOut. */
+/** Mirrors backend TimelineAdminOut. No image: the timeline has none. */
 export type TimelineRecord = Audit & {
   id: string;
   date_display: string;
@@ -198,13 +200,41 @@ export const NOUN: Record<ContentAdminKind, { one: string; many: string }> = {
 
 // --- Requests ---
 
+/** One file from an LGA import's images zip (backend ImageResultOut). */
+export type ImageImportResult = {
+  filename: string;
+  slug: string | null;
+  status: "attached" | "would_attach" | "skipped" | "failed";
+  reason: string | null;
+};
+
 export type ImportSummary = {
   dry_run: boolean;
   created: string[];
   updated: string[];
   unchanged: string[];
   skipped: { line: number; key: string | null; reason: string }[];
+  /** LGA imports only. */
+  images?: ImageImportResult[];
 };
+
+// --- LGA images (the backend's rules: app/services/cloudinary_convention.py) ---
+
+export const IMAGE_ACCEPT = "image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp";
+export const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
+
+/** A quick check before uploading; the backend checks the content itself. */
+export function imageProblem(file: File): string | null {
+  const okType = ["image/jpeg", "image/png", "image/webp"].includes(file.type) || /\.(jpe?g|png|webp)$/i.test(file.name);
+  if (!okType) return "Choose a JPG, PNG or WebP image.";
+  if (file.size > MAX_IMAGE_BYTES) return "The image must be at most 10 MB.";
+  return null;
+}
+
+/** Where the CSV import template for this kind downloads from. */
+export function templateUrl(kind: ContentAdminKind): string {
+  return `/api/admin/content/${kind}/template`;
+}
 
 export type Result<T> = { ok: true; data: T } | { ok: false; status: number | null; message: string };
 
@@ -257,9 +287,51 @@ export const contentApi = {
     request<ContentRecord>(`${base(kind)}/${encodeURIComponent(key)}`, json("PATCH", changes)),
   remove: (kind: ContentAdminKind, key: string) =>
     request<void>(`${base(kind)}/${encodeURIComponent(key)}`, { method: "DELETE" }),
-  importCsv: (kind: ContentAdminKind, file: File, dryRun: boolean) => {
+  /** `images` (a zip) is for LGA imports only. */
+  importCsv: (kind: ContentAdminKind, file: File, dryRun: boolean, images?: File | null) => {
     const form = new FormData();
     form.append("file", file);
+    if (kind === "lgas" && images) form.append("images", images);
     return request<ImportSummary>(`${base(kind)}/import?dry_run=${dryRun}`, { method: "POST", body: form });
   },
 };
+
+/**
+ * Upload an image for an existing LGA. `onProgress` gets 0..1 as the file is
+ * sent; after 1 the server is still passing it on to Cloudinary. Uses
+ * XMLHttpRequest because fetch can't report upload progress.
+ */
+export function uploadLgaImage(slug: string, file: File, onProgress: (fraction: number) => void): Promise<Result<LgaRecord>> {
+  return new Promise((resolve) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `${base("lgas")}/${encodeURIComponent(slug)}/image`);
+    xhr.timeout = 300_000;
+    xhr.upload.onprogress = (event) => {
+      if (event.lengthComputable) onProgress(event.loaded / event.total);
+    };
+    xhr.onload = () => {
+      let data: unknown = null;
+      try {
+        data = JSON.parse(xhr.responseText);
+      } catch {
+        // not JSON; handled below
+      }
+      if (xhr.status >= 200 && xhr.status < 300 && data) {
+        resolve({ ok: true, data: data as LgaRecord });
+        return;
+      }
+      const detail = (data as { detail?: unknown } | null)?.detail;
+      // For 502/503 the backend's own words say what went wrong with the
+      // upload (e.g. Cloudinary rejected it, or uploads aren't configured).
+      const message =
+        (xhr.status === 502 || xhr.status === 503) && typeof detail === "string"
+          ? `${detail}.`
+          : contentErrorMessage(xhr.status, detail);
+      resolve({ ok: false, status: xhr.status, message });
+    };
+    xhr.onerror = xhr.ontimeout = () => resolve({ ok: false, status: null, message: contentErrorMessage(null) });
+    const form = new FormData();
+    form.append("file", file);
+    xhr.send(form);
+  });
+}

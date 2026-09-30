@@ -28,6 +28,11 @@ ALLOWED_FOLDERS: tuple[str, ...] = (
 # Enforced by Cloudinary itself via the upload preset.
 ALLOWED_FORMATS: tuple[str, ...] = ("jpg", "png", "webp", "mp4")
 
+# The still-image subset, for uploads that must be images (LGA images, via
+# app/services/cloudinary_upload.py).
+VIDEO_FORMATS: tuple[str, ...] = ("mp4",)
+IMAGE_FORMATS: tuple[str, ...] = tuple(f for f in ALLOWED_FORMATS if f not in VIDEO_FORMATS)
+
 # Cloudinary upload presets can't enforce a file size limit, so this must
 # be checked client-side before uploading (e.g. the Upload Widget's
 # maxFileSize option). Exposed to the frontend via POST /api/uploads/init.

@@ -53,6 +53,53 @@ OPTIONAL_FIELDS = (
 # Every column a CSV row (or admin edit) can set.
 EDITABLE_FIELDS = REQUIRED_FIELDS + OPTIONAL_FIELDS
 
+# The CSV's columns in the source file's order (02_LGAs/ekiti_lgas.csv), for
+# the downloadable import template. No image column: images come only from
+# an upload or the import's images zip, never from a CSV cell.
+CSV_COLUMNS = (
+    "lga_name",
+    "headquarters",
+    "latitude",
+    "longitude",
+    "coordinate_type",
+    "major_towns_communities",
+    "notable_places",
+    "important_institutions",
+    *(f"source_{n}_{part}" for n in (1, 2, 3) for part in ("name", "type", "link")),
+    "source_date",
+    "last_checked",
+    "verification_status",
+    "limitations",
+    "owner",
+)
+
+# The template's example row. A name that isn't a real LGA, so importing the
+# template unedited adds one visibly fake row rather than overwriting one.
+TEMPLATE_EXAMPLE = {
+    "lga_name": "Example LGA",
+    "headquarters": "Example-Ekiti",
+    "latitude": "7.621111",
+    "longitude": "5.221389",
+    "coordinate_type": "Headquarters town centre",
+    "major_towns_communities": "Example-Ekiti; Second-Town-Ekiti",
+    "notable_places": "Example Town Hall; Oja Oba market",
+    "important_institutions": "To be researched",
+    "source_1_name": "Ekiti State Government Local Government and LCDAs directory",
+    "source_1_type": "Official government source",
+    "source_1_link": "https://www.ekitistate.gov.ng/about-ekiti/local-government",
+    "source_2_name": "secondary geographic coordinate reference",
+    "source_2_type": "secondary geographic database",
+    "source_2_link": "https://www.geonames.org/",
+    "source_3_name": "",
+    "source_3_type": "",
+    "source_3_link": "",
+    "source_date": "Not specified",
+    "last_checked": "2026-09-21",
+    "verification_status": "Pending",
+    "limitations": "Coordinates and listed places require independent review before publication",
+    "owner": "Your name",
+}
+
 
 @dataclass
 class SkippedRow:

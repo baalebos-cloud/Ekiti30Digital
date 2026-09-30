@@ -200,6 +200,12 @@ function LgaSummary({ lga }: { lga: LgaRecord }) {
   return (
     <>
       <div className="flex flex-wrap items-center gap-2">
+        {lga.image_url ? (
+          // eslint-disable-next-line @next/next/no-img-element -- remote Cloudinary thumbnail
+          <img src={lga.image_url} alt="" className="lga-row-thumb" loading="lazy" />
+        ) : (
+          <span className="lga-row-thumb is-empty" title="No image yet" aria-hidden="true" />
+        )}
         <p className="font-display text-lg font-medium">{lga.lga_name}</p>
         <span className="status-pill">{lga.verification_status}</span>
       </div>
