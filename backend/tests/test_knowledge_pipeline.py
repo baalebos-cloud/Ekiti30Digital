@@ -196,7 +196,7 @@ def test_empty_verified_corpus_skips_embedding():
 
 def test_ask_route_cites_each_returned_fact(client, monkeypatch):
     from app.api.routes import ask_ekiti
-    hit = {"doc_id": "creation", "content": "Ekiti State was created in 1996.",
+    hit = {"doc_id": "history-state-creation-1996", "content": "Ekiti State was created in 1996.",
            "source_ids": ["SRC-001"], "source_titles": ["State announcement"],
            "source_urls": ["https://example.org/announcement"],
            "source_url": "https://example.org/announcement", "category": "history",

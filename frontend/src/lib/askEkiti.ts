@@ -27,21 +27,22 @@ export type AskEkitiCitation = {
 
 export type AskEkitiResponse = {
   answer: string;
+  reason?: string;
   /** "insufficient": nothing verified matched, and the answer says so. */
   status: "answered" | "insufficient";
   citations: AskEkitiCitation[];
 };
 
-export type AskEkitiError = "invalid_question" | "unavailable" | "unreachable" | "network";
+export type AskEkitiError = "invalid_question" | "language_review" | "unavailable" | "unreachable" | "network";
 
 export type AskEkitiResult = { ok: true; data: AskEkitiResponse } | { ok: false; error: AskEkitiError };
 
-export async function askEkiti(question: string): Promise<AskEkitiResult> {
+export async function askEkiti(question: string, language: "en" | "yo" = "en"): Promise<AskEkitiResult> {
   try {
     const response = await fetch("/api/ask-ekiti", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ question }),
+      body: JSON.stringify({ question, language }),
     });
     const data: unknown = await response.json().catch(() => null);
     if (response.ok && data && typeof data === "object" && "answer" in data) {
@@ -50,7 +51,7 @@ export async function askEkiti(question: string): Promise<AskEkitiResult> {
     const error = (data as { error?: unknown } | null)?.error;
     return {
       ok: false,
-      error: error === "invalid_question" || error === "unreachable" ? error : "unavailable",
+      error: error === "invalid_question" || error === "unreachable" || error === "language_review" ? error : "unavailable",
     };
   } catch {
     return { ok: false, error: "network" };
@@ -62,6 +63,8 @@ export function askErrorMessage(error: AskEkitiError): string {
   switch (error) {
     case "invalid_question":
       return `That question couldn't be sent. Try asking in a few words (up to ${MAX_QUESTION_LENGTH} characters).`;
+    case "language_review":
+      return "Yoruba answers are awaiting language review. Please choose English for now.";
     case "network":
       return "I couldn't reach the server — check your connection and try again.";
     default:

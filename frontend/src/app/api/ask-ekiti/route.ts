@@ -2,8 +2,7 @@
  * Ask Ekiti: proxies a question to the backend's public POST /api/ask-ekiti
  * and returns an AskEkitiResponse (src/lib/askEkiti.ts).
  *
- * Language is always "en" — Yoruba answers are blocked on the backend
- * pending human review, so the browser can't ask for anything else here.
+ * The selected language is forwarded; the backend enforces language review.
  * Citations are re-checked before they reach the page: only http(s) links
  * survive, since knowledge-base text ends up as clickable links.
  *
@@ -75,8 +74,11 @@ function toCitation(raw: unknown): AskEkitiCitation | null {
 
 export async function POST(request: Request) {
   let question: string;
+  let language: "en" | "yo" = "en";
   try {
-    const body = (await request.json()) as { question?: unknown };
+    const body = (await request.json()) as { question?: unknown; language?: unknown };
+    if (body.language !== undefined && body.language !== "en" && body.language !== "yo") return fail(400, "invalid_question");
+    language = body.language === "yo" ? "yo" : "en";
     question = typeof body.question === "string" ? body.question.trim() : "";
   } catch {
     return fail(400, "invalid_question");
@@ -90,7 +92,7 @@ export async function POST(request: Request) {
     upstream = await fetch(`${API_URL}/api/ask-ekiti`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ question, category: null, language: "en" }),
+      body: JSON.stringify({ question, category: null, language }),
       cache: "no-store",
       signal: AbortSignal.timeout(TIMEOUT_MS),
     });
@@ -101,6 +103,7 @@ export async function POST(request: Request) {
   const data = (await upstream.json().catch(() => null)) as Record<string, unknown> | null;
   if (!upstream.ok) {
     console.warn(`[ask-ekiti] backend returned ${upstream.status}:`, data?.detail ?? "(no detail)");
+    if (upstream.status === 503 && data?.detail === "Yoruba responses await human review") return fail(503, "language_review");
     if (upstream.status === 422) return fail(400, "invalid_question");
     return fail(upstream.status === 503 ? 503 : 502, "unavailable");
   }
@@ -113,6 +116,7 @@ export async function POST(request: Request) {
 
   const body: AskEkitiResponse = {
     answer: data.answer,
+    reason: typeof data.reason === "string" ? data.reason : undefined,
     status,
     citations: Array.isArray(data.citations)
       ? data.citations.map(toCitation).filter((c): c is AskEkitiCitation => c !== null)
