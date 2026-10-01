@@ -1,30 +1,25 @@
+"use client";
+
+import { SectionNotice, useHomepage } from "@/components/homepage/HomepageContent";
+import { LeaderIcon } from "@/components/homepage/PlaceholderIcon";
 import { AutoScrollRow } from "@/components/ui/AutoScrollRow";
 
-type Leader = {
-  name: string;
-  term: string;
-};
-
-const leaders: Leader[] = [
-  { name: "Mohammed Bawa", term: "1996–1998" },
-  { name: "Atanda Yusuf", term: "1998–1999" },
-  { name: "Niyi Adebayo", term: "1999–2003" },
-  { name: "Ayodele Fayose", term: "2003–2006, 2014–2018" },
-  { name: "Segun Oni", term: "2007–2010" },
-  { name: "Kayode Fayemi", term: "2010–2014, 2018–2022" },
-  { name: "Biodun Oyebanji", term: "2022–present" },
-];
-
-function LeaderIcon() {
+function LeadersSkeleton() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
-      <circle cx="12" cy="8" r="3.6" />
-      <path d="M4.5 20c1.2-4.4 4.3-6.6 7.5-6.6s6.3 2.2 7.5 6.6" />
-    </svg>
+    <div className="leader-row" aria-busy="true" aria-label="Loading leaders">
+      {Array.from({ length: 7 }, (_, i) => (
+        <div className="leader-card" key={i}>
+          <div className="leader-photo skeleton" />
+          <div className="skeleton mx-auto mb-1.5 h-4 w-24 rounded" />
+          <div className="skeleton mx-auto h-3 w-16 rounded" />
+        </div>
+      ))}
+    </div>
   );
 }
 
 export default function LeadersStrip() {
+  const { state, retry } = useHomepage();
   return (
     <section className="leaders" id="leaders">
       <div className="wrap">
@@ -35,17 +30,30 @@ export default function LeadersStrip() {
             October 1996. Real, verified photos to follow once sourced.
           </p>
         </div>
-        <AutoScrollRow className="leader-row">
-          {leaders.map((leader) => (
-            <div className="leader-card" key={leader.name}>
-              <div className="leader-photo">
-                <LeaderIcon />
+        {state.status === "loading" ? (
+          <LeadersSkeleton />
+        ) : state.status === "error" ? (
+          <SectionNotice onRetry={retry}>We couldn&apos;t load the leaders just now.</SectionNotice>
+        ) : state.content.leaders.length === 0 ? (
+          <SectionNotice>The leaders will appear here soon.</SectionNotice>
+        ) : (
+          <AutoScrollRow className="leader-row">
+            {state.content.leaders.map((leader) => (
+              <div className="leader-card" key={leader.id}>
+                <div className="leader-photo">
+                  {leader.imageUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element -- remote Cloudinary portrait
+                    <img src={leader.imageUrl} alt={leader.name} loading="lazy" />
+                  ) : (
+                    <LeaderIcon />
+                  )}
+                </div>
+                <p className="leader-name">{leader.name}</p>
+                <p className="leader-term">{leader.term}</p>
               </div>
-              <p className="leader-name">{leader.name}</p>
-              <p className="leader-term">{leader.term}</p>
-            </div>
-          ))}
-        </AutoScrollRow>
+            ))}
+          </AutoScrollRow>
+        )}
       </div>
     </section>
   );

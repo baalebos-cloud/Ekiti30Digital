@@ -33,9 +33,8 @@ from app.schemas.content_admin import (
     TimelineCreate,
     TimelineUpdate,
 )
-from app.services import cloudinary_upload, lga_images, lga_ingestion, timeline_ingestion
-from app.services.cloudinary_admin import CloudinaryNotConfigured
-from app.services.cloudinary_convention import MAX_UPLOAD_BYTES
+from app.api.image_uploads import attach_uploaded_image
+from app.services import lga_images, lga_ingestion, timeline_ingestion
 
 logger = logging.getLogger(__name__)
 
@@ -116,26 +115,6 @@ def _csv_download(columns: tuple[str, ...], example: dict[str, str], filename: s
         media_type="text/csv; charset=utf-8",
         headers={"Content-Disposition": f'attachment; filename="{filename}"'},
     )
-
-
-async def _read_image_upload(file: UploadFile) -> bytes:
-    data = await file.read(MAX_UPLOAD_BYTES + 1)
-    if not data:
-        raise _invalid("Choose an image to upload")
-    return data
-
-
-def _image_error(err: Exception) -> HTTPException:
-    """The HTTP error for a failed image upload — the image_url stays as it was."""
-    if isinstance(err, cloudinary_upload.InvalidImage):
-        code = status.HTTP_413_CONTENT_TOO_LARGE if err.too_large else status.HTTP_422_UNPROCESSABLE_CONTENT
-        return HTTPException(status_code=code, detail=str(err))
-    if isinstance(err, CloudinaryNotConfigured):
-        return HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail="Image uploads aren't configured on the server",
-        )
-    return HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail=f"The image upload failed: {err}")
 
 
 # --- LGAs ---
@@ -298,19 +277,15 @@ async def upload_lga_image(
 
     On any failure the LGA's current image is left as it was.
     """
-    lga = _get_lga(slug, db)
-    data = await _read_image_upload(file)
-    try:
-        lga_images.attach_image(lga, data, file.filename or f"{slug}.jpg", _identity(admin))
-    except (cloudinary_upload.InvalidImage, CloudinaryNotConfigured, cloudinary_upload.CloudinaryUploadError) as err:
-        db.rollback()
-        if isinstance(err, cloudinary_upload.CloudinaryUploadError):
-            logger.warning("LGA image upload failed for %s: %s", slug, err)
-        raise _image_error(err) from None
-    db.commit()
-    db.refresh(lga)
-    logger.info("Admin %s set the image for LGA %s", _identity(admin), slug)
-    return lga
+    return await attach_uploaded_image(
+        _get_lga(slug, db),
+        file,
+        db,
+        folder=lga_images.LGA_IMAGE_FOLDER,
+        default_filename=f"{slug}.jpg",
+        updated_by=_identity(admin),
+        what=f"LGA {slug}",
+    )
 
 
 # --- Timeline ---

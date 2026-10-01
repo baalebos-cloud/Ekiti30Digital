@@ -66,6 +66,8 @@ class Settings(BaseSettings):
     # fulltext avoids loading an embedding model in the web process.
     # Existing deployments retain vector mode until explicitly switched.
     ASK_EKITI_RETRIEVAL_MODE: Literal["vector", "fulltext"] = "vector"
+    # Enable only after the language lead reviews ask_language.py.
+    ASK_EKITI_YORUBA_REVIEWED: bool = False
     EMBEDDING_MODEL: str = "paraphrase-multilingual-MiniLM-L12-v2"
 
     # Output dimension of EMBEDDING_MODEL (384 for

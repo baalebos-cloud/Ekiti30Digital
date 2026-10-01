@@ -25,6 +25,11 @@ SEARCH = text("""
       AND coalesce(c.source_titles, '') <> ''
       AND coalesce(c.source_urls, '') <> ''
       AND (CAST(:category AS text) IS NULL OR d.class = CAST(:category AS text))
+      AND (CAST(:doc_ids AS text[]) IS NULL OR d.doc_id = ANY(CAST(:doc_ids AS text[])))
+      AND (CAST(:fact_kind AS text) IS NULL
+           OR (:fact_kind = 'identity' AND c.content ~ 'Local Government Area is one of the [0-9]+ Local Government Areas of Ekiti State\\.')
+           OR (:fact_kind = 'headquarters' AND c.content LIKE '%Local Government Area''s headquarters is %.')
+           OR (:fact_kind = 'creation' AND c.content LIKE 'Ekiti State was created on %.'))
       AND to_tsvector('english', c.content)
           @@ plainto_tsquery('english', :question)
     ORDER BY search_rank DESC, d.doc_id, c.chunk_index
@@ -32,7 +37,7 @@ SEARCH = text("""
 """)
 
 
-def retrieve_fulltext(question, db, limit=5, category=None):
+def retrieve_fulltext(question, db, limit=5, category=None, doc_ids=None, fact_kind=None):
     """Require all non-stopword search terms in the same cited fact.
 
     This intentionally returns no evidence when wording does not match.
@@ -42,6 +47,7 @@ def retrieve_fulltext(question, db, limit=5, category=None):
     rows = db.execute(SEARCH, {
         "question": search_text(question), "category": category,
         "limit": max(1, min(int(limit), 20)),
+        "doc_ids": doc_ids or None, "fact_kind": fact_kind,
     }).mappings().all()
     hits = []
     for row in rows:

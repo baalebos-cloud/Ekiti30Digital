@@ -13,18 +13,23 @@ Every upload gets a new, Cloudinary-generated public_id. Nothing is
 overwritten, so a bad replacement never destroys the previous image (which
 stays in Cloudinary; nothing here deletes it).
 
+attach_image() is the one way an admin upload lands on a record (an LGA, or
+a homepage hero image, leader, landmark or moment): validate, upload, then
+set the record's image_url / updated_by / updated_at.
+
 Tests mock httpx.post rather than calling Cloudinary.
 """
 
 import hashlib
 import time
 import urllib.parse
+from datetime import datetime, timezone
 
 import httpx
 
 from app.core.config import settings
 from app.services.cloudinary_admin import CloudinaryNotConfigured
-from app.services.cloudinary_convention import IMAGE_FORMATS, MAX_UPLOAD_BYTES, validate_folder
+from app.services.cloudinary_convention import IMAGE_FORMATS, MAX_UPLOAD_BYTES, validate_admin_folder
 
 _TIMEOUT_SECONDS = 60.0
 
@@ -80,7 +85,7 @@ def upload_image(data: bytes, *, folder: str, filename: str) -> str:
     Raises CloudinaryNotConfigured, or CloudinaryUploadError for anything
     Cloudinary didn't accept.
     """
-    if not validate_folder(folder):
+    if not validate_admin_folder(folder):
         raise ValueError(f"not an allowed folder: {folder!r}")
     cloud_name = settings.CLOUDINARY_CLOUD_NAME
     api_key = settings.CLOUDINARY_API_KEY
@@ -121,3 +126,18 @@ def upload_image(data: bytes, *, folder: str, filename: str) -> str:
     if body.get("format") not in IMAGE_FORMATS:
         raise CloudinaryUploadError(f"Cloudinary stored an unexpected format: {body.get('format')!r}")
     return secure_url
+
+
+def attach_image(record, data: bytes, *, folder: str, filename: str, updated_by: str) -> None:
+    """Validate and upload `data`, then point `record` at it; the caller commits.
+
+    `record` is any model with image_url, updated_by and updated_at columns.
+    Raises InvalidImage, CloudinaryNotConfigured or CloudinaryUploadError,
+    leaving the record unchanged.
+    """
+    validate_image(data)
+    url = upload_image(data, folder=folder, filename=filename)
+    record.image_url = url
+    record.updated_by = updated_by
+    # Naive UTC, like the models' server-side func.now().
+    record.updated_at = datetime.now(timezone.utc).replace(tzinfo=None)

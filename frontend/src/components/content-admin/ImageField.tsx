@@ -1,11 +1,11 @@
 "use client";
 
 /**
- * The LGA editor's image control. LGAs only: the timeline has no images, so
- * ContentEditor renders this for kind "lgas" and nothing else.
+ * An editor's image control: the LGA editor (ContentEditor; the timeline has
+ * no images) and the homepage item editor (homepage-admin/ItemEditor).
  *
- * It only stages a file. ContentEditor uploads it (POST .../lgas/{slug}/image)
- * after the LGA itself has been saved, and passes the progress back in.
+ * It only stages a file. The editor uploads it (POST .../{item}/image) after
+ * the item itself has been saved, and passes the progress back in.
  */
 
 import { AnimatePresence, motion } from "motion/react";
@@ -15,16 +15,22 @@ import { FieldError } from "@/components/ui/FieldError";
 import { IMAGE_ACCEPT, imageProblem } from "@/lib/contentAdmin";
 
 type Props = {
-  /** The image the LGA has now, if any. */
+  /** What the image belongs to, for the wording: "LGA", "leader"... */
+  noun: string;
+  /** The image the item has now, if any. */
   currentUrl: string | null;
   staged: File | null;
   onStage: (file: File | null) => void;
   /** 0..1 while the staged file is being sent; null otherwise. */
   progress: number | null;
   disabled: boolean;
+  /** Offered when there's a current image: take it off the item (it goes back to its placeholder). */
+  onRemove?: () => void;
+  /** Shown instead of "No image yet" when there's no image (e.g. the placeholder icon). */
+  empty?: React.ReactNode;
 };
 
-export function LgaImageField({ currentUrl, staged, onStage, progress, disabled }: Props) {
+export function ImageField({ noun, currentUrl, staged, onStage, progress, disabled, onRemove, empty }: Props) {
   const id = useId();
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [problem, setProblem] = useState<string | null>(null);
@@ -71,10 +77,10 @@ export function LgaImageField({ currentUrl, staged, onStage, progress, disabled 
                 className="h-full w-full"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element -- local preview or remote Cloudinary image */}
-                <img src={shown} alt={staged ? "Selected image, not saved yet" : "Current LGA image"} />
+                <img src={shown} alt={staged ? "Selected image, not saved yet" : `Current ${noun} image`} />
               </motion.div>
             ) : (
-              <span className="text-xs text-ink-soft">No image yet</span>
+              (empty ?? <span className="text-xs text-ink-soft">No image yet</span>)
             )}
           </AnimatePresence>
         </div>
@@ -86,7 +92,7 @@ export function LgaImageField({ currentUrl, staged, onStage, progress, disabled 
                 <span className="text-ink-soft"> · uploads when you save</span>
               </>
             ) : currentUrl ? (
-              <span className="text-ink-soft">This LGA has an image. Choosing another replaces it.</span>
+              <span className="text-ink-soft">This {noun} has an image. Choosing another replaces it.</span>
             ) : (
               <span className="text-ink-soft">JPG, PNG or WebP, up to 10 MB.</span>
             )}
@@ -113,7 +119,12 @@ export function LgaImageField({ currentUrl, staged, onStage, progress, disabled 
             </label>
             {staged && !uploading && (
               <button type="button" className="link-btn" onClick={() => stage(null)} disabled={disabled}>
-                Keep the {currentUrl ? "current image" : "LGA without an image"}
+                Keep the {currentUrl ? "current image" : `${noun} without an image`}
+              </button>
+            )}
+            {onRemove && currentUrl && !staged && !uploading && (
+              <button type="button" className="link-btn is-danger" onClick={onRemove} disabled={disabled}>
+                Remove image
               </button>
             )}
           </div>

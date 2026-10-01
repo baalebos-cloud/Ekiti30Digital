@@ -31,7 +31,7 @@ export const ASK_EKITI_OPEN_EVENT = "ask-ekiti:open";
 type Message =
   | { id: number; from: "you"; text: string }
   | { id: number; from: "ekiti"; kind: "answered"; text: string; citations: AskEkitiCitation[] }
-  | { id: number; from: "ekiti"; kind: "insufficient"; text: string }
+  | { id: number; from: "ekiti"; kind: "insufficient"; text: string; reason?: string }
   /** `retry` is the question to ask again, or null if asking again won't help. */
   | { id: number; from: "ekiti"; kind: "error"; text: string; retry: string | null };
 
@@ -40,13 +40,14 @@ type NewMessage = Message extends infer M ? (M extends Message ? Omit<M, "id"> :
 
 const EXAMPLES = [
   "When was Ekiti State created?",
-  "What is Ikogosi known for?",
-  "Which LGAs border Ado Ekiti?",
+  "How many LGAs does Ekiti State have?",
+  "What is the headquarters of Ikere LGA?",
 ];
 
 export function AskEkitiWidget() {
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState("");
+  const [language, setLanguage] = useState<"en" | "yo">("en");
   const [messages, setMessages] = useState<Message[]>([]);
   const [pending, setPending] = useState(false);
   const fab = useRef<HTMLButtonElement>(null);
@@ -98,7 +99,7 @@ export function AskEkitiWidget() {
     if (retryOf === undefined) add({ from: "you", text: question });
     else setMessages((m) => m.filter((msg) => msg.id !== retryOf));
     setPending(true);
-    const result = await askEkiti(question);
+    const result = await askEkiti(question, language);
     setPending(false);
     if (!result.ok) {
       add({
@@ -108,7 +109,7 @@ export function AskEkitiWidget() {
         retry: result.error === "invalid_question" ? null : question,
       });
     } else if (result.data.status === "insufficient") {
-      add({ from: "ekiti", kind: "insufficient", text: result.data.answer });
+      add({ from: "ekiti", kind: "insufficient", text: result.data.answer, reason: result.data.reason });
     } else {
       add({ from: "ekiti", kind: "answered", text: result.data.answer, citations: result.data.citations });
     }
@@ -160,6 +161,15 @@ export function AskEkitiWidget() {
               </button>
             </div>
 
+            <label className="px-4 py-2 text-sm">
+              Language / Èdè
+              <select aria-label="Answer language" value={language} disabled={pending}
+                onChange={(event) => setLanguage(event.target.value as "en" | "yo")}
+                className="ml-2 rounded border px-2 py-1">
+                <option value="en">English</option>
+                <option value="yo">Yorùbá (subject to language review)</option>
+              </select>
+            </label>
             <div ref={log} className="ask-log" aria-live="polite">
               <div className="ask-bubble is-ekiti">
                 Ẹ káàbọ̀! Ask anything about Ekiti — its history, towns, people and places.
@@ -183,7 +193,7 @@ export function AskEkitiWidget() {
                     transition={{ duration: 0.25 }}
                     className={`ask-bubble ${bubbleClass(m)}`}
                   >
-                    {m.from === "ekiti" && m.kind === "insufficient" && <span className="ask-bubble-tag">Not in the verified sources yet</span>}
+                    {m.from === "ekiti" && m.kind === "insufficient" && (!m.reason || m.reason === "no_verified_match") && <span className="ask-bubble-tag">Not in the verified sources yet</span>}
                     <p className="whitespace-pre-line">{m.text}</p>
                     {m.from === "ekiti" && m.kind === "answered" && m.citations.length > 0 && (
                       <Sources citations={m.citations} />
@@ -324,18 +334,11 @@ function formatVerified(value: string | null): string | null {
   return date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
 }
 
-/** The sources behind an answer: each one once, linked where it has a link. */
+/** The sources behind an answer: numbered to match each fact, linked where it has a link. */
 function Sources({ citations }: { citations: AskEkitiCitation[] }) {
-  const seen = new Set<string>();
-  const sources = citations.flatMap((citation) =>
-    citation.sources
-      .filter((source) => {
-        const key = source.url ?? source.title;
-        if (seen.has(key)) return false;
-        seen.add(key);
-        return true;
-      })
-      .map((source) => ({ ...source, tier: citation.tier, verified: formatVerified(citation.lastVerified) })),
+  const sources = citations.flatMap((citation, citationIndex) =>
+    citation.sources.map((source) => ({ ...source, citationNumber: citationIndex + 1,
+      tier: citation.tier, verified: formatVerified(citation.lastVerified) })),
   );
 
   return (
@@ -351,13 +354,13 @@ function Sources({ citations }: { citations: AskEkitiCitation[] }) {
           >
             {source.url ? (
               <a href={source.url} target="_blank" rel="noopener noreferrer" className="ask-source">
-                <span className="ask-source-num">{i + 1}</span>
+                <span className="ask-source-num">{source.citationNumber}</span>
                 <span className="ask-source-title">{source.title}</span>
                 <span aria-hidden="true">↗</span>
               </a>
             ) : (
               <span className="ask-source">
-                <span className="ask-source-num">{i + 1}</span>
+                <span className="ask-source-num">{source.citationNumber}</span>
                 <span className="ask-source-title">{source.title}</span>
               </span>
             )}

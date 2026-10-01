@@ -13,7 +13,7 @@ import { SuccessToast, useToast } from "@/components/ui/SuccessToast";
 import type { PendingContributor, ReviewKind } from "@/lib/review";
 import type { AssetRecord } from "@/lib/uploads";
 
-// The two review queues, plus content editing (LGAs and timeline).
+// The two review queues, plus content editing (LGAs, timeline and the homepage).
 type Tab = ReviewKind | "content";
 
 const TABS: { kind: Tab; label: string }[] = [

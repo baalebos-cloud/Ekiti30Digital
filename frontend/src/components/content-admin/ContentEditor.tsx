@@ -4,7 +4,7 @@ import { AnimatePresence, motion, useAnimationControls } from "motion/react";
 import { useEffect, useId, useRef, useState } from "react";
 
 import { AuditLine } from "@/components/content-admin/AuditLine";
-import { LgaImageField } from "@/components/content-admin/LgaImageField";
+import { ImageField } from "@/components/content-admin/ImageField";
 import { FieldError } from "@/components/ui/FieldError";
 import { Spinner } from "@/components/ui/Spinner";
 import {
@@ -251,7 +251,8 @@ export function ContentEditor({ kind, record, onCancel, onSaved, onRecordChanged
                 <h3 className="section-heading">
                   <span className="section-num">{FIELD_GROUPS[kind].length + 1}</span> Image
                 </h3>
-                <LgaImageField
+                <ImageField
+                  noun="LGA"
                   currentUrl={(persisted as LgaRecord | null)?.image_url ?? null}
                   staged={stagedImage}
                   onStage={(file) => {
