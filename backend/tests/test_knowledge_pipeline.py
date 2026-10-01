@@ -12,8 +12,11 @@ from app.models.base import Base
 from app.models.knowledge import KnowledgeDocument, EMBEDDING_DIMENSIONS
 from app.services.knowledge_pipeline import ingest_manifest, retrieve, verified_facts
 
-FIELDS = ["id", "path", "category", "status", "source_tier", "source_ids",
-          "last_verified", "file_sha256", "ingestible"]
+FIELDS = [
+    "id", "path", "category", "status", "source_tier", "source_ids",
+    "last_verified", "ask_ekiti_approved", "ask_ekiti_approved_by",
+    "ask_ekiti_approved_date", "file_sha256", "ingestible"
+]
 
 
 def fixture(tmp_path: Path):
@@ -93,14 +96,18 @@ def test_database_dimension_matches():
     check_embedding_dimensions(db)
 
 
-def test_retrieval_checks_database_before_embedding():
+def test_retrieval_checks_database_dimension_after_embedding():
     answers = iter([1, 'vector(12)'])
-    db = SimpleNamespace(bind=SimpleNamespace(dialect=SimpleNamespace(name='postgresql')),
-                         scalar=lambda statement: next(answers))
-    def unexpected_embed(texts):
-        pytest.fail('must reject schema mismatch before embedding')
+    db = SimpleNamespace(
+        bind=SimpleNamespace(dialect=SimpleNamespace(name='postgresql')),
+        scalar=lambda statement: next(answers),
+    )
+
+    def query_embed(texts):
+        return [[0.1] * EMBEDDING_DIMENSIONS for _ in texts]
+
     with pytest.raises(RuntimeError, match='explicit migration'):
-        retrieve('Question?', db, embed=unexpected_embed)
+        retrieve('Question?', db, embed=query_embed)
 
 
 def test_settings_mutation_requires_restart(monkeypatch):
@@ -171,7 +178,7 @@ def test_rejects_manifest_forgery_and_stale_hash(tmp_path):
         row["file_sha256"] = hashlib.sha256(doc.read_bytes()).hexdigest()
         write_manifest(manifest, [row])
         outcome = ingest_manifest(manifest, root, db, embed)
-        assert "verification status" in outcome["rejected"][0]["reason"]
+        assert "evidence status" in outcome["rejected"][0]["reason"]
 
 
 def test_uncited_claim_is_rejected():
@@ -180,18 +187,26 @@ def test_uncited_claim_is_rejected():
         verified_facts("## Facts\n- A claim without evidence.\n## Sources\n")
 
 
-def test_empty_verified_corpus_skips_embedding():
+def test_empty_corpus_returns_no_hits_after_query_embedding():
     class EmptyPostgresSession:
         bind = SimpleNamespace(dialect=SimpleNamespace(name="postgresql"))
 
         def scalar(self, statement):
             return None
 
-    def unexpected_embed(texts):
-        raise AssertionError("an empty corpus must not embed the question")
+    calls = []
 
-    assert retrieve("When was Ekiti State created?", EmptyPostgresSession(),
-                    embed=unexpected_embed) == []
+    def query_embed(texts):
+        calls.append(texts)
+        return [[0.1] * EMBEDDING_DIMENSIONS for _ in texts]
+
+    assert retrieve(
+        "When was Ekiti State created?",
+        EmptyPostgresSession(),
+        embed=query_embed,
+    ) == []
+
+    assert calls == [["When was Ekiti State created?"]]
 
 
 def test_ask_route_cites_each_returned_fact(client, monkeypatch):
@@ -215,3 +230,65 @@ def test_ask_route_declines_without_evidence(client, monkeypatch):
     response = client.post("/api/ask-ekiti", json={"question": "Unknown question"})
     assert response.json()["answer_status"] == "insufficient"
     assert response.json()["citations"] == []
+
+
+def test_ingests_explicitly_approved_needs_review_document(tmp_path):
+    root = tmp_path
+    doc = root / "04_Tourism" / "ikogosi.md"
+    doc.parent.mkdir(parents=True)
+
+    doc.write_text("""---
+id: ikogosi
+status: needs_review
+category: tourism
+source_tier: A
+source_ids: [SRC-011]
+source_name: Tourism source
+source_url: https://example.org/tourism
+ask_ekiti_approved: true
+ask_ekiti_approved_by: Reviewer
+ask_ekiti_approved_date: 2026-10-01
+---
+## Facts
+- Ikogosi has warm and cold springs. [S1]
+## Sources
+- [S1] SRC-011: Tourism source. Government. https://example.org/tourism
+""", encoding="utf-8")
+
+    row = dict(
+        id="ikogosi",
+        path="04_Tourism/ikogosi.md",
+        category="tourism",
+        status="needs_review",
+        source_tier="A",
+        source_ids="SRC-011",
+        last_verified="",
+        ask_ekiti_approved="yes",
+        ask_ekiti_approved_by="Reviewer",
+        ask_ekiti_approved_date="2026-10-01",
+        file_sha256=hashlib.sha256(doc.read_bytes()).hexdigest(),
+        ingestible="yes",
+    )
+
+    manifest = root / "13_Knowledge_Base" / "kb_manifest.csv"
+    manifest.parent.mkdir()
+
+    write_manifest(manifest, [row])
+
+    engine = create_engine("sqlite:///:memory:")
+    Base.metadata.create_all(engine)
+
+    with Session(engine) as db:
+        result = ingest_manifest(manifest, root, db, embed)
+
+        assert result["ingested"] == 1
+        assert result["rejected"] == []
+
+        record = db.scalar(select(KnowledgeDocument))
+
+        assert record.doc_id == "ikogosi"
+        assert record.evidence_status == "needs_review"
+        assert record.last_verified is None
+        assert record.ask_ekiti_approved is True
+        assert record.ask_ekiti_approved_date.isoformat() == "2026-10-01"
+        assert len(record.chunks) == 1

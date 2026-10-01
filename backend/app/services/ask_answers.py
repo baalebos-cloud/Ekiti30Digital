@@ -4,8 +4,11 @@ from collections import defaultdict
 from app.services.ask_language import message, yoruba_fact
 from app.services.ask_planner import plan, entities
 
-CITATION_KEYS = ("doc_id", "source_ids", "source_titles", "source_urls", "source_url",
-                 "category", "tier", "last_verified", "path")
+CITATION_KEYS = (
+    "doc_id", "source_ids", "source_titles", "source_urls", "source_url",
+    "category", "tier", "last_verified", "evidence_status",
+    "ask_ekiti_approved", "ask_ekiti_approved_date", "path"
+)
 
 
 def response(question, language, search, category=None):
@@ -36,11 +39,11 @@ def response(question, language, search, category=None):
         if content is None:
             p.missing.append(message("translation", language))
             continue
-        citations.append({key: hit[key] for key in CITATION_KEYS})
+        citations.append({key: hit.get(key) for key in CITATION_KEYS})
         statements.append({"text": content, "citation_index": len(citations) - 1})
     if not statements:
         return dict(base, answer=message("insufficient", language), missing=p.missing,
-                    reason="no_verified_match")
+                    reason="no_supported_match")
     # A numbered citation beside each fact removes ambiguity in multi-fact answers.
     answer = "\n".join(f"{item['text']} [{item['citation_index'] + 1}]" for item in statements)
     signatures = defaultdict(set)
@@ -52,11 +55,33 @@ def response(question, language, search, category=None):
         answer += "\n" + ("The retrieved sources give different figures or dates. Compare the cited statements and their periods; no resolution is assumed."
                             if language == "en" else "Àwọn orísun tí a rí ní iye tàbí ọjọ́ tó yàtọ̀. Ṣe àfiwé àwọn ọ̀rọ̀ àti àsìkò wọn; a kò tíì pinnu èyí tó tọ́.")
     if any(term in question.casefold() for term in ("current", "today", "still operating")):
-        dates = ", ".join(sorted({hit["last_verified"] for hit in hits}))
-        answer += "\n" + (("Last verified: " + dates + ". This does not confirm live conditions.") if language == "en"
-                            else "Ọjọ́ ìjẹ́rìí: " + dates + ". Èyí kò jẹ́rìí sí ipò ní báyìí.")
+        dates = sorted({
+            hit.get("last_verified")
+            for hit in hits
+            if hit.get("last_verified")
+        })
+        if dates:
+            joined_dates = ", ".join(dates)
+            answer += "\n" + (
+                "Last verified: " + joined_dates
+                + ". This does not confirm live conditions."
+                if language == "en"
+                else "Ọjọ́ ìjẹ́rìí: " + joined_dates
+                + ". Èyí kò jẹ́rìí sí ipò ní báyìí."
+            )
+
+    if any(
+        hit.get("evidence_status") != "verified"
+        for hit in hits
+    ):
+        answer += "\n" + (
+            "Some cited material is approved for Ask Ekiti but is not yet fully verified."
+            if language == "en"
+            else "Díẹ̀ nínú ẹ̀rí náà ni a fọwọ́ sí fún Ask Ekiti, ṣùgbọ́n a kò tíì jẹ́rìí rẹ̀ ní kíkún."
+        )
+
     if p.missing:
-        prefix = "Not covered by the retrieved verified evidence: " if language == "en" else "Ẹ̀rí tí a rí kò bo àwọn wọ̀nyí: "
+        prefix = "Not covered by the retrieved sourced evidence: " if language == "en" else "Ẹ̀rí tí a rí kò bo àwọn wọ̀nyí: "
         answer += "\n" + prefix + "; ".join(dict.fromkeys(p.missing)) + "."
     return dict(base, answer=answer, answer_status="answered", citations=citations,
                 statements=statements, missing=list(dict.fromkeys(p.missing)),
