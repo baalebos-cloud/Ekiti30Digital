@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, Work_Sans } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { AskEkitiWidget } from "@/components/AskEkitiWidget";
 import { MotionProvider } from "@/components/MotionProvider";
 import { Nav } from "@/components/Nav";
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <div className="flex flex-1 flex-col">{children}</div>
           <AskEkitiWidget />
         </MotionProvider>
+        <Analytics />
       </body>
     </html>
   );
