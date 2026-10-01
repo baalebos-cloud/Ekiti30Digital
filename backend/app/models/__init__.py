@@ -6,6 +6,7 @@ Alembic's autogenerate (see backend/alembic/env.py) relies on this.
 
 from app.models.asset import Asset  # noqa: F401
 from app.models.contributor import ContributorAccount  # noqa: F401
+from app.models.homepage import HeroContent, HeroImage, Landmark, Leader, Moment  # noqa: F401
 from app.models.knowledge import Chunk, KnowledgeDocument  # noqa: F401
 from app.models.lga import Lga  # noqa: F401
 from app.models.timeline_event import TimelineEvent  # noqa: F401

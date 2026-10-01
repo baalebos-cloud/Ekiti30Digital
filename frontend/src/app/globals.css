@@ -154,6 +154,22 @@ h2.section-title { font-family: var(--font-fraunces), serif; font-weight: 500; f
 .m-more { flex: 0 0 auto; width: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
 .m-more .m-more-circle { width: 76px; height: 76px; border-radius: 50%; border: 2px dashed rgba(255, 255, 255, 0.5); display: flex; align-items: center; justify-content: center; font-family: var(--font-fraunces), serif; font-size: 13px; color: rgba(255, 255, 255, 0.85); margin-bottom: 14px; }
 
+/* ---------- Homepage: uploaded images, loading and fallback states ---------- */
+.polaroid .frame img, .land-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.leader-photo img, .m-photo img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 50%; }
+/* Beats the per-polaroid .p1/.p2/.p3 .frame gradients while loading. */
+.polaroid .frame.skeleton { background: linear-gradient(90deg, var(--bg-raised) 0%, color-mix(in srgb, var(--gold-soft) 40%, var(--bg-raised)) 50%, var(--bg-raised) 100%); background-size: 200% 100%; }
+/* The shimmer for the dark moments band. */
+.skeleton-dark { background: linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.08) 100%); background-size: 200% 100%; animation: skeleton-shimmer 1.4s ease-in-out infinite; }
+.m-photo.skeleton-dark { border-color: var(--forest); }
+@media (prefers-reduced-motion: reduce) { .skeleton-dark { animation: none; } }
+.home-notice { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; padding: 22px 24px; border: 2px dashed var(--line); border-radius: var(--radius-m); font-family: var(--font-fraunces), serif; font-style: italic; font-size: 15px; color: var(--ink-soft); }
+.home-notice p { margin: 0; }
+.home-notice-retry { font-family: var(--font-work-sans), sans-serif; font-style: normal; font-size: 13.5px; font-weight: 600; color: var(--forest); background: transparent; border: 1px solid var(--line); border-radius: var(--radius-s); padding: 7px 14px; cursor: pointer; }
+.home-notice-retry:focus-visible { outline: none; box-shadow: 0 0 0 4px color-mix(in srgb, var(--gold) 40%, transparent); }
+.moments .home-notice { border-color: rgba(255, 255, 255, 0.35); color: rgba(255, 255, 255, 0.85); }
+.moments .home-notice-retry { color: #fff; border-color: rgba(255, 255, 255, 0.45); }
+
 /* ---------- Feature bento grid ---------- */
 .bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
 .card { background: var(--bg-raised); border: 1px solid var(--line); border-radius: var(--radius-m); padding: 22px; display: flex; flex-direction: column; justify-content: space-between; min-height: 150px; }
@@ -410,6 +426,32 @@ select.input { appearance: none; padding-right: 40px; cursor: pointer; }
 .lga-row-thumb.is-empty { display: inline-block; background: var(--bg-raised); border-style: dashed; }
 .upload-meter { height: 6px; border-radius: 999px; overflow: hidden; background: color-mix(in srgb, var(--gold-soft) 45%, var(--bg)); }
 .upload-meter span { display: block; height: 100%; border-radius: inherit; background: var(--forest); }
+
+/* ---------- Admin: homepage content ---------- */
+.homepage-section-tab { font-size: 13.5px; font-weight: 600; padding: 7px 14px; border-radius: var(--radius-s); border: 1px solid var(--line); background: var(--bg); color: var(--ink-soft); cursor: pointer; transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease; }
+.homepage-section-tab:hover { color: var(--ink); }
+.homepage-section-tab.is-active { color: var(--forest); border-color: color-mix(in srgb, var(--forest-2) 45%, var(--line)); background: color-mix(in srgb, var(--forest-2) 10%, var(--bg)); }
+.homepage-section-tab:focus-visible, .order-btn:focus-visible, .icon-choice:focus-within { outline: none; box-shadow: 0 0 0 4px color-mix(in srgb, var(--gold) 40%, transparent); }
+/* A list row's image, or the placeholder the homepage shows without one. */
+.homepage-thumb { flex: 0 0 auto; width: 56px; height: 56px; border-radius: 10px; object-fit: cover; border: 1px solid var(--line); }
+.homepage-thumb.is-round { border-radius: 50%; }
+.homepage-thumb-placeholder { display: flex; align-items: center; justify-content: center; color: #fff; background: linear-gradient(160deg, var(--teal), var(--teal-deep)); }
+.homepage-thumb-placeholder.is-anchor { background: linear-gradient(160deg, var(--gold-soft), var(--gold)); }
+.homepage-thumb-placeholder svg { width: 45%; height: 45%; opacity: 0.85; }
+.lga-image-thumb > .homepage-thumb-placeholder { width: 100%; height: 100%; }
+.lga-image-thumb > .homepage-thumb-placeholder svg { width: 32px; height: 32px; }
+.order-btn { display: flex; align-items: center; justify-content: center; width: 28px; height: 24px; border-radius: 6px; border: 1px solid var(--line); background: var(--bg); color: var(--ink-soft); cursor: pointer; transition: color 140ms ease, border-color 140ms ease; }
+.order-btn:hover:not(:disabled) { color: var(--forest); border-color: color-mix(in srgb, var(--forest-2) 45%, var(--line)); }
+.order-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.icon-picker { display: flex; flex-wrap: wrap; gap: 8px; }
+.icon-choice { position: relative; display: flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--ink-soft); cursor: pointer; transition: color 140ms ease; }
+.icon-choice:hover { color: var(--ink); }
+.icon-choice svg { position: relative; width: 22px; height: 22px; }
+.icon-choice.is-selected { color: #fff; }
+.icon-choice-ring { position: absolute; inset: -1px; border-radius: 10px; background: linear-gradient(160deg, var(--teal), var(--teal-deep)); }
+.hero-preview { margin-top: 10px; padding: 14px 16px; border-radius: var(--radius-s); background: var(--bg-warm); border: 1px solid var(--line); }
+.hero-preview-title { margin: 4px 0 0; font-family: var(--font-fraunces), serif; font-weight: 500; font-size: 26px; line-height: 1.12; }
+.hero-preview-title em { font-style: italic; color: var(--forest-2); }
 .dropzone.has-file { border-style: solid; border-color: color-mix(in srgb, var(--forest) 45%, var(--line)); }
 .import-image-list { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--radius-s); overflow: hidden; }
 .import-image-list li { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: 4px 12px; padding: 8px 12px; background: var(--bg); }

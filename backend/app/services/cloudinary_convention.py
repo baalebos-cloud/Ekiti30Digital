@@ -25,6 +25,21 @@ ALLOWED_FOLDERS: tuple[str, ...] = (
     "EKITI30/Ekiti_2056",
 )
 
+# Folders only admin uploads (signed, through the backend:
+# app/services/cloudinary_upload.py) may use, for site content an admin
+# publishes directly. Never offered to member uploads, so they aren't in
+# ALLOWED_FOLDERS.
+HOMEPAGE_HERO_FOLDER = "EKITI30/Homepage/Hero"
+HOMEPAGE_LEADERS_FOLDER = "EKITI30/Homepage/Leaders"
+HOMEPAGE_LANDMARKS_FOLDER = "EKITI30/Homepage/Landmarks"
+HOMEPAGE_MOMENTS_FOLDER = "EKITI30/Homepage/Moments"
+ADMIN_ONLY_FOLDERS: tuple[str, ...] = (
+    HOMEPAGE_HERO_FOLDER,
+    HOMEPAGE_LEADERS_FOLDER,
+    HOMEPAGE_LANDMARKS_FOLDER,
+    HOMEPAGE_MOMENTS_FOLDER,
+)
+
 # Enforced by Cloudinary itself via the upload preset.
 ALLOWED_FORMATS: tuple[str, ...] = ("jpg", "png", "webp", "mp4")
 
@@ -42,3 +57,8 @@ MAX_UPLOAD_BYTES = 10 * 1024 * 1024  # 10 MB
 def validate_folder(folder: str) -> bool:
     """Return True if `folder` is exactly one of ALLOWED_FOLDERS."""
     return folder in ALLOWED_FOLDERS
+
+
+def validate_admin_folder(folder: str) -> bool:
+    """Return True if an admin upload may go to `folder`: an allowed folder or an admin-only one."""
+    return folder in ALLOWED_FOLDERS or folder in ADMIN_ONLY_FOLDERS

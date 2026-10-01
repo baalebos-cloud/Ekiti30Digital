@@ -10,6 +10,8 @@ from app.api.routes import (
     contributor_admin,
     contributor_auth,
     health,
+    homepage,
+    homepage_admin,
     lgas,
     stories,
     timeline,
@@ -49,3 +51,6 @@ app.include_router(contributor_auth.router)
 app.include_router(contributor_admin.router)
 app.include_router(content_admin.lgas_router)
 app.include_router(content_admin.timeline_router)
+app.include_router(homepage.router)
+for _router in homepage_admin.routers:
+    app.include_router(_router)

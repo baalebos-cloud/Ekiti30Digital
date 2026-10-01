@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero";
 import { HomeSectionNav } from "@/components/HomeSectionNav";
+import { HomepageProvider } from "@/components/homepage/HomepageContent";
 import LeadersStrip from "@/components/LeadersStrip";
 import LandmarksStrip from "@/components/LandmarksStrip";
 import MomentsSpine from "@/components/MomentsSpine";
@@ -12,11 +13,15 @@ export default function Home() {
   return (
     <>
       <main className="home flex-1">
-        <Hero />
-        <HomeSectionNav />
-        <LeadersStrip />
-        <LandmarksStrip />
-        <MomentsSpine />
+        {/* The hero, leaders, landmarks and moments come from the admin-managed
+            homepage content, fetched once for all four. */}
+        <HomepageProvider>
+          <Hero />
+          <HomeSectionNav />
+          <LeadersStrip />
+          <LandmarksStrip />
+          <MomentsSpine />
+        </HomepageProvider>
         <FeatureGrid />
       </main>
       <Footer />

@@ -28,8 +28,8 @@ export default async function AdminPage() {
           </h1>
           <p className="max-w-[56ch] text-sm text-ink-soft">
             Nothing reaches the public site or signs in until it&apos;s approved here. Take a look,
-            then approve — or reject with a short reason. Use Manage content to edit LGAs and the
-            timeline.
+            then approve — or reject with a short reason. Use Manage content to edit LGAs, the
+            timeline and the homepage.
           </p>
         </div>
       </div>

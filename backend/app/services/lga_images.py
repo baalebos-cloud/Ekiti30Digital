@@ -14,7 +14,6 @@ import io
 import logging
 import zipfile
 from dataclasses import dataclass
-from datetime import datetime, timezone
 from pathlib import PurePosixPath
 
 from sqlalchemy.orm import Session
@@ -154,21 +153,15 @@ def match_images(
     return matched, results
 
 
-def _now() -> datetime:
-    return datetime.now(timezone.utc).replace(tzinfo=None)
-
-
 def attach_image(lga: Lga, data: bytes, filename: str, updated_by: str) -> None:
     """Validate, upload and record one LGA image; the caller commits.
 
     Raises cloudinary_upload.InvalidImage, CloudinaryNotConfigured or
     cloudinary_upload.CloudinaryUploadError, leaving the LGA unchanged.
     """
-    cloudinary_upload.validate_image(data)
-    url = cloudinary_upload.upload_image(data, folder=LGA_IMAGE_FOLDER, filename=filename)
-    lga.image_url = url
-    lga.updated_by = updated_by
-    lga.updated_at = _now()
+    cloudinary_upload.attach_image(
+        lga, data, folder=LGA_IMAGE_FOLDER, filename=filename, updated_by=updated_by
+    )
 
 
 def apply_images(

@@ -257,7 +257,8 @@ export function contentErrorMessage(status: number | null, detail?: unknown): st
   return "Something went wrong on the server. Please try again.";
 }
 
-async function request<T>(url: string, init?: RequestInit): Promise<Result<T>> {
+/** A JSON request to one of the admin proxies, as a Result. */
+export async function adminRequest<T>(url: string, init?: RequestInit): Promise<Result<T>> {
   try {
     const response = await fetch(url, { cache: "no-store", ...init });
     if (response.status === 204) return { ok: true, data: undefined as T };
@@ -274,37 +275,43 @@ async function request<T>(url: string, init?: RequestInit): Promise<Result<T>> {
 }
 
 const base = (kind: ContentAdminKind) => `/api/admin/content/${kind}`;
-const json = (method: string, body: unknown): RequestInit => ({
+export const json = (method: string, body: unknown): RequestInit => ({
   method,
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify(body),
 });
 
 export const contentApi = {
-  list: <K extends ContentAdminKind>(kind: K) => request<RecordFor<K>[]>(base(kind)),
-  create: (kind: ContentAdminKind, values: Record<string, unknown>) => request<ContentRecord>(base(kind), json("POST", values)),
+  list: <K extends ContentAdminKind>(kind: K) => adminRequest<RecordFor<K>[]>(base(kind)),
+  create: (kind: ContentAdminKind, values: Record<string, unknown>) => adminRequest<ContentRecord>(base(kind), json("POST", values)),
   update: (kind: ContentAdminKind, key: string, changes: Record<string, unknown>) =>
-    request<ContentRecord>(`${base(kind)}/${encodeURIComponent(key)}`, json("PATCH", changes)),
+    adminRequest<ContentRecord>(`${base(kind)}/${encodeURIComponent(key)}`, json("PATCH", changes)),
   remove: (kind: ContentAdminKind, key: string) =>
-    request<void>(`${base(kind)}/${encodeURIComponent(key)}`, { method: "DELETE" }),
+    adminRequest<void>(`${base(kind)}/${encodeURIComponent(key)}`, { method: "DELETE" }),
   /** `images` (a zip) is for LGA imports only. */
   importCsv: (kind: ContentAdminKind, file: File, dryRun: boolean, images?: File | null) => {
     const form = new FormData();
     form.append("file", file);
     if (kind === "lgas" && images) form.append("images", images);
-    return request<ImportSummary>(`${base(kind)}/import?dry_run=${dryRun}`, { method: "POST", body: form });
+    return adminRequest<ImportSummary>(`${base(kind)}/import?dry_run=${dryRun}`, { method: "POST", body: form });
   },
 };
 
+/** Upload an image for an existing LGA (see uploadImage). */
+export function uploadLgaImage(slug: string, file: File, onProgress: (fraction: number) => void): Promise<Result<LgaRecord>> {
+  return uploadImage<LgaRecord>(`${base("lgas")}/${encodeURIComponent(slug)}/image`, file, onProgress);
+}
+
 /**
- * Upload an image for an existing LGA. `onProgress` gets 0..1 as the file is
- * sent; after 1 the server is still passing it on to Cloudinary. Uses
+ * POST an image as the `file` field of a multipart form to an admin image
+ * proxy (LGAs, homepage items). `onProgress` gets 0..1 as the file is sent;
+ * after 1 the server is still passing it on to Cloudinary. Uses
  * XMLHttpRequest because fetch can't report upload progress.
  */
-export function uploadLgaImage(slug: string, file: File, onProgress: (fraction: number) => void): Promise<Result<LgaRecord>> {
+export function uploadImage<T>(url: string, file: File, onProgress: (fraction: number) => void): Promise<Result<T>> {
   return new Promise((resolve) => {
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", `${base("lgas")}/${encodeURIComponent(slug)}/image`);
+    xhr.open("POST", url);
     xhr.timeout = 300_000;
     xhr.upload.onprogress = (event) => {
       if (event.lengthComputable) onProgress(event.loaded / event.total);
@@ -317,7 +324,7 @@ export function uploadLgaImage(slug: string, file: File, onProgress: (fraction: 
         // not JSON; handled below
       }
       if (xhr.status >= 200 && xhr.status < 300 && data) {
-        resolve({ ok: true, data: data as LgaRecord });
+        resolve({ ok: true, data: data as T });
         return;
       }
       const detail = (data as { detail?: unknown } | null)?.detail;

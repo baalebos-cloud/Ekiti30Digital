@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { ContentEditor } from "@/components/content-admin/ContentEditor";
 import { ContentList } from "@/components/content-admin/ContentList";
 import { CsvImport } from "@/components/content-admin/CsvImport";
+import { HomepageManager } from "@/components/homepage-admin/HomepageManager";
 import { EmptyState, ErrorState, LoadingState } from "@/components/review/SectionStates";
 import { Spinner } from "@/components/ui/Spinner";
 import { SuccessToast, useToast } from "@/components/ui/SuccessToast";
@@ -26,7 +27,11 @@ type ListState =
 
 type View = { mode: "list" } | { mode: "edit"; record: ContentRecord } | { mode: "create" } | { mode: "import" };
 
-const LABELS: Record<ContentAdminKind, string> = { lgas: "LGAs", timeline: "Timeline" };
+// The homepage has its own manager (hero, leaders, landmarks, moments); the
+// others are CSV-backed record lists.
+type Tab = ContentAdminKind | "homepage";
+const TABS: Tab[] = [...CONTENT_ADMIN_KINDS, "homepage"];
+const LABELS: Record<Tab, string> = { lgas: "LGAs", timeline: "Timeline", homepage: "Homepage" };
 
 function sortItems(kind: ContentAdminKind, items: ContentRecord[]): ContentRecord[] {
   const sortKey = (r: ContentRecord) => (kind === "lgas" ? recordKey(kind, r) : `${r.date_start}|${recordKey(kind, r)}`);
@@ -83,9 +88,11 @@ function useContentList(kind: ContentAdminKind) {
   return { state, reload, replace, remove };
 }
 
-/** The "Manage content" tab: edit, add, delete and import LGAs and timeline events. */
+/** The "Manage content" tab: LGAs and timeline events (edit, add, delete, import), and the homepage. */
 export function ContentManager() {
-  const [kind, setKind] = useState<ContentAdminKind>("lgas");
+  const [tab, setTab] = useState<Tab>("lgas");
+  // The record list in view (unused on the homepage tab, where HomepageManager takes over).
+  const kind: ContentAdminKind = tab === "homepage" ? "lgas" : tab;
   const lgas = useContentList("lgas");
   const timeline = useContentList("timeline");
   const lists = { lgas, timeline };
@@ -112,16 +119,16 @@ export function ContentManager() {
     <div className="flex flex-col gap-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div role="tablist" aria-label="Content type" className="flex gap-1 rounded-full border border-line bg-bg-raised p-1">
-          {CONTENT_ADMIN_KINDS.map((k) => (
+          {TABS.map((k) => (
             <button
               key={k}
               type="button"
               role="tab"
-              aria-selected={kind === k}
-              onClick={() => setKind(k)}
-              className={`relative rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${kind === k ? "text-white" : "text-ink-soft hover:text-ink"}`}
+              aria-selected={tab === k}
+              onClick={() => setTab(k)}
+              className={`relative rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${tab === k ? "text-white" : "text-ink-soft hover:text-ink"}`}
             >
-              {kind === k && (
+              {tab === k && (
                 <motion.span
                   layoutId="content-kind-pill"
                   className="absolute inset-0 rounded-full bg-forest"
@@ -133,7 +140,7 @@ export function ContentManager() {
           ))}
         </div>
 
-        {view.mode === "list" && (
+        {tab !== "homepage" && view.mode === "list" && (
           <div className="flex flex-wrap items-center gap-2">
             <button type="button" onClick={() => list.reload()} disabled={list.state.status === "loading"} className="link-btn flex items-center gap-1.5">
               {list.state.status === "loading" && <Spinner size={12} />}
@@ -157,13 +164,15 @@ export function ContentManager() {
 
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
-          key={`${kind}-${view.mode}-${view.mode === "edit" ? recordKey(kind, view.record) : ""}`}
+          key={tab === "homepage" ? "homepage" : `${kind}-${view.mode}-${view.mode === "edit" ? recordKey(kind, view.record) : ""}`}
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -4 }}
           transition={{ duration: 0.2 }}
         >
-          {view.mode === "edit" || view.mode === "create" ? (
+          {tab === "homepage" ? (
+            <HomepageManager onToast={show} />
+          ) : view.mode === "edit" || view.mode === "create" ? (
             <ContentEditor
               kind={kind}
               record={view.mode === "edit" ? view.record : null}
