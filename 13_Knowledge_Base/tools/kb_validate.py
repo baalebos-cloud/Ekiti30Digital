@@ -50,7 +50,8 @@ REQUIRED = ["id", "title", "category", "doc_type", "source_ids", "source_name", 
 SKIP_NAMES = {"README.md", "CONTRIBUTING.md", "CODE_OF_CONDUCT.md"}
 MANIFEST_COLUMNS = ["id", "path", "category", "doc_type", "status", "source_tier", "source_ids",
                     "publication_date", "last_verified", "verified_by", "language", "translation_of",
-                    "period_covered", "file_sha256", "ingestible", "reason"]
+                    "period_covered", "ask_ekiti_approved", "ask_ekiti_approved_by",
+                    "ask_ekiti_approved_date", "file_sha256", "ingestible", "reason"]
 
 
 # ---------------------------------------------------------------- parsing
@@ -103,6 +104,60 @@ def parse_front_matter(text):
         key, val = ln.split(":", 1)
         fm[key.strip()] = parse_value(val)
     return fm, "\n".join(lines[end + 1:]), None
+
+
+# ---------------------------------------------------------------- Ask Ekiti citation gate
+FACT_MARKER_RE = re.compile(r"\[(S\d+(?:\s*,\s*S\d+)*)\]\s*$")
+SOURCE_LINE_RE = re.compile(
+    r"^- \[(S\d+)\]\s+(SRC-\d{3}):\s+.*https?://\S+",
+    re.M,
+)
+
+
+def citation_safe_facts(body, declared_source_ids):
+    """Return whether ## Facts contains only locally resolved sourced claims."""
+    sections = {}
+    current = None
+
+    for line in body.splitlines():
+        if line.startswith("## "):
+            current = line[3:].strip()
+            sections[current] = []
+        elif current:
+            sections[current].append(line)
+
+    source_map = {}
+    for line in sections.get("Sources", []):
+        match = SOURCE_LINE_RE.match(line.strip())
+        if match:
+            source_map[match.group(1)] = match.group(2)
+
+    facts = [
+        line.strip()[2:]
+        for line in sections.get("Facts", [])
+        if line.strip().startswith("- ")
+    ]
+
+    if not facts:
+        return False, "document has no ## Facts claims"
+
+    declared = set(declared_source_ids or [])
+
+    for fact in facts:
+        marker = FACT_MARKER_RE.search(fact)
+        if not marker:
+            return False, "a fact is missing its [S#] citation"
+
+        keys = [item.strip() for item in marker.group(1).split(",")]
+
+        for key in keys:
+            if key not in source_map:
+                return False, f"{key} is not resolved in ## Sources"
+
+            if source_map[key] not in declared:
+                return False, f"{source_map[key]} is not declared in source_ids"
+
+    return True, ""
 
 
 # ---------------------------------------------------------------- dates
@@ -310,6 +365,33 @@ def validate_doc(doc, registry, today):
     if exc and not note:
         (E if status == "verified" else W)("tier_c_exception needs a verification_note")
 
+    # ---- Ask Ekiti publication approval
+    # This is deliberately separate from evidence verification. A reviewer may
+    # approve a document for Ask Ekiti while its underlying evidence remains
+    # needs_review, conflict, community tradition, estimate, etc.
+    approval_flag = fm.get("ask_ekiti_approved")
+    approval_by = str(fm.get("ask_ekiti_approved_by", "")).strip()
+    approval_date = str(fm.get("ask_ekiti_approved_date", "")).strip()
+
+    if approval_flag not in (None, True, False):
+        E("ask_ekiti_approved must be true or false")
+
+    if approval_flag is True:
+        if status == "retired":
+            E("retired documents cannot be approved for Ask Ekiti")
+
+        if not approval_by:
+            E("ask_ekiti_approved needs ask_ekiti_approved_by")
+
+        d = parse_full_date(approval_date)
+        if not approval_date or d is None:
+            E("ask_ekiti_approved needs ask_ekiti_approved_date (YYYY-MM-DD)")
+        elif d > today:
+            E("ask_ekiti_approved_date is in the future")
+
+    elif approval_by or approval_date:
+        W("Ask Ekiti approval metadata is set but ask_ekiti_approved is not true")
+
     # ---- language (A9 rule 9)
     if lang == "yo":
         if not fm.get("translation_of"):
@@ -398,8 +480,30 @@ def run(root, registry_path, manifest_path, strict, write_manifest, today, quiet
     rows = []
     for d in sorted(docs, key=lambda x: x["path"]):
         fm = d["fm"]
-        ok = fm.get("status") == "verified" and not d["errors"]
-        reason = "" if ok else ("has errors" if d["errors"] else f"status is {fm.get('status', '?')}")
+        verified_ok = fm.get("status") == "verified" and not d["errors"]
+
+        citation_ok, citation_reason = citation_safe_facts(
+            d["body"],
+            fm.get("source_ids") if isinstance(fm.get("source_ids"), list) else [],
+        )
+
+        approved_ok = (
+            fm.get("ask_ekiti_approved") is True
+            and fm.get("status") in ("verified", "needs_review")
+            and not d["errors"]
+            and citation_ok
+        )
+
+        ok = verified_ok or approved_ok
+
+        if ok:
+            reason = ""
+        elif d["errors"]:
+            reason = "has errors"
+        elif fm.get("ask_ekiti_approved") is True and not citation_ok:
+            reason = f"Ask Ekiti approval is not citation-safe: {citation_reason}"
+        else:
+            reason = f"status is {fm.get('status', '?')}"
         rows.append({
             "id": fm.get("id", ""), "path": d["path"], "category": fm.get("category", ""),
             "doc_type": fm.get("doc_type", ""), "status": fm.get("status", ""),
@@ -407,6 +511,9 @@ def run(root, registry_path, manifest_path, strict, write_manifest, today, quiet
             "publication_date": fm.get("publication_date", ""), "last_verified": fm.get("last_verified", ""),
             "verified_by": fm.get("verified_by", ""), "language": fm.get("language", ""),
             "translation_of": fm.get("translation_of", ""), "period_covered": fm.get("period_covered", ""),
+            "ask_ekiti_approved": "yes" if fm.get("ask_ekiti_approved") is True else "no",
+            "ask_ekiti_approved_by": fm.get("ask_ekiti_approved_by", ""),
+            "ask_ekiti_approved_date": fm.get("ask_ekiti_approved_date", ""),
             "file_sha256": d["sha"], "ingestible": "yes" if ok else "no", "reason": reason,
         })
     if write_manifest:

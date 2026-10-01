@@ -41,7 +41,21 @@ class KnowledgeDocument(Base):
 
     # The manifest's `source_tier` column.
     tier: Mapped[str]
-    last_verified: Mapped[date] = mapped_column(Date)
+    # Evidence verification is separate from Ask Ekiti publication approval.
+    # Reviewer-approved documents may be usable before full verification, so
+    # last_verified must remain nullable in that case.
+    last_verified: Mapped[date | None] = mapped_column(Date, nullable=True)
+
+    evidence_status: Mapped[str] = mapped_column(default="verified")
+
+    ask_ekiti_approved: Mapped[bool] = mapped_column(
+        Boolean, default=False
+    )
+    ask_ekiti_approved_by: Mapped[str | None]
+    ask_ekiti_approved_date: Mapped[date | None] = mapped_column(
+        Date, nullable=True
+    )
+
     ingestible: Mapped[bool] = mapped_column(Boolean)
 
     # Source file path relative to the repository root, and its SHA-256 from

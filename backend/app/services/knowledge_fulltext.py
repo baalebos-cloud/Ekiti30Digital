@@ -12,15 +12,28 @@ def search_text(question: str) -> str:
 
 SEARCH = text("""
     SELECT d.doc_id, c.content, d.class AS category, d.tier,
-           d.last_verified, d.path, d.source_url,
+           d.last_verified, d.evidence_status,
+           d.ask_ekiti_approved, d.ask_ekiti_approved_date,
+           d.path, d.source_url,
            c.source_ids, c.source_titles, c.source_urls,
            ts_rank_cd(to_tsvector('english', c.content),
                       plainto_tsquery('english', :question)) AS search_rank
     FROM chunks AS c
     JOIN knowledge_documents AS d ON d.id = c.document_id
     WHERE d.ingestible IS TRUE
-      AND d.last_verified IS NOT NULL
-      AND d.last_verified <= CURRENT_DATE
+      AND (
+            (
+                d.evidence_status = 'verified'
+                AND d.last_verified IS NOT NULL
+                AND d.last_verified <= CURRENT_DATE
+            )
+            OR
+            (
+                d.ask_ekiti_approved IS TRUE
+                AND d.ask_ekiti_approved_date IS NOT NULL
+                AND d.ask_ekiti_approved_date <= CURRENT_DATE
+            )
+          )
       AND coalesce(c.source_ids, '') <> ''
       AND coalesce(c.source_titles, '') <> ''
       AND coalesce(c.source_urls, '') <> ''
@@ -54,7 +67,14 @@ def retrieve_fulltext(question, db, limit=5, category=None, doc_ids=None, fact_k
         hit = dict(row)
         for key in ("source_ids", "source_titles", "source_urls"):
             hit[key] = hit[key].split(";")
-        hit["last_verified"] = hit["last_verified"].isoformat()
+        hit["last_verified"] = (
+            hit["last_verified"].isoformat()
+            if hit.get("last_verified") else None
+        )
+        hit["ask_ekiti_approved_date"] = (
+            hit["ask_ekiti_approved_date"].isoformat()
+            if hit.get("ask_ekiti_approved_date") else None
+        )
         hit["search_rank"] = float(hit["search_rank"])
         hits.append(hit)
     return hits
