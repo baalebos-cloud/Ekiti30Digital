@@ -19,13 +19,13 @@ lga-ise-orun,02_LGAs/lga-ise-orun.md,lgas,entity,verified,A,SRC-028,Not stated,2
 lga-moba,02_LGAs/lga-moba.md,lgas,entity,verified,A,SRC-028,Not stated,2026-09-29,smartexploit,en,,1996-2026,no,,,cc88b00bbc488c35b4af99dd953befefb9b4bbdcc81c26d7ea6043268a169620,yes,
 lga-oye,02_LGAs/lga-oye.md,lgas,entity,verified,A,SRC-028,Not stated,2026-09-29,smartexploit,en,,1996-2026,no,,,bc7b3fe220a111ffb37305448a96ccf89e13954d5d1b4ecbc853c7c697bf2274,yes,
 04-tourism-abanijorin-rocks-cave,04_Tourism/abanijorin-rocks-cave.md,tourism,,needs_review,,,null,2026-09-23,,,,,no,,,39d3c51036dfd31b4b0fbdf8c020ace37cf95f4b4ca844ebae5536746a1cb89d,no,has errors
-04-tourism-arinta-waterfall,04_Tourism/arinta-waterfall.md,tourism,,needs_review,,,null,2026-09-23,,,,,no,,,2cd93300378efd66c1106133f07ed72ae3c41de7a7616d26e3a04cac42396272,no,has errors
+04-tourism-arinta-waterfall,04_Tourism/arinta-waterfall.md,tourism,entity,needs_review,A,SRC-047,Not stated,,,en,,1996-2026,yes,project-reviewer,2026-10-01,8f446a23d782ab7c816604c4db35caa6be9d054e8ec0d2a0d7a83778c9830b63,yes,
 04-tourism-egbe-dam,04_Tourism/egbe-dam.md,tourism,,needs_review,,,null,2026-09-23,,,,,no,,,36ff0d0ddbe5037b7aeab850abd65a35b47c993cc6d95bdd798a57a4d9748f00,no,has errors
 04-tourism-erin-ayonigba-sacred-fish-river,04_Tourism/erin-ayonigba-sacred-fish-river.md,tourism,,needs_review,,,null,2026-09-23,,,,,no,,,53fde14e2f444c035949ee4e49dad68ebaffa554f972f05a843d3f5072e3f5bc,no,has errors
 04-tourism-ero-dam-lake,04_Tourism/ero-dam-lake.md,tourism,,needs_review,,,null,2026-09-23,,,,,no,,,1d1603fe9d1c0abbfd8df7df56a130cb58b6561f838d82ddf45b2fdcabd8ec1b,no,has errors
 04-tourism-esa-cave,04_Tourism/esa-cave.md,tourism,,needs_review,,,null,2026-09-23,,,,,no,,,9169830544a00dc1ed2263eeb22c771225ac55ee79a962b21727147b25c0b06f,no,has errors
 04-tourism-ewi-of-ado-ekiti-palace,04_Tourism/ewi-of-ado-ekiti-palace.md,tourism,,needs_review,,,null,2026-09-23,,,,,no,,,d2bce3c898794e0bf5502cc8db55b12c894e42c238c6d33e05cf822e04b69871,no,has errors
-04-tourism-fajuyi-memorial-park,04_Tourism/fajuyi-memorial-park.md,tourism,,needs_review,,,null,2026-09-23,,,,,no,,,136d392457efdf97b7c46ab414b118c2af8d15c06f1bf91ba4a40667099cc789,no,has errors
+04-tourism-fajuyi-memorial-park,04_Tourism/fajuyi-memorial-park.md,tourism,entity,needs_review,A,SRC-011,Not stated,,,en,,1996-2026,yes,project-reviewer,2026-10-01,42733e78d8348b942ed1a823f8f1108cecbb6eb20b8262a21aff0d7e8b9466c7,yes,
 04-tourism-ikogosi-warm-springs,04_Tourism/ikogosi-warm-springs.md,tourism,entity,needs_review,A,SRC-011,Not stated,,,en,,1996-2026,yes,project-reviewer,2026-10-01,d31ce473880f687af04a90d3ffa25da7a34db4744c2ba9929f3fe56e5047cfa2,yes,
 04-tourism-motif-funland,04_Tourism/motif-funland.md,tourism,,needs_review,,,null,2026-09-23,,,,,no,,,456fec0dff15a43176c00638fc3d24e2ddc130f39a49d1bdbf4ce0158989fa1b,no,has errors
 04-tourism-olosunta-orole-hills,04_Tourism/olosunta-orole-hills.md,tourism,,needs_review,,,null,2026-09-23,,,,,no,,,9627e2f82dc6a83a82b42c5f1a03922182c2bd4edefd1f59db544808a3d330e1,no,has errors
@@ -41,7 +41,7 @@ lga-oye,02_LGAs/lga-oye.md,lgas,entity,verified,A,SRC-028,Not stated,2026-09-29,
 05-culture-olosunta-and-orole-hill-deity-veneration,05_Culture/olosunta-and-orole-hill-deity-veneration.md,culture,,needs_review,,,null,2026-09-23,,,,,no,,,fd97f1908d7647ae397d987227b2f2c64c8dea2f8f88a4d846fc69556706c54d,no,has errors
 05-culture-olosunta-orun-ikere-festival,05_Culture/olosunta-orun-ikere-festival.md,culture,,needs_review,,,null,2026-09-23,,,,,no,,,8dea14ee008625931ae875cecaabe88526251c3e95b316631cf46bf4a830722f,no,has errors
 05-culture-olowe-of-ise-sculpture-legacy,05_Culture/olowe-of-ise-sculpture-legacy.md,culture,,needs_review,,,null,2026-09-23,,,,,no,,,36112182de93644426c5c7a6b2109056152afb008ecbf8f9a9e1ccbda4e01bbb,no,has errors
-05-culture-udiroko-festival,05_Culture/udiroko-festival.md,culture,,needs_review,,,null,2026-09-23,,,,,no,,,7d7383ddfa6f1850f5dd0651eeadfba3a628dc1376b9353dca60d29c3740f0c4,no,has errors
+05-culture-udiroko-festival,05_Culture/udiroko-festival.md,culture,entity,needs_review,A,SRC-048,2012-08-28,,,en,,1996-2026,yes,project-reviewer,2026-10-01,6454d5123cd0705160f5bb8c02d32a578095d1c4cd0d2e7be1cb49744b5c00e4,yes,
 ,06_Education/Education_Gaps_and_Follow-ups.md,,,,,,,2026-09-25,,,,,no,,,427da0fe445c7c337ea91d1e84323196b17df349058d4a876ee8a380b2b805cb,no,has errors
 ek-edu-inst-abuad,06_Education/institutions/abuad/metadata.md,education,,needs_review,A,,,2026-09-25,,,,,no,,,2ba251729f12c8e44049eaed4a4d9b9e8f64e6a468d0ea838c2b231cbbbaf856,no,has errors
 ek-edu-inst-cohesti,06_Education/institutions/cohesti-ijero-ekiti/metadata.md,education,,needs_review,B,,,2026-09-25,,,,,no,,,028de5f5d5a5005b5e5f6841cb776dd82fe008c0458f9ffd80d04ce51b6494bb,no,has errors
@@ -49,6 +49,7 @@ ek-edu-inst-ekspoly,06_Education/institutions/ekspoly-isan-ekiti/metadata.md,edu
 ek-edu-inst-eksu,06_Education/institutions/eksu/metadata.md,education,,needs_review,A,,,2026-09-25,,,,,no,,,c6addf2bdb7ea930cc1f145bab030df61213a24f9c56d67010c76bfe05fd80c4,no,has errors
 ek-edu-inst-fedpoly,06_Education/institutions/fedpoly-ado-ekiti/metadata.md,education,,needs_review,A,,,2026-09-25,,,,,no,,,745bc2f747a1a67f377750334f8228b72f99d8e23225372109e93f0cbdd414b1,no,has errors
 ek-edu-inst-futes,06_Education/institutions/futes-iyin-ekiti/metadata.md,education,,needs_review,,,,2026-09-25,,,,,no,,,d1fa1365ff4d7dfdd4e1478e2be7d7ef4e56d5f3ce07ab2f1480f36d749141c4,no,has errors
+07-health-ulerawa-health-programme,07_Health/programmes/EK-HEA-PROG-001_Ulerawa_Health_Programme.md,health,entity,needs_review,A,SRC-049;SRC-050,Not stated,,,en,,2023-2026,yes,project-reviewer,2026-10-01,4870c9acfe98df81bcf942c8aa87204d102e94058e6ca77303e08772e0d0bd30,yes,
 ,08_Agriculture/Agriculture_Gaps_and_Follow-ups.md,,,,,,,2026-09-25,,,,,no,,,5c65f07dc3086998480bec191f1c64256530ab9c5588369be667b4545381d471,no,has errors
 ek-agr-data-001,08_Agriculture/data/agriculture_sector_snapshot.md,agriculture,,needs_review,B,,,2026-09-25,,,,,no,,,0afc556cbdc2364bef88714a0337f66ea6b0487c1173b2f425af8992463ac594,no,has errors
 ek-agr-inst-cargoairport,08_Agriculture/institutions/agro-allied-cargo-airport/metadata.md,agriculture,,needs_review,B,,,2026-09-25,,,,,no,,,75588fc19b6beaf125cc8b3201d67e498fb31a5fe07f072d04359ad0e4d013a7,no,has errors

@@ -9,6 +9,60 @@ LGA_NAMES = ["ado ekiti", "aiyekire", "efon", "ekiti east", "ekiti south west",
              "irepodun ifelodun", "ise orun", "moba", "oye"]
 
 
+CATEGORY_PATTERNS = {
+    "tourism": (
+        r"\b(tourism|tourist|attraction|attractions|waterfall|waterfalls|"
+        r"spring|springs|resort|resorts|memorial park|tourist sites?)\b"
+    ),
+    "culture": (
+        r"\b(culture|cultural|festival|festivals|tradition|traditional|"
+        r"heritage|custom|customs)\b"
+    ),
+    "education": (
+        r"\b(education|school|schools|university|universities|polytechnic|"
+        r"polytechnics|college|colleges|institution|institutions)\b"
+    ),
+    "health": (
+        r"\b(health|healthcare|hospital|hospitals|medical|medicine|"
+        r"health programme|health program|ulerawa)\b"
+    ),
+    "agriculture": (
+        r"\b(agriculture|agricultural|farming|farmer|farmers|farm|farms|"
+        r"cassava|crop|crops)\b"
+    ),
+    "statistics": (
+        r"\b(statistics|statistical|population|census|unemployment|"
+        r"figures|data)\b"
+    ),
+    "history": (
+        r"\b(history|historical|state creation|statehood)\b"
+    ),
+    "lgas": (
+        r"\b(lga|lgas|local government|local governments)\b"
+    ),
+}
+
+
+def topic_category(question):
+    """Infer one explicit knowledge-base category from the question.
+
+    If a question clearly spans more than one domain, return None so the
+    caller does not silently discard part of the user's request.
+    """
+    q = normalized(question)
+
+    matches = [
+        category
+        for category, pattern in CATEGORY_PATTERNS.items()
+        if re.search(pattern, q)
+    ]
+
+    if len(matches) == 1:
+        return matches[0]
+
+    return None
+
+
 def entities(question):
     remaining = " " + normalized(question) + " "
     found = []
