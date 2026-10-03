@@ -1,6 +1,6 @@
 """Answer-level regressions for the failures observed in the live evaluation."""
 import pytest
-from app.services.ask_planner import entities, plan
+from app.services.ask_planner import entities, plan, topic_category
 from app.services.ask_answers import response
 from app.services.ask_language import yoruba_fact
 from app.core.config import settings
@@ -60,6 +60,53 @@ def test_policy_responses_do_not_query_or_invent(question, key):
     result = response(question, "en", forbidden)
     assert result["reason"] == key
     assert not result["citations"]
+
+
+@pytest.mark.parametrize(
+    ("question", "expected"),
+    [
+        ("Tell me about tourism attractions in Ekiti.", "tourism"),
+        ("What health programmes are available in Ekiti?", "health"),
+        ("What universities are in Ekiti?", "education"),
+        ("Tell me about agriculture in Ekiti.", "agriculture"),
+        ("Tell me about Ekiti festivals and culture.", "culture"),
+        ("Show me statistics about Ekiti.", "statistics"),
+        ("Tell me about the history of Ekiti.", "history"),
+        ("Tell me about Ekiti LGAs.", "lgas"),
+    ],
+)
+def test_topic_category_detection(question, expected):
+    assert topic_category(question) == expected
+
+
+def test_multi_domain_question_does_not_force_one_category():
+    assert (
+        topic_category(
+            "Compare tourism and health programmes in Ekiti."
+        )
+        is None
+    )
+
+
+def test_generic_answer_routes_to_detected_category():
+    seen = []
+
+    def search(question, *, category, doc_ids, fact_kind, limit):
+        seen.append(category)
+        return [
+            hit(
+                "04-tourism-arinta-waterfall",
+                "Arinta Waterfall is in Ekiti.",
+            )
+        ]
+
+    response(
+        "Tell me about tourism attractions in Ekiti.",
+        "en",
+        search,
+    )
+
+    assert seen == ["tourism"]
 
 
 def test_partial_answer_reports_missing_evidence():

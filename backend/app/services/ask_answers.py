@@ -2,7 +2,7 @@
 import re
 from collections import defaultdict
 from app.services.ask_language import message, yoruba_fact
-from app.services.ask_planner import plan, entities
+from app.services.ask_planner import plan, entities, topic_category
 
 CITATION_KEYS = (
     "doc_id", "source_ids", "source_titles", "source_urls", "source_url",
@@ -13,6 +13,10 @@ CITATION_KEYS = (
 
 def response(question, language, search, category=None):
     p = plan(question, language)
+
+    # An explicit API category always wins. Otherwise, route questions that
+    # clearly name one KB domain to that domain before semantic ranking.
+    effective_category = category or topic_category(question)
     base = {"answer_status": "insufficient", "language": language, "citations": [],
             "statements": [], "coverage": "none", "missing": []}
     if p.policy:
@@ -20,14 +24,26 @@ def response(question, language, search, category=None):
     hits = []
     if p.queries:
         for query, ids, kind in p.queries:
-            found = search(query, category=category, doc_ids=ids, fact_kind=kind, limit=20)
+            found = search(
+                query,
+                category=effective_category,
+                doc_ids=ids,
+                fact_kind=kind,
+                limit=20,
+            )
             hits.extend(found)
             if kind == "headquarters":
                 present = {hit["doc_id"] for hit in found}
                 p.missing.extend(ident.removeprefix("lga-") + " headquarters / olú ìjọba"
                                  for ident in ids if ident not in present)
     else:
-        hits = search(question, category=category, doc_ids=entities(question), fact_kind=None, limit=5)
+        hits = search(
+            question,
+            category=effective_category,
+            doc_ids=entities(question),
+            fact_kind=None,
+            limit=5,
+        )
     seen = set()
     statements, citations = [], []
     for hit in hits:

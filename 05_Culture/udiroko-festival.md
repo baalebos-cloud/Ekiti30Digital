@@ -1,50 +1,49 @@
 ---
-title: "Udiroko Festival"
-category: "culture"
-subcategory: "Festival / Cultural Event"
-lga: "Ado-Ekiti LGA"
-location: "Ado-Ekiti (palace grounds) — annual, August"
-source: "Ekiti State Government (Udiroko festival articles)"
-source_url: "https://www.ekitistate.gov.ng/?p=4314"
-source_type: "Government publication, corroborated by long-running independent press coverage"
-additional_sources: []
-verification_status: "Verified"
-media_reference: "Needs sourcing (festival photos widely available in state government press releases — confirm reuse rights before use)"
-media_rights: "Government press photos may exist but reuse rights are not confirmed — do not use without explicit permission from the Ekiti State Government's media office"
-publication_date: null
-last_verified: "2026-09-23"
-traditional_account: true
-notes: "The festival's existence, annual occurrence, and 2024 UNWTO visit are corroborated by independent press coverage. The 1310 AD origin date is oral tradition and is labelled as such."
 id: 05-culture-udiroko-festival
+title: Udiroko Festival
+category: culture
+doc_type: entity
+source_ids: [SRC-048]
+source_name: Udiroko Festival: A Catalyst For Development
+source_url: https://www.ekitistate.gov.ng/archives/4314
+publication_date: 2012-08-28
+source_tier: A
 status: needs_review
+period_covered: 1996-2026
+language: en
+translation_of:
+translation_reviewed_by:
+ask_ekiti_approved: true
+ask_ekiti_approved_by: project-reviewer
+ask_ekiti_approved_date: 2026-10-01
+verification_note: Ask Ekiti inclusion is reviewer-approved. Traditional-origin claims remain separated from documented festival facts.
+tags: [culture, festival, udiroko, ado-ekiti, ewi]
 ---
 
 # Udiroko Festival
 
-## Documented Facts
+## Summary
 
-Ado-Ekiti's new-year festival: the Ewi, his chiefs, and Ado indigenes at home and in the diaspora converge at the palace for prayers ("Iwure"), cultural displays and a royal address. In 2024 it was attended by a United Nations World Tourism Organization delegation assessing Ekiti for a state tourism masterplan.
+Udiroko is an annual cultural festival of Ado-Ekiti centred on the palace of the Ewi of Ado-Ekiti.
+
+## Facts
+
+- Udiroko Festival is celebrated annually in Ado-Ekiti and brings together the Ewi, chiefs, Ado-Ekiti citizens at home and in the diaspora, and other participants at the Ewi's palace. [S1]
+- The festival marks the first day of Ado-Ekiti's traditional calendar and includes cultural displays, an address by the Ewi and a new-year prayer known as Iwure. [S1]
+- A 2012 Ekiti State Government account states that fundraising connected with Udiroko supported community development projects including the modern Ewi's palace, Great Fajuyi Hall and an administrative block for the Faculty of Law at Ekiti State University. [S1]
 
 ## Traditional / Community Account
 
-Oral tradition dates the festival's origin to around 1310 AD, in the reign of the first Ewi, Awamaro. It is popularly described as Ado-Ekiti's most unifying annual event after the Ogun festival — a characterisation, not an independently measured fact.
+The 2012 government article states that Udiroko was established around 1310 during the reign of Awamaro, described there as the first Ewi of modern Ado-Ekiti. This historical-origin statement is retained as a traditional account and is not indexed as an independently verified factual claim.
 
-> This section records a belief, oral tradition, or community account. It is presented as such and should not be displayed or treated as independently verified historical fact.
+## Evidence Status
 
-## Verification Breakdown
-
-- **Festival's existence, format, and 2024 UNWTO visit** — *Verified* (Ekiti State Government + independent press coverage)
-- **1310 AD origin date** — *Community claim* (Oral tradition)
-
-## Notes / Uncertainties
-
-The festival's existence, annual occurrence, and 2024 UNWTO visit are corroborated by independent press coverage. The 1310 AD origin date is oral tradition and is labelled as such.
-
-## Media / Photo Reference
-
-- Status: Needs sourcing (festival photos widely available in state government press releases — confirm reuse rights before use)
-- Rights: Government press photos may exist but reuse rights are not confirmed — do not use without explicit permission from the Ekiti State Government's media office
+The documented festival facts are sourced to an Ekiti State Government article dated 28 August 2012. Traditional-origin material is intentionally kept outside the factual retrieval section.
 
 ## Sources
 
-- Ekiti State Government (Udiroko festival articles) — https://www.ekitistate.gov.ng/?p=4314 (Government publication, corroborated by long-running independent press coverage)
+- [S1] SRC-048: Udiroko Festival: A Catalyst For Development. Government of Ekiti State. https://www.ekitistate.gov.ng/archives/4314
+
+## Ask Ekiti Usage
+
+Only claims in the ## Facts section are eligible for factual retrieval. Traditional-origin claims must remain clearly labelled if used elsewhere.

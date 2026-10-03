@@ -10,7 +10,12 @@ from sqlalchemy.orm import Session
 
 from app.models.base import Base
 from app.models.knowledge import KnowledgeDocument, EMBEDDING_DIMENSIONS
-from app.services.knowledge_pipeline import ingest_manifest, retrieve, verified_facts
+from app.services.knowledge_pipeline import (
+    _matching_doc_id,
+    ingest_manifest,
+    retrieve,
+    verified_facts,
+)
 
 FIELDS = [
     "id", "path", "category", "status", "source_tier", "source_ids",
@@ -185,6 +190,59 @@ def test_uncited_claim_is_rejected():
     from pytest import raises
     with raises(ValueError, match="citation"):
         verified_facts("## Facts\n- A claim without evidence.\n## Sources\n")
+
+
+@pytest.mark.parametrize(
+    ("question", "expected"),
+    [
+        (
+            "What is Arinta Waterfall?",
+            "04-tourism-arinta-waterfall",
+        ),
+        (
+            "What is Fajuyi Memorial Park?",
+            "04-tourism-fajuyi-memorial-park",
+        ),
+        (
+            "What is the Udiroko Festival?",
+            "05-culture-udiroko-festival",
+        ),
+        (
+            "What is the Ulerawa Health Programme?",
+            "07-health-ulerawa-health-programme",
+        ),
+        (
+            "What is Ikogosi Warm Springs?",
+            "04-tourism-ikogosi-warm-springs",
+        ),
+    ],
+)
+def test_named_subject_resolves_to_exact_document(question, expected):
+    doc_ids = [
+        "04-tourism-arinta-waterfall",
+        "04-tourism-fajuyi-memorial-park",
+        "04-tourism-ikogosi-warm-springs",
+        "05-culture-udiroko-festival",
+        "07-health-ulerawa-health-programme",
+    ]
+
+    assert _matching_doc_id(question, doc_ids) == expected
+
+
+def test_broad_topic_question_does_not_focus_one_document():
+    doc_ids = [
+        "04-tourism-arinta-waterfall",
+        "04-tourism-fajuyi-memorial-park",
+        "04-tourism-ikogosi-warm-springs",
+    ]
+
+    assert (
+        _matching_doc_id(
+            "Tell me about tourism in Ekiti",
+            doc_ids,
+        )
+        is None
+    )
 
 
 def test_empty_corpus_returns_no_hits_after_query_embedding():

@@ -18,6 +18,86 @@ SOURCE_RE = re.compile(r"^- \[(S\d+)\] (SRC-\d+): (.+)$")
 MARKER_RE = re.compile(r"\[(S\d+(?:\s*,\s*S\d+)*)\]\s*$")
 URL_RE = re.compile(r"https?://[^\s)]+")
 
+# Prefixes used in canonical Ask Ekiti document IDs. Removing these lets a
+# query such as "What is Arinta Waterfall?" match the subject portion of
+# "04-tourism-arinta-waterfall" without hard-coding individual entities.
+DOC_ID_PREFIXES = {
+    "history",
+    "government",
+    "lga",
+    "lgas",
+    "timeline",
+    "tourism",
+    "culture",
+    "education",
+    "health",
+    "agriculture",
+    "statistics",
+}
+
+
+def _normalized_phrase(value: str) -> str:
+    """Normalize text for conservative document-subject matching."""
+    return " ".join(
+        re.findall(r"[a-z0-9]+", str(value).casefold())
+    )
+
+
+def _document_subject(doc_id: str) -> str:
+    """Return the human-readable subject portion of a canonical document ID."""
+    tokens = re.findall(r"[a-z0-9]+", str(doc_id).casefold())
+
+    # Canonical IDs may begin with a numeric section, e.g. 04-tourism-...
+    while tokens and tokens[0].isdigit():
+        tokens.pop(0)
+
+    # Remove one or more structural prefixes, but keep the actual subject.
+    while tokens and tokens[0] in DOC_ID_PREFIXES:
+        tokens.pop(0)
+
+    return " ".join(tokens)
+
+
+def _matching_doc_id(question: str, doc_ids) -> str | None:
+    """Resolve an explicit named subject to one ingestible document.
+
+    This is intentionally conservative. It only focuses retrieval when the
+    subject encoded in a canonical document ID appears as a complete phrase
+    in the user's question. Broad questions therefore remain multi-document.
+    """
+    normalized_question = _normalized_phrase(question)
+
+    matches = []
+
+    for doc_id in doc_ids:
+        subject = _document_subject(doc_id)
+
+        if not subject:
+            continue
+
+        pattern = r"\b" + re.escape(subject) + r"\b"
+
+        if re.search(pattern, normalized_question):
+            matches.append((len(subject.split()), len(subject), doc_id))
+
+    if not matches:
+        return None
+
+    # Prefer the most specific/longest subject if IDs overlap.
+    matches.sort(reverse=True)
+    best = matches[0]
+
+    equally_specific = [
+        item
+        for item in matches
+        if item[:2] == best[:2]
+    ]
+
+    if len(equally_specific) != 1:
+        return None
+
+    return best[2]
+
 
 def _sections(body):
     sections = {}
@@ -368,7 +448,7 @@ def retrieve(question: str, db: Session, embed=local_embed, limit=5, category=No
     if not all(math.isfinite(float(value)) for value in vector):
         raise ValueError("question embedding contains a non-finite value")
 
-    eligible = select(KnowledgeDocument.id).where(
+    eligible = select(KnowledgeDocument.doc_id).where(
         KnowledgeDocument.ingestible.is_(True)
     )
 
@@ -379,13 +459,40 @@ def retrieve(question: str, db: Session, embed=local_embed, limit=5, category=No
         return []
 
     check_embedding_dimensions(db)
+
+    # For a question that explicitly names one indexed subject, constrain
+    # semantic ranking to that document. Broad questions continue searching
+    # across the eligible corpus.
+    eligible_ids = list(db.scalars(eligible).all())
+    focused_doc_id = _matching_doc_id(question, eligible_ids)
+
     distance = Chunk.embedding.cosine_distance(vector)
-    query = (select(Chunk, KnowledgeDocument, distance.label("distance"))
-             .join(KnowledgeDocument).where(KnowledgeDocument.ingestible.is_(True),
-                                            Chunk.embedding.is_not(None)))
+    query = (
+        select(
+            Chunk,
+            KnowledgeDocument,
+            distance.label("distance"),
+        )
+        .join(KnowledgeDocument)
+        .where(
+            KnowledgeDocument.ingestible.is_(True),
+            Chunk.embedding.is_not(None),
+        )
+    )
+
     if category:
-        query = query.where(KnowledgeDocument.class_ == category)
-    hits = db.execute(query.order_by(distance).limit(limit)).all()
+        query = query.where(
+            KnowledgeDocument.class_ == category
+        )
+
+    if focused_doc_id:
+        query = query.where(
+            KnowledgeDocument.doc_id == focused_doc_id
+        )
+
+    hits = db.execute(
+        query.order_by(distance).limit(limit)
+    ).all()
     return [{"doc_id": doc.doc_id, "content": chunk.content,
              "category": doc.class_, "source_ids": chunk.source_ids.split(";"),
              "source_titles": chunk.source_titles.split(";"),
