@@ -119,11 +119,30 @@ def test_partial_answer_reports_missing_evidence():
 
 
 def test_hq_comparison_marks_each_missing_field():
-    r = response("Compare Ado-Ekiti and Ikere LGAs by headquarters and population.",
-                 "en", lambda *a, **k: [HQ])
+    calls = []
+
+    def search(question, *, category, doc_ids, fact_kind, limit):
+        calls.append((category, fact_kind))
+
+        if category == "lgas" and fact_kind == "headquarters":
+            return [HQ]
+
+        if category == "statistics":
+            return []
+
+        return []
+
+    r = response(
+        "Compare Ado-Ekiti and Ikere LGAs by headquarters and population.",
+        "en",
+        search,
+    )
+
     assert r["coverage"] == "partial"
     assert "ado-ekiti headquarters" in r["answer"]
-    assert "population" in r["answer"]
+    assert "statistics" in r["answer"]
+    assert ("lgas", "headquarters") in calls
+    assert ("statistics", None) in calls
 
 
 def test_yoruba_keeps_citation_and_numeric_fact():
@@ -166,3 +185,81 @@ def test_input_messages_and_invalid_language(client):
         r = client.post("/api/ask-ekiti", json={"question": q})
         assert r.status_code == 200 and r.json()["reason"] == reason
     assert client.post("/api/ask-ekiti", json={"question": "When?", "language": "invalid"}).status_code == 422
+
+
+def test_multi_domain_question_searches_each_requested_category():
+    calls = []
+
+    tourism = {
+        **hit(
+            "04-tourism-arinta-waterfall",
+            "Arinta Waterfall is a tourism attraction in Ekiti.",
+        ),
+        "category": "tourism",
+    }
+
+    health = {
+        **hit(
+            "07-health-ulerawa-health-programme",
+            "Ulerawa is a health programme in Ekiti.",
+        ),
+        "category": "health",
+    }
+
+    def search(question, *, category, doc_ids, fact_kind, limit):
+        calls.append(category)
+
+        if category == "tourism":
+            return [tourism]
+
+        if category == "health":
+            return [health]
+
+        return []
+
+    result = response(
+        "Tell me about tourism and health in Ekiti.",
+        "en",
+        search,
+    )
+
+    assert calls == ["tourism", "health"]
+    assert result["coverage"] == "supported"
+    assert "Arinta Waterfall" in result["answer"]
+    assert "Ulerawa" in result["answer"]
+    assert len(result["citations"]) == 2
+
+
+def test_creation_question_can_also_retrieve_another_domain():
+    calls = []
+
+    tourism = {
+        **hit(
+            "04-tourism-ikogosi-warm-springs",
+            "Ikogosi Warm Springs is a tourism site in Ekiti.",
+        ),
+        "category": "tourism",
+    }
+
+    def search(question, *, category, doc_ids, fact_kind, limit):
+        calls.append((category, fact_kind))
+
+        if fact_kind == "creation":
+            return [CREATION]
+
+        if category == "tourism":
+            return [tourism]
+
+        return []
+
+    result = response(
+        "When was Ekiti State created and what tourist attractions are in Ekiti?",
+        "en",
+        search,
+    )
+
+    assert ("history", "creation") in calls
+    assert ("tourism", None) in calls
+    assert "1996" in result["answer"]
+    assert "Ikogosi Warm Springs" in result["answer"]
+    assert result["coverage"] == "supported"
