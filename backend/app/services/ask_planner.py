@@ -43,19 +43,29 @@ CATEGORY_PATTERNS = {
 }
 
 
-def topic_category(question):
-    """Infer one explicit knowledge-base category from the question.
+def topic_categories(question):
+    """Return every explicitly requested knowledge-base category.
 
-    If a question clearly spans more than one domain, return None so the
-    caller does not silently discard part of the user's request.
+    A question may span several Ekiti domains, for example tourism and
+    health. Preserve all detected domains so the answer layer can retrieve
+    evidence for each one instead of forcing the question into one category.
     """
     q = normalized(question)
 
-    matches = [
+    return [
         category
         for category, pattern in CATEGORY_PATTERNS.items()
         if re.search(pattern, q)
     ]
+
+
+def topic_category(question):
+    """Return one category only when exactly one domain is detected.
+
+    This wrapper preserves compatibility with callers that expect the older
+    single-category behaviour.
+    """
+    matches = topic_categories(question)
 
     if len(matches) == 1:
         return matches[0]
@@ -79,6 +89,7 @@ def entities(question):
 @dataclass
 class Plan:
     queries: list = field(default_factory=list)
+    categories: list = field(default_factory=list)
     missing: list = field(default_factory=list)
     policy: str | None = None
     count: bool = False
@@ -105,19 +116,25 @@ def plan(question, language="en"):
         p.policy = "scope"
     if p.policy:
         return p
+
+    p.categories = topic_categories(question)
     ids = entities(question)
     creation = (any(scope in q for scope in ("ekiti state", "ekiti become a state", "ipinle ekiti")) and any(term in q for term in
         ("created", "creation", "become a state", "established", "founded", "da ipinle ekiti sile")))
     if "ekiti state university" in q:
         creation = False
-    # Keep unsupported constraints explicit rather than silently dropping them.
-    fields = [(r"\b(population|census|olugbe|ikaniyan)\b", "population / iye olùgbé"),
-              (r"\b(governor|governors|administrator|administrators)\b", "officeholders / àwọn alákóso"),
-              (r"\b(tourism|tourist|springs|landmarks)\b", "tourism / ìrìn àjò afẹ́"),
-              (r"\b(universities|university|institutions)\b", "education / ẹ̀kọ́"),
-              (r"\b(hospitals|health)\b", "health / ìlera"),
-              (r"\b(agricultural|agriculture)\b", "agriculture / iṣẹ́ àgbẹ̀"),
-              (r"\b(unemployment|oil|borders|border|coordinates)\b", "other requested details / àwọn àlàyé mìíràn")]
+    # Keep only genuinely unsupported constraints explicit here.
+    # Supported knowledge domains are retrieved independently by the answer layer.
+    fields = [
+        (
+            r"\b(governor|governors|administrator|administrators)\b",
+            "officeholders / àwọn alákóso",
+        ),
+        (
+            r"\b(oil|borders|border|coordinates)\b",
+            "other requested details / àwọn àlàyé mìíràn",
+        ),
+    ]
     if creation:
         p.queries.append(("Ekiti State created", ["history-state-creation-1996"], "creation"))
         if re.search(r"\bwho\b", q) and not re.search(r"\bwhen\b", q):

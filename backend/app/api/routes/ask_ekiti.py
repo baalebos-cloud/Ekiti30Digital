@@ -36,10 +36,14 @@ def ask_ekiti(request: AskRequest, db: Session = Depends(get_db)) -> dict:
                 raise RuntimeError("Ask Ekiti text search requires PostgreSQL")
             return retrieve_fulltext(question, db, category=category, doc_ids=doc_ids,
                                      fact_kind=fact_kind, limit=limit)
-        hits = retrieve(question, db, category=category, limit=limit)
-        if doc_ids:
-            hits = [hit for hit in hits if hit["doc_id"] in doc_ids]
-        return hits
+        return retrieve(
+            question,
+            db,
+            category=category,
+            doc_ids=doc_ids,
+            fact_kind=fact_kind,
+            limit=limit,
+        )
 
     try:
         return response(request.question.strip(), request.language, search, request.category)

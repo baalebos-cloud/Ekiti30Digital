@@ -431,12 +431,27 @@ def local_embed(texts):
     return model.encode(texts).tolist()
 
 
-def retrieve(question: str, db: Session, embed=local_embed, limit=5, category=None):
+def retrieve(
+    question: str,
+    db: Session,
+    embed=local_embed,
+    limit=5,
+    category=None,
+    doc_ids=None,
+    fact_kind=None,
+):
     if db.bind.dialect.name != "postgresql":
         raise RuntimeError("Ask Ekiti vector search requires PostgreSQL with pgvector")
     if settings.ASK_EKITI_RETRIEVAL_MODE == "fulltext":
         from app.services.knowledge_fulltext import retrieve_fulltext
-        return retrieve_fulltext(question, db, limit=limit, category=category)
+        return retrieve_fulltext(
+            question,
+            db,
+            limit=limit,
+            category=category,
+            doc_ids=doc_ids,
+            fact_kind=fact_kind,
+        )
     # Generate the query embedding before the first database operation.
     # Loading the local transformer can take long enough for a hosted
     # PostgreSQL SSL connection to go stale if the connection is opened first.
@@ -454,6 +469,11 @@ def retrieve(question: str, db: Session, embed=local_embed, limit=5, category=No
 
     if category:
         eligible = eligible.where(KnowledgeDocument.class_ == category)
+
+    if doc_ids:
+        eligible = eligible.where(
+            KnowledgeDocument.doc_id.in_(doc_ids)
+        )
 
     if db.scalar(eligible.limit(1)) is None:
         return []
@@ -485,6 +505,34 @@ def retrieve(question: str, db: Session, embed=local_embed, limit=5, category=No
             KnowledgeDocument.class_ == category
         )
 
+    if doc_ids:
+        query = query.where(
+            KnowledgeDocument.doc_id.in_(doc_ids)
+        )
+
+    # Planned fact kinds are structural constraints, not merely semantic
+    # hints. Apply them before vector ranking so exact LGA/headquarters and
+    # state-creation requests cannot be lost to unrelated nearest neighbours.
+    if fact_kind == "identity":
+        query = query.where(
+            Chunk.content.op("~")(
+                r"Local Government Area is one of the [0-9]+ "
+                r"Local Government Areas of Ekiti State\."
+            )
+        )
+    elif fact_kind == "headquarters":
+        query = query.where(
+            Chunk.content.like(
+                "%Local Government Area's headquarters is %."
+            )
+        )
+    elif fact_kind == "creation":
+        query = query.where(
+            Chunk.content.like("Ekiti State was created on %.")
+        )
+    elif fact_kind is not None:
+        return []
+
     if focused_doc_id:
         query = query.where(
             KnowledgeDocument.doc_id == focused_doc_id
@@ -510,4 +558,6 @@ def retrieve(question: str, db: Session, embed=local_embed, limit=5, category=No
              ),
              "path": doc.path,
              "distance": float(score)}
-            for chunk, doc, score in hits if score is not None and score <= 0.65]
+            for chunk, doc, score in hits
+            if score is not None
+            and (fact_kind is not None or score <= 0.65)]
