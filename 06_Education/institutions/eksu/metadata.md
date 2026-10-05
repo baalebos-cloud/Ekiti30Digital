@@ -1,24 +1,32 @@
 ---
-class: education
-doc_id: EK-EDU-INST-EKSU
-ingestible: false
-last_verified: 2026-09-25
-source_title: Ekiti State University (EKSU) --- Institutional Record
-tier: A
 id: ek-edu-inst-eksu
-title: "Ekiti State University (EKSU) --- Institutional Record"
-status: needs_review
-source_tier: A
+title: Ekiti State University (EKSU)
 category: education
+doc_type: entity
+source_ids: [SRC-052]
+source_name: About EKSU
+source_url: https://eksu.edu.ng/about-eksu/
+publication_date: Not stated
+source_tier: A
+status: needs_review
+period_covered: 1999-2011
+language: en
+tags: [education, university, eksu, ado-ekiti]
 ---
 
-# Ekiti State University (EKSU), Ado-Ekiti
+## Summary
 
--   Established on 30 March 1982 as Obafemi Awolowo University,
-    Ado-Ekiti.
--   Renamed Ondo State University in June 1985.
--   Renamed University of Ado-Ekiti in November 1999.
--   Renamed Ekiti State University in September 2011.
--   The university moved from temporary sites to its permanent
-    Ado-Iworoko Road site in 1985.
--   Cross-reference: EK-EDU-003.
+Ekiti State University is a university in Ado-Ekiti. This Ask Ekiti record currently includes only post-1996 institutional-name history supported by the registered official EKSU source.
+
+## Facts
+
+- The institution was renamed University of Ado-Ekiti in November 1999. [S1]
+- The institution was renamed Ekiti State University in September 2011. [S1]
+
+## Sources
+
+- [S1] SRC-052: About EKSU. Ekiti State University. https://eksu.edu.ng/about-eksu/
+
+## Review note
+
+The institution's earlier history, including its 1982 establishment and 1985 name change, predates the EKITI@30 period and is not included in this Education record. This document remains `needs_review` and has not been approved for Ask Ekiti publication.
