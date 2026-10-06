@@ -1,28 +1,32 @@
 ---
-doc_id: EK-EDU-INST-EKSPOLY
-source_title: "Ekiti State Polytechnic (EKSPOLY), Isan-Ekiti — Institutional Record"
-class: education
-tier: B
-last_verified: 2026-09-25
-ingestible: no
 id: ek-edu-inst-ekspoly
-title: "Ekiti State Polytechnic (EKSPOLY), Isan-Ekiti — Institutional Record"
-status: needs_review
-source_tier: B
+title: Ekiti State Polytechnic (EKSPOLY), Isan-Ekiti
 category: education
+doc_type: entity
+source_ids: [SRC-055]
+source_name: Ekiti State Polytechnic, Isan-Ekiti (Second Amendment) Law, 2021
+source_url: https://hoa.ekitistate.gov.ng/dashboard/doc/No.%2018%20of%202021%20-%20EKITI%20STATE%20COLLEGE%20OF%20AGRICULTURE%20AND%20TECHNOLOGY.pdf
+publication_date: 2021
+source_tier: A
+status: needs_review
+period_covered: 2019-2021
+language: en
+tags: [education, polytechnic, ekspoly, isan-ekiti]
 ---
-# Ekiti State Polytechnic (EKSPOLY), Isan-Ekiti
-- Resolves the open item flagged in `Education_Gaps_and_Follow-ups.md` (#3, prior
-  pass) — founding history now researched.
-- Originally established **2014** as the College of Technical and Commercial
-  Agriculture, Isan-Ekiti, under Gov. Kayode Fayemi, focused on middle-level
-  agricultural manpower; institutional accounts describe this phase as "truncated"
-  under the succeeding administration.
-- Re-established/re-enacted **2 September 2019** by state law as Ekiti State College
-  of Agriculture and Technology, Isan-Ekiti, then renamed Ekiti State Polytechnic;
-  academic activities formally began September 2019 under pioneer Rector Prof.
-  Johnson Kayode Adesodun.
-- Prior to its establishment, Ekiti was the only South-West state without a state
-  polytechnic, per the institution's own account.
-- Located in Oye Local Government Area, ~15 km from Oye-Ekiti.
-- Cross-reference: EK-EDU-017 (timeline).
+
+## Summary
+
+Ekiti State Polytechnic, Isan-Ekiti, is an educational institution in Ekiti State. This Ask Ekiti record currently includes only legal-history facts supported by the official Ekiti State legislative source.
+
+## Facts
+
+- The Ekiti State College of Agriculture and Technology, Isan-Ekiti Law No. 6 of 2019 is identified as the principal law governing the institution in the 2021 amendment law. [S1]
+- The 2021 amendment changed the institution's name to Ekiti State Polytechnic, Isan-Ekiti. [S1]
+
+## Sources
+
+- [S1] SRC-055: Ekiti State Polytechnic, Isan-Ekiti (Second Amendment) Law, 2021. Ekiti State House of Assembly. https://hoa.ekitistate.gov.ng/dashboard/doc/No.%2018%20of%202021%20-%20EKITI%20STATE%20COLLEGE%20OF%20AGRICULTURE%20AND%20TECHNOLOGY.pdf
+
+## Review note
+
+The earlier 2014 founding claim and other historical details from secondary sources are excluded because they are not established by SRC-055. This document remains `needs_review` and has not been approved for Ask Ekiti publication.
