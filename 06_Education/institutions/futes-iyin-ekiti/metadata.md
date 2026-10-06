@@ -1,29 +1,33 @@
 ---
-doc_id: EK-EDU-INST-FUTES
-source_title: "Federal University of Technology and Environmental Sciences (FUTES), Iyin-Ekiti — Institutional Record"
-class: education
-tier: A/B
-last_verified: 2026-09-25
-ingestible: no
 id: ek-edu-inst-futes
-title: "Federal University of Technology and Environmental Sciences (FUTES), Iyin-Ekiti — Institutional Record"
-status: needs_review
+title: Federal University of Technology and Environmental Sciences (FUTES), Iyin-Ekiti
 category: education
+doc_type: entity
+source_ids: [SRC-054]
+source_name: History
+source_url: https://futes.edu.ng/history
+publication_date: Not stated
+source_tier: A
+status: needs_review
+period_covered: 2025
+language: en
+tags: [education, university, futes, iyin-ekiti]
 ---
-# Federal University of Technology and Environmental Sciences (FUTES), Iyin-Ekiti
-- Established 20 February 2025 when President Bola Ahmed Tinubu signed the bill into
-  law, sponsored by Senate Leader Opeyemi Bamidele; Ekiti's second federal university
-  after FUOYE.
-- Bill originated in 2021 as a proposed Federal University of Medical and Health
-  Sciences before its scope was refined to technology and environmental sciences.
-- Pioneer management appointed 25 March 2025: VC Prof. James Olugbenga Aribisala,
-  Registrar Oluwole Olalere Dada, Bursar Adeniyi Rachael Ajayi, Librarian Prof. Isaac
-  Oluwadare Busayo.
-- Operates from a 200-hectare site donated by the Iyin-Ekiti community, facilitated by
-  the Oluyin of Iyin-Ekiti, Oba Adeola Adeniyi Ajakaye.
-- Specialises in technology-driven education (engineering, digital innovation, applied
-  sciences) and environmental sustainability/climate action per the sponsoring
-  Minister of Education's stated rationale.
-- **Currently running / admitting students** per requester — confirm current
-  intake/accreditation status against the university's own site before ingestion,
-  as pioneer-year details (courses NUC-accredited, admission cycles) move fast.
+
+## Summary
+
+The Federal University of Technology and Environmental Sciences (FUTES) is a federal university in Iyin-Ekiti. This record includes only institutional-history facts supported by the university's official history page.
+
+## Facts
+
+- The Federal University of Technology and Environmental Sciences, Iyin-Ekiti, was established on 20 February 2025. [S1]
+- The university's pioneer management was appointed on 25 March 2025. [S1]
+- Professor James Olugbenga Aribisala was appointed the pioneer Vice-Chancellor of the university. [S1]
+
+## Sources
+
+- [S1] SRC-054: History. Federal University of Technology and Environmental Sciences (FUTES), Iyin-Ekiti. https://futes.edu.ng/history
+
+## Review note
+
+Claims about current admissions, accreditation status, programme availability and other fast-changing operational information are excluded from this record. This document remains `needs_review` and has not been approved for Ask Ekiti publication.
