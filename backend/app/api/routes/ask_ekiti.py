@@ -3,6 +3,7 @@ from pydantic import BaseModel, Field
 from typing import Literal
 from app.core.config import settings
 from app.services.ask_answers import response
+from app.services.ask_synthesizer import get_grounded_synthesizer
 from app.services.knowledge_fulltext import retrieve_fulltext
 from sqlalchemy.orm import Session
 
@@ -46,6 +47,14 @@ def ask_ekiti(request: AskRequest, db: Session = Depends(get_db)) -> dict:
         )
 
     try:
-        return response(request.question.strip(), request.language, search, request.category)
+        synthesizer = get_grounded_synthesizer()
+
+        return response(
+            request.question.strip(),
+            request.language,
+            search,
+            request.category,
+            synthesizer=synthesizer,
+        )
     except RuntimeError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc

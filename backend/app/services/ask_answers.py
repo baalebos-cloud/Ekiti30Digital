@@ -3,6 +3,10 @@ import re
 from collections import defaultdict
 from app.services.ask_language import message, yoruba_fact
 from app.services.ask_planner import plan, entities, topic_category
+from app.services.ask_grounding import (
+    build_evidence_packet,
+    synthesize_or_fallback,
+)
 
 CITATION_KEYS = (
     "doc_id", "source_ids", "source_titles", "source_urls", "source_url",
@@ -26,7 +30,13 @@ def _missing_category(category, language):
     return value[language == "yo"]
 
 
-def response(question, language, search, category=None):
+def response(
+    question,
+    language,
+    search,
+    category=None,
+    synthesizer=None,
+):
     p = plan(question, language)
 
     base = {
@@ -183,10 +193,25 @@ def response(question, language, search, category=None):
             reason="no_supported_match",
         )
 
-    answer = "\n".join(
+    fallback_core_answer = "\n".join(
         f"{item['text']} [{item['citation_index'] + 1}]"
         for item in statements
     )
+
+    packet = build_evidence_packet(
+        question,
+        language,
+        statements,
+        citations,
+    )
+
+    synthesis = synthesize_or_fallback(
+        synthesizer,
+        packet,
+        fallback_core_answer,
+    )
+
+    answer = synthesis["answer"]
 
     signatures = defaultdict(set)
 
@@ -275,4 +300,5 @@ def response(question, language, search, category=None):
         missing=list(dict.fromkeys(p.missing)),
         coverage="partial" if p.missing else "supported",
         sources_differ=conflict,
+        synthesis_mode=synthesis["mode"],
     )
