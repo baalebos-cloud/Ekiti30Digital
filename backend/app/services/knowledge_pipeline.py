@@ -99,6 +99,19 @@ def _matching_doc_id(question: str, doc_ids) -> str | None:
     return best[2]
 
 
+def _retrieval_focus(question, eligible_ids, requested_doc_ids=None):
+    """Focus broad vector search only when the planner did not specify docs.
+
+    Explicit planner document constraints are authoritative. In particular,
+    comparisons may intentionally request several documents and must not be
+    collapsed to one subject merely because one name is more specific.
+    """
+    if requested_doc_ids:
+        return None
+
+    return _matching_doc_id(question, eligible_ids)
+
+
 def _sections(body):
     sections = {}
     current = None
@@ -431,7 +444,7 @@ def local_embed(texts):
     return model.encode(texts).tolist()
 
 
-def retrieve(
+def retrieve_vector(
     question: str,
     db: Session,
     embed=local_embed,
@@ -442,16 +455,7 @@ def retrieve(
 ):
     if db.bind.dialect.name != "postgresql":
         raise RuntimeError("Ask Ekiti vector search requires PostgreSQL with pgvector")
-    if settings.ASK_EKITI_RETRIEVAL_MODE == "fulltext":
-        from app.services.knowledge_fulltext import retrieve_fulltext
-        return retrieve_fulltext(
-            question,
-            db,
-            limit=limit,
-            category=category,
-            doc_ids=doc_ids,
-            fact_kind=fact_kind,
-        )
+
     # Generate the query embedding before the first database operation.
     # Loading the local transformer can take long enough for a hosted
     # PostgreSQL SSL connection to go stale if the connection is opened first.
@@ -484,7 +488,11 @@ def retrieve(
     # semantic ranking to that document. Broad questions continue searching
     # across the eligible corpus.
     eligible_ids = list(db.scalars(eligible).all())
-    focused_doc_id = _matching_doc_id(question, eligible_ids)
+    focused_doc_id = _retrieval_focus(
+        question,
+        eligible_ids,
+        requested_doc_ids=doc_ids,
+    )
 
     distance = Chunk.embedding.cosine_distance(vector)
     query = (
@@ -561,3 +569,123 @@ def retrieve(
             for chunk, doc, score in hits
             if score is not None
             and (fact_kind is not None or score <= 0.65)]
+
+
+
+def fuse_hybrid_hits(vector_hits, fulltext_hits, limit=5):
+    """Fuse semantic and lexical evidence using reciprocal-rank fusion.
+
+    A fact found by both retrieval methods receives more weight, while
+    evidence unique to either method remains eligible. Results are
+    deduplicated by document and exact cited fact.
+    """
+    limit = max(1, min(int(limit), 20))
+    rrf_k = 60
+
+    records = {}
+    scores = {}
+    channels = {}
+
+    for channel, hits in (
+        ("vector", vector_hits),
+        ("fulltext", fulltext_hits),
+    ):
+        for rank, hit in enumerate(hits, start=1):
+            key = (hit["doc_id"], hit["content"])
+
+            if key not in records:
+                records[key] = dict(hit)
+                scores[key] = 0.0
+                channels[key] = set()
+
+            scores[key] += 1.0 / (rrf_k + rank)
+            channels[key].add(channel)
+
+            # Preserve channel-specific diagnostics when the same fact
+            # appears in both result sets.
+            for field in ("distance", "search_rank"):
+                if field in hit:
+                    records[key][field] = hit[field]
+
+    ranked = []
+
+    for key, hit in records.items():
+        hit["hybrid_score"] = scores[key]
+        hit["retrieval_sources"] = sorted(channels[key])
+        ranked.append(hit)
+
+    ranked.sort(
+        key=lambda hit: (
+            -hit["hybrid_score"],
+            hit["doc_id"],
+            hit["content"],
+        )
+    )
+
+    return ranked[:limit]
+
+
+def retrieve(
+    question: str,
+    db: Session,
+    embed=local_embed,
+    limit=5,
+    category=None,
+    doc_ids=None,
+    fact_kind=None,
+):
+    """Retrieve grounded Ask Ekiti evidence using the configured strategy."""
+    mode = settings.ASK_EKITI_RETRIEVAL_MODE
+
+    if mode == "fulltext":
+        from app.services.knowledge_fulltext import retrieve_fulltext
+
+        return retrieve_fulltext(
+            question,
+            db,
+            limit=limit,
+            category=category,
+            doc_ids=doc_ids,
+            fact_kind=fact_kind,
+        )
+
+    if mode == "hybrid":
+        from app.services.knowledge_fulltext import retrieve_fulltext
+
+        final_limit = max(1, min(int(limit), 20))
+        candidate_limit = min(20, max(final_limit * 3, final_limit))
+
+        vector_hits = retrieve_vector(
+            question,
+            db,
+            embed=embed,
+            limit=candidate_limit,
+            category=category,
+            doc_ids=doc_ids,
+            fact_kind=fact_kind,
+        )
+
+        fulltext_hits = retrieve_fulltext(
+            question,
+            db,
+            limit=candidate_limit,
+            category=category,
+            doc_ids=doc_ids,
+            fact_kind=fact_kind,
+        )
+
+        return fuse_hybrid_hits(
+            vector_hits,
+            fulltext_hits,
+            limit=final_limit,
+        )
+
+    return retrieve_vector(
+        question,
+        db,
+        embed=embed,
+        limit=limit,
+        category=category,
+        doc_ids=doc_ids,
+        fact_kind=fact_kind,
+    )
