@@ -263,3 +263,93 @@ def test_creation_question_can_also_retrieve_another_domain():
     assert "1996" in result["answer"]
     assert "Ikogosi Warm Springs" in result["answer"]
     assert result["coverage"] == "supported"
+
+
+def test_grounded_synthesizer_can_rewrite_supported_answer():
+    def synthesizer(packet):
+        assert packet["evidence"][0]["fact"] == (
+            "Ekiti State was created on 1 October 1996."
+        )
+
+        return {
+            "statements": [
+                {
+                    "text": (
+                        "Ekiti State came into existence "
+                        "on 1 October 1996."
+                    ),
+                    "citations": [1],
+                }
+            ]
+        }
+
+    result = response(
+        "When was Ekiti State created?",
+        "en",
+        lambda *a, **k: [CREATION],
+        synthesizer=synthesizer,
+    )
+
+    assert result["synthesis_mode"] == "grounded"
+    assert (
+        "Ekiti State came into existence on 1 October 1996. [1]"
+        in result["answer"]
+    )
+    assert len(result["citations"]) == 1
+
+
+def test_invalid_grounded_synthesis_falls_back_to_sourced_facts():
+    def synthesizer(_packet):
+        return {
+            "statements": [
+                {
+                    "text": "Unsupported generated statement.",
+                    "citations": [99],
+                }
+            ]
+        }
+
+    result = response(
+        "When was Ekiti State created?",
+        "en",
+        lambda *a, **k: [CREATION],
+        synthesizer=synthesizer,
+    )
+
+    assert result["synthesis_mode"] == "fallback"
+    assert (
+        "Ekiti State was created on 1 October 1996. [1]"
+        in result["answer"]
+    )
+
+
+def test_grounded_answer_keeps_backend_missing_evidence_warning():
+    def synthesizer(_packet):
+        return {
+            "statements": [
+                {
+                    "text": (
+                        "Ekiti State was created "
+                        "on 1 October 1996."
+                    ),
+                    "citations": [1],
+                }
+            ]
+        }
+
+    result = response(
+        (
+            "When was Ekiti State created, and who was "
+            "its first military administrator?"
+        ),
+        "en",
+        lambda *a, **k: [CREATION],
+        synthesizer=synthesizer,
+    )
+
+    assert result["synthesis_mode"] == "grounded"
+    assert result["coverage"] == "partial"
+    assert "Not covered by the retrieved sourced evidence" in (
+        result["answer"]
+    )
+    assert "officeholders" in result["answer"]

@@ -59,6 +59,10 @@ class Settings(BaseSettings):
     # also need a separate provider field.
     LLM_MODEL: str | None = None
 
+    # Grounded LLM synthesis is opt-in. Retrieval and deterministic
+    # citation-safe answers remain available when this is disabled.
+    ASK_EKITI_SYNTHESIS_ENABLED: bool = False
+
     # Embeddings are generated locally with sentence-transformers (free,
     # self-hosted) rather than through the gateway. The model is
     # multilingual so Yoruba content embeds meaningfully.
